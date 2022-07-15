@@ -1,0 +1,21 @@
+{{ define "main" }}
+{{ .Content }}
+{{- partial "posts.html" . -}}
+<div class="tips-container">
+    <h2>Tips</h2>
+    <p>If you enjoy my content, here are ways to support me:</p>
+    <ul class="tips-list">
+        <li class="tips-item"><img src="/media/btc.svg" alt="BTC logo" title="BTC logo"
+                style="width: 1em; height: 1em; display: inline; margin: auto;" /> BTC (<a
+                href="/media/btc.png">QR</a>): <span
+                style="font-size: x-small; word-break: break-all;">bc1qw5lun4wxx4tx9vaztywusnlk7nr5fn773swa98</span>
+        </li>
+        <li class="tips-item"><img src="/media/xmr.svg" alt="XMR logo" title="XMR logo"
+                style="width: 1em; height: 1em; display: inline; margin: auto;" /> XMR (<a
+                href="/media/xmr.png">QR</a>):
+            <span
+                style="font-size: x-small; word-break: break-all;">483ax3yva2Ub23ZEsAJV93hQvZvkkyMHScF7H7zd9C9FaVq3Hnxw7fMVvNwLbV6sqdbGGo2GuHYofQrV2xgK7eNpTrM4YKm</span>
+        </li>
+    </ul>
+</div>
+{{ end }}

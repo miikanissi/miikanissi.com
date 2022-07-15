@@ -1,0 +1,65 @@
+baseURL = "https://miikanissi.com/"
+languageCode = "en-us"
+title = "Miika Nissi"
+theme = "debet-esse"
+enableInlineShortcodes = true
+pygmentsCodeFences = true
+pygmentsUseClasses = true
+disableKinds = ['taxonomy', 'term']
+
+[params]
+  author = "Miika Nissi"
+  email = "miika@miikanissi.com"
+  title = "Miika Nissi"
+  logo = "favicon-32x32.png"
+  description = "This is my personal website: a place where you can read and learn about technology related subjects."
+  copyright = "Copyright © 2020-{year} Miika Nissi"
+  dark = "auto"
+  highlight = true
+
+[menu]
+  [[menu.main]]
+    identifier = "home"
+    name = "Home"
+    title = "Home"
+    url = "/"
+    weight = 10
+
+  [[menu.main]]
+    identifier = "about"
+    name = "About"
+    title = "About"
+    url = "/about/"
+    weight = 20
+  
+  [[menu.main]]
+    identifier = "github"
+    name = "GitHub"
+    title = "GitHub"
+    url = "https://github.com/miikanissi"
+    weight = 30
+  
+  [[menu.main]]
+    identifier = "rss"
+    name = "RSS"
+    title = "RSS"
+    url = "/index.xml"
+    weight = 40
+
+[permalinks]
+  posts = "/blog/:title/"
+
+[markup.goldmark.renderer]
+  # Allow HTML in Markdown
+  unsafe = true
+
+  [markup.tableOfContents]
+    ordered = true
+
+[frontmatter]
+  lastmod = ["lastmod", ":git", "date", "publishDate"]
+
+[sitemap]
+  changefreq = 'monthly'
+  filename = 'sitemap.xml'
+  priority = 0.5
