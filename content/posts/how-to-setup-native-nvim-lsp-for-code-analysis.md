@@ -8,8 +8,8 @@ description:
 
 Neovim or nvim has come a long way to overtake vim with support of multitude of new
 features natively out of the box. One of these features is the support for the Language
-Server Protocol (LSP), which means it acts as a client to LSP servers. In order to take
-advantage of this feature there are a couple of important plugins that do the heavy
+Server Protocol (LSP), which means nvim acts as a client to LSP servers. In order to
+take advantage of this feature there are a couple of important plugins that do the heavy
 lifting of getting a working LSP server and client communication set up. In this post I
 will go over what you need to get started on how to setup nvim LSP client for analysing
 code, autocompletion and even automatic code linting and fixing.
@@ -61,7 +61,7 @@ require("nvim-lsp-installer").setup({
 })
 ```
 
-## Enabling LSPs in nvim
+## Enabling LSP servers in nvim
 
 Now that we have installed the required plugins and LSP servers we have to enable them.
 For this we are using [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig). The
@@ -103,9 +103,9 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 ```
 
-Now in order to overried the default `on_attach` and `capabilities` functions for each
-LSP server we can add the following snippet in the configuration, which will loop
-through all the defined LSP servers and enable them using our local override functions:
+In order to override the default `on_attach` and `capabilities` functions for each LSP
+server we can add the following snippet in the configuration, which will loop through
+all the defined LSP servers and enable them using our local override functions:
 
 ```lua
 -- LSPs with default setup: bashls (Bash), cssls (CSS), html (HTML), clangd (C/C++), jsonls (JSON)
@@ -206,7 +206,7 @@ vim.keymap.set('n', '<leader>bf', vim.lsp.buf.formatting, {})
 
 ## Afterword
 
-Setting up nvim LSP client to work with different LSP servers can seem a bit
+Setting up the nvim LSP client to work with different LSP servers can seem a bit
 intimidating as most things need to be configured manually. The benefit of this is that
 most of everything on how the LSP client behaves can be customized from keybindings to
 default behavior. There are plenty of other things that can be customized but this basic
