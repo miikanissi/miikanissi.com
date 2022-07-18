@@ -1,9 +1,9 @@
 ---
-title: "Graduated as an ITC Engineer"
+title: "Graduated as an ICT Engineer"
 date: 2022-04-15T20:07:43-04:00
 description:
   "Reflecting on my studies and celebrating graduation from HAMK University of Applied
-  Sciences."
+  Sciences as an ICT engineer."
 ---
 
 I started my Bachelor of Engineering program in Information and Communications
