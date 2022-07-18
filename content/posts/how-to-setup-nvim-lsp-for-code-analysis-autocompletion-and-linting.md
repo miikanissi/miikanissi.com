@@ -1,5 +1,5 @@
 ---
-title: "How to Setup Native Nvim LSP for Code Analysis, Autocompletion and Linting"
+title: "How to Setup Nvim LSP for Code Analysis, Autocompletion and Linting"
 date: 2022-07-15T17:50:01-04:00
 description:
   "Guide on how to setup LSP on nvim for code analysis, autocompletion, and automatic
