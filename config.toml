@@ -4,6 +4,7 @@ title = "Miika Nissi"
 theme = "debet-esse"
 enableInlineShortcodes = true
 enableRobotsTXT = true
+enableGitInfo = true
 pygmentsCodeFences = true
 pygmentsUseClasses = true
 disableKinds = ['taxonomy', 'term']
