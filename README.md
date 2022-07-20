@@ -1,4 +1,4 @@
-# Personal Website - https://miikanissi.com/
+# Personal Website - [https://miikanissi.com/](https://miikanissi.com/)
 
 This is the repository for my personal website using [Hugo](https://gohugo.io/) static
 site generator with my own custom theme -
