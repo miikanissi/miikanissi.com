@@ -11,7 +11,7 @@ mail in Emacs is the best thing ever. I recently started using mu4e as my email 
 and it turns out configuring it is a bit of a hassle. This post works as a guide on
 setting up mu4e email client for Emacs with mbsync to sync email.
 
-## Pass to securely store your passwords
+## Pass To Securely Store Your Passwords
 
 To be able to store your email password securely you need to setup gpg and pass. I have
 previously made a post on [configuring
@@ -20,7 +20,7 @@ before you proceed.
 
 Every time you want to add a new email make sure you add a pass entry for it first.
 
-## Setting up mbsync
+## Setting up Mbsync
 
 To fetch and sync email from the mail server using imap, you need to use
 [isync/mbsync](https://wiki.archlinux.org/index.php/isync). First you need to install

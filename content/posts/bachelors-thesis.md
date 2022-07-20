@@ -14,9 +14,9 @@ what improvements needed to be made. I found three important features that were 
 and together with my employer and the customer we decided that I could use the
 development of these features as my Bachelor's thesis.
 
-## The missing features and development
+## The Missing Features and Development
 
-### 1. Canceling registrations
+### 1. Canceling Registrations
 
 In the core version of Odoo 14, registrants do not have the ability to cancel their own
 registrations - only the event manager could cancel them. This is a big inconvenience as
@@ -29,7 +29,7 @@ Additionally, the event manager could define how long before the event begins th
 cancellations are possible. For example, the event manager could choose to close
 cancellations when there is less than 24 hours until the event begins.
 
-### 2. Waiting list
+### 2. Waiting List
 
 It is common for an event management system to have a waiting list if an event is fully
 booked. However, Odoo 14 does not have this feature. My solution was to make a
@@ -52,7 +52,7 @@ customizable way of creating complex forms and with this integration we saved ti
 future maintenance cost by not creating a fully custom form creation system and instead
 used a pre-existing feature.
 
-## Finishing touches
+## Finishing Touches
 
 I wrote my thesis based on the project after the development process. The thesis is now
 published and can be viewed from a permanent address at

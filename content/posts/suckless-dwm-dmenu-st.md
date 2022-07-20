@@ -10,7 +10,7 @@ more simple and reliable technology. Suckless is a community of programmers who 
 made some great pieces of minimalist software that I recently started using. In this
 post I want to showcase my setup and some thoughts.
 
-## dwm - a dynamic window manager
+## Dwm - a Dynamic Window Manager
 
 [dwm](https://dwm.suckless.org/), like all of suckless software, has no configuration
 files or options. Everything is hard-coded into the source code. To customize dwm, you
@@ -48,7 +48,7 @@ As you can see, I have quite a list of extra patches applied to dwm, increasing 
 lines of code from around 2000 to 2700. I see many of these patches as almost necessary,
 such as the fullscreen patch or the stacker patch.
 
-### dwmblocks - status bar for dwm
+### Dwmblocks - a Status Bar for Dwm
 
 [dwmblocks](https://github.com/torrinfail/dwmblocks) is a modular status bar for dwm. It
 is not made by suckless but it follows the same spirit of suckless software by being
@@ -68,7 +68,7 @@ esac
 date "+ %Y %b %d (%a), %-I:%M%p"
 ```
 
-## dmenu - dynamic menu
+## Dmenu - a Dynamic Menu
 
 [dmenu](https://tools.suckless.org/dmenu/) is a dynamic menu which allows you to create
 different prompts. By default dmenu has a basic run prompt to launch applications.
@@ -92,7 +92,7 @@ I also have applied a couple of dmenu patches:
 - [password](https://tools.suckless.org/dmenu/patches/password/), allows dmenu to hide
   keyboard input as dots with the option `-P`.
 
-## st - simple terminal
+## St - a Simple Terminal
 
 You'd think finding a good terminal emulator that is fast and simple wouys be easy. I
 have tried xterm, urxvt, alacritty, kitty and so on, but they either lack basic features

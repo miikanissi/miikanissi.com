@@ -13,7 +13,7 @@ manager which uses the same language.
 After a couple of weeks of use I'm already loving the customizability and workflow. In
 this post I will shortly go over my setup and share my configuration files.
 
-## My setup
+## My Setup
 
 ![Desktop Environment screenshot](/media/desktop.png)
 

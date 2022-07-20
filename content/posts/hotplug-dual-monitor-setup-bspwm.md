@@ -16,7 +16,7 @@ different and this configuration might not work for [i3](https://i3wm.org/) or
 [dwm](https://dwm.suckless.org/), but it might give an idea of things that need to be
 considered.
 
-## BSPWM startup
+## BSPWM Startup
 
 The first thing to consider with an external monitor setup is what happens on startup.
 When you boot up your laptop with no external monitors connected you should have
@@ -56,7 +56,7 @@ if [[ "$1" = 0 ]]; then
 fi
 ```
 
-## External monitor is connected during a session
+## External Monitor Is Connected Suring a Session
 
 Next we create a function where we write the logic which we want to happen when an
 external monitor is plugged in during the session. Here we simply want to move half of
@@ -78,7 +78,7 @@ monitor_add() {
 }
 ```
 
-## External monitor is removed
+## External Monitor Is Removed
 
 When the external monitor is removed we essentially want the opposite to happen. We want
 to move all of the workspaces (and the windows they contain) from our external monitor
@@ -102,7 +102,7 @@ monitor_remove() {
 }
 ```
 
-## Putting it all together
+## Putting It All Together
 
 Now that we have our functions declared all that is missing is writing the logic to
 trigger them. This is done at the end of the configuration file. Here we once again use
@@ -133,7 +133,7 @@ else
 fi
 ```
 
-## Automatically detect a screen change
+## Automatically Detect a Screen Change
 
 At this point our configuration is fully working and every time we reload BSPWM it
 checks for the state of the monitors and sets them up correctly. However, we have not
@@ -148,7 +148,7 @@ detail on how Udev rules work but you can read more about them
 ACTION=="change", SUBSYSTEM=="drm", RUN+="/bin/su m --command='/home/m/.config/bspwm/bspwmrc'"
 ```
 
-## Bonus: Set a wallpaper and run Polybar
+## Bonus: Set a Wallpaper and Run Polybar
 
 After a new monitor is added it won't have any wallpaper by default. This is why in the
 configuration file after we setup our monitors we want to use some program such as

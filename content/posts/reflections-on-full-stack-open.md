@@ -24,7 +24,7 @@ skipped part 13 - relational databases, since I have plenty of experience on the
 Each credit corresponds to roughly 27 hours of work totaling 351 hours for my 13
 credits, however I ended up spending roughly 200 hours on the course.
 
-## My experience
+## My Experience
 
 **I particularly enjoyed the practical aspect of the course** - it explained the best
 practices of web development and introduced many helpful tools to ease the development

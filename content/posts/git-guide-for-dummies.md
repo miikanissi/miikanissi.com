@@ -78,7 +78,7 @@ sometimes visit this post when I forget a command).
   1. No, Let's clean this shit up.
   2. Yes, Just fuck my shit up.
 
-## That's it
+## That's It
 
 Knowing how to use these Git commands is mostly all you need for a good Git workflow.
 Happy programming.

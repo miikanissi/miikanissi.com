@@ -14,7 +14,7 @@ lifting of getting a working LSP server and client communication set up. In this
 will go over what you need to get started on how to setup nvim LSP client for analysing
 code, autocompletion and even automatic code linting and fixing.
 
-## Installing the nvim plugins with Packer
+## Installing the Nvim Plugins With Packer
 
 To get started we first need to install the plugins. My preferred nvim plugin manager is
 [Packer](https://github.com/wbthomason/packer.nvim) but this step can be done with any
@@ -61,7 +61,7 @@ require("nvim-lsp-installer").setup({
 })
 ```
 
-## Enabling LSP servers in nvim
+## Enabling LSP Servers in Nvim
 
 Now that we have installed the required plugins and LSP servers we have to enable them.
 For this we are using [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig). The
@@ -117,7 +117,7 @@ for _, lsp in ipairs { 'bashls', 'cssls', 'html', 'clangd', 'jsonls'} do
 end
 ```
 
-### Additional keybindings for autocompletion
+### Additional Keybindings for Autocompletion
 
 The following snippet adds custom keybindings for autocompletion:
 
@@ -164,7 +164,7 @@ cmp.setup {
 }
 ```
 
-## Automatic code linting and fixing on save using null-ls
+## Automatic Code Linting and Fixing on Save Using Null-ls
 
 So far we have installed all the necessary plugins and enabled LSP servers with custom
 keybindings and autocompletion. Now we can use a plugin called

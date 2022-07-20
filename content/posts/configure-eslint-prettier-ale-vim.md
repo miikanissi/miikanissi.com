@@ -31,7 +31,7 @@ call plug#end()
 
 Running `:PlugInstall` in Vim will install ALE for us and we can move on.
 
-## ESLint & Prettier from NPM
+## Installing ESLint and Prettier From NPM
 
 Generally, I like to install all of my programs from the official repository of my Linux
 distribution or build them from source. In this case, we need to use `npm` to install
@@ -51,7 +51,7 @@ To install `prettier-eslint` we need `npm`. Then we can run:
 npm install -D --save-dev prettier-eslint-cli
 ```
 
-## Vim configuration for ALE and prettier-eslint
+## Vim Configuration for ALE and Prettier/ESLint
 
 Most of the heavy lifting is automatically done by `prettier-eslint` so our VIM
 configuration is pretty simple. To have ALE use `prettier-eslint`, we need to define it

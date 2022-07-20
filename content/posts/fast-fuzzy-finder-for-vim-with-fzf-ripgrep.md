@@ -14,7 +14,7 @@ of fzf, we will be pairing it with [ripgrep](https://github.com/BurntSushi/ripgr
 nice syntax highlighted preview window. With the power of fzf and ripgrep we can
 efficiently jump from file to file and improve our workflow.
 
-## Setting up fzf in Vim
+## Setting up Fzf in Vim
 
 fzf has an official Vim plugin that can be installed with any Vim plugin manager. We can
 install fzf with [vim-plug](https://github.com/junegunn/vim-plug) by adding this to our
@@ -25,7 +25,7 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 ```
 
-### Useful fzf commands that work out of the box
+### Useful Fzf Commands That Work Out of the Box
 
 | Command          | List                                                                                                        |
 | ---------------- | ----------------------------------------------------------------------------------------------------------- |
@@ -38,7 +38,7 @@ Plug 'junegunn/fzf.vim'
 | `:Windows`       | Windows                                                                                                     |
 | `:Snippets`      | Snippets ([UltiSnips](https://github.com/SirVer/ultisnips))                                                 |
 
-## Integrating ripgrep with fzf
+## Integrating Ripgrep With Fzf
 
 By default fzf uses the `find` command to walk through a file hierarchy to locate files
 based on a search criteria. However, fzf supports other similar search tools such as
@@ -65,7 +65,7 @@ from `rg --files --ignore-vcs --hidden`.
 We can also use ripgrep to interactively search for file contents. fzf supports this
 behaviour out of the box with the command `:Rg`.
 
-## fzf file previews inside Vim
+## Fzf File Previews Inside Vim
 
 It is very helpful to have file previews enabled in order to find the right file with
 fzf. This can be achieved by redefining the default fzf commands in our `.vimrc`:
@@ -84,7 +84,7 @@ command! -bang -nargs=* Rg
 Now if we call `:Files`, `:GFiles`, or `:Rg` in vim and make our search, we can see file
 previews.
 
-### Syntax highlighting
+### Syntax Highlighting
 
 By default fzf uses the `cat` command to show the file previews, but if we are mostly
 working on code, we might want to also see some syntax highlighting in our file

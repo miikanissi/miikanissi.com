@@ -1,7 +1,7 @@
 ---
-title: "About me"
+title: "About Me"
 description:
-  "About me: Miika Nissi. I'm a software engineer and a Linux/UNIX enthusiast located in
+  "About Me: Miika Nissi. I'm a software engineer and a Linux/UNIX enthusiast located in
   Queens, New York City."
 sitemap:
   changefreq: yearly
@@ -14,14 +14,15 @@ My name is Miika, I'm a software engineer and a Linux/UNIX enthusiast located in
 New York City. I particularly enjoy learning new paradigms of programming languages and
 finding simple, efficient solutions.
 
-I work as a Software Engineer at [Tawasta](https://tawasta.fi/en/). My work revolves
-around building open source business solutions for Odoo, enterprise resource planning
-(ERP) software, using a technology stack of Python, Javascript, XML/SCSS.
+I work as a software engineer at [Tawasta](https://tawasta.fi/en/). My work revolves
+around building open source business solutions for [Odoo](https://www.odoo.com/),
+enterprise resource planning (ERP) software, using a technology stack of Python,
+JavaScript, XML, SCSS and Docker.
 
 When I'm not programming or working with computers, I enjoy lifting weights, reading and
 being in nature.
 
-## My website
+## My Website
 
 My website's publishing method has migrated from an
 [automated bash script](https://github.com/miikanissi/blogi), to Emacs Org-mode to a
@@ -29,8 +30,7 @@ My website's publishing method has migrated from an
 and now to [Hugo](https://gohugo.io/) with my own
 [custom theme](https://github.com/miikanissi/debet-esse). Throughout these changes my
 goal has remained the same: to make a simple static blog website, no JavaScript, no
-excessive CSS, but a distraction free place to share my ideas and guides about
-technology.
+excessive CSS, but a distraction free place to share my ideas and guides on technology.
 
 This meme by [@vincentdnl](https://twitter.com/vincentdnl) is an accurate depiction of
 my thought process for this site:

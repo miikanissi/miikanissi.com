@@ -20,7 +20,7 @@ html. My custom function also creates a sitemap for my blog posts and an RSS fee
 My setup is in my Emacs configuration file which you can find in its entirety from my
 [GitHub](https://github.com/miikanissi/dotfiles/tree/master/.emacs.d/).
 
-### File structure
+### File Structure
 
 ```bash
 root
@@ -78,7 +78,7 @@ These functions are used to format a sitemap to have a date for each entry.
         (t entry)))
 ```
 
-## RSS feed
+## RSS Feed
 
 RSS-feed generation is done with the ox-rss package, but it requires some additional
 customization for my needs.
@@ -120,7 +120,7 @@ PROJECT is the current project."
         (t entry)))
 ```
 
-## Project spec for org-publish
+## Project Spec for Org-publish
 
 This spec defines the directory structure and exporting options for org-publish
 
@@ -224,7 +224,7 @@ This spec defines the directory structure and exporting options for org-publish
           ("miikanissi.com" :components ("org" "images" "css" "rss")))))
 ```
 
-## Project publishing function
+## Project Publishing Function
 
 The website is updated when calling `m/publish-website`, which only publishes newly
 modified files. When used with additional arguments, a full update can be forced:
