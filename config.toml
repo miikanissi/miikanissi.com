@@ -49,7 +49,7 @@ disableKinds = ['taxonomy', 'term']
     weight = 40
 
 [permalinks]
-  posts = "/blog/:title/"
+  posts = "/blog/:filename/"
 
 [markup.goldmark.renderer]
   # Allow HTML in Markdown
