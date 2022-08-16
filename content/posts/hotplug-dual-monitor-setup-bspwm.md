@@ -56,7 +56,7 @@ if [[ "$1" = 0 ]]; then
 fi
 ```
 
-## External Monitor Is Connected Suring a Session
+## External Monitor Is Connected During a Session
 
 Next we create a function where we write the logic which we want to happen when an
 external monitor is plugged in during the session. Here we simply want to move half of
@@ -161,7 +161,9 @@ feh --no-fehbg --bg-scale <path-to-wallpaper>
 
 The simplest way of setting [Polybar](https://github.com/polybar/polybar) is to first
 make sure we kill all existing polybar processes and then we relaunch it based on what
-monitors are connected.
+monitors are connected. The following polybar command has the option `--reload` which
+will monitor any changes to polybar and automatically reload it when a configuration is
+changed.
 
 ```bash
 # Kill and relaunch polybar
@@ -180,3 +182,7 @@ fi
 In case you need more help with your BSPWM setup, feel free to contact me by email at
 [miika@miikanissi.com](mailto:miika@miikanissi.com). You can find the rest of my
 configuration in my [dotfiles](https://github.com/miikanissi/dotfiles) repository.
+Specifically, you can check
+[here to see my bspwmrc](https://github.com/miikanissi/dotfiles/blob/d22a55006d449d420617ae233add6cd0c83aca53/.config/bspwm/bspwmrc)
+at the time of writing this post and
+[here for the associated monitor setup script](https://github.com/miikanissi/dotfiles/blob/d22a55006d449d420617ae233add6cd0c83aca53/.local/bin/bspwm_setup_monitors.sh).
