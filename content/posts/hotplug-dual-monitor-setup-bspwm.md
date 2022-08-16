@@ -141,8 +141,11 @@ made BSPWM make an automatic reload when a screen change occurs. In order to do 
 need to create a custom Udev rule. Udev monitors device events and we can use it to
 reload BSPWM automatically when a monitor gets plugged in or out. I won't be going into
 detail on how Udev rules work but you can read more about them
-[here](https://wiki.debian.org/udev). In the following snippet make sure to replace the
-`m` after `/bin/su` and `/home/` as your own username.
+[here](https://wiki.debian.org/udev).
+
+In the following snippet make sure to replace the `m` after `/bin/su` and `/home/` as
+your own username. Save this snippet in a file called
+`/etc/udev/rules.d/99-reload-monitor.rules`.
 
 ```text
 ACTION=="change", SUBSYSTEM=="drm", RUN+="/bin/su m --command='/home/m/.config/bspwm/bspwmrc'"
