@@ -16,11 +16,12 @@ finding simple, efficient solutions.
 
 I work as a software engineer at [Tawasta](https://tawasta.fi/en/). My work revolves
 around building open source business solutions for [Odoo](https://www.odoo.com/),
-enterprise resource planning (ERP) software, using a technology stack of Python,
-JavaScript, XML, SCSS and Docker.
+enterprise resource planning (ERP) system, using a technology stack of Python,
+JavaScript, PostgreSQL, XML, Sass, and Docker. I also help with Linux system
+administration to ensure services are running smoothly.
 
-When I'm not programming or working with computers, I enjoy lifting weights, reading and
-being in nature.
+When I'm not programming or working with computers, I enjoy lifting weights, working
+with animals and being in nature.
 
 ## My Website
 
@@ -37,4 +38,12 @@ my thought process for this site:
 
 ![Developer's side projects](/media/blog-meme.jpg)
 
-You can also find me and my projects on [GitHub](https://github.com/miikanissi).
+## Contact Me
+
+The fastest way to reach me is via email at
+[miika@miikanissi.com](mailto:miika@miikanissi.com). You can also find me and my
+projects on these platforms:
+
+- [GitHub](https://github.com/miikanissi)
+- [GitLab](https://gitlab.com/miikanissi)
+- [LinkedIn](https://www.linkedin.com/in/miikanissi/)
