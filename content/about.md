@@ -25,10 +25,10 @@ with animals and being in nature.
 
 ## My Website
 
-My website's publishing method has migrated from an
+The publishing method of my website has migrated from an
 [automated bash script](https://github.com/miikanissi/blogi), to Emacs Org-mode to a
 [Makefile based static website generator (mblog)](https://github.com/miikanissi/mblog)
-and now to [Hugo](https://gohugo.io/) with my own
+and now to [Hugo](https://github.com/miikanissi/miikanissi.com) with my own
 [custom theme](https://github.com/miikanissi/debet-esse). Throughout these changes my
 goal has remained the same: to make a simple static blog website, no JavaScript, no
 excessive CSS, but a distraction free place to share my ideas and guides on technology.
