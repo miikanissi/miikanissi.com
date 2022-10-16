@@ -8,6 +8,7 @@ enableGitInfo = true
 pygmentsCodeFences = true
 pygmentsUseClasses = true
 disableKinds = ['taxonomy', 'term']
+disableHugoGeneratorInject = true
 
 [params]
   author = "Miika Nissi"
