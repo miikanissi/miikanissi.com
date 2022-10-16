@@ -1,18 +1,26 @@
 <footer id="footer">
-    <hr />
-    <img src="/media/tux-laptop.gif" alt="Gif of Tux on a laptop" style="float:left;height:1.5em;vertical-align:middle;"/>
-    {{- if isset .Params "date" }}
-    {{ if eq .Lastmod .Date }}
-    <time>{{ .Date | time.Format (i18n "post.created") }}</time>
-    <span>by {{ .Site.Params.author }}.</span>
-    {{ else }}
-    <time>{{ .Date | time.Format (i18n "post.created") }} {{ .Lastmod | time.Format (i18n "post.updated") }}</time>
-    <span>by {{ .Site.Params.author }}.</span>
-    {{ end }}
-    <br />
-    {{- end -}}
-    <span class="copyright">{{ replace .Site.Params.copyright "{year}" now.Year }}</span>
-    {{ with .Site.Params.email -}}
-    <span class="email">&lt;<a href="mailto:{{ . }}">{{ . }}</a>&gt;.</span>
-    {{ end }}
+    <hr>
+    <div class="footer">
+        <div class="footer-left">
+            <img src="/media/tux-laptop.gif" alt="Gif of Tux on a laptop">
+        </div>
+        <div class="footer-right">
+            {{- if isset .Params "date" }}
+            <p>
+                {{ i18n "posts.posted_on" }} <time>{{ .Date | time.Format ":date_long" }}</time>.
+            </p>
+            {{ if ne .Lastmod.Day .Date.Day }}
+            <p>
+                {{ i18n "posts.updated_on" }} <time>{{ .Lastmod | time.Format ":date_long" }}</time>.
+            </p>
+            {{ end }}
+            {{- end -}}
+            <p>
+                <span class="copyright">{{ replace .Site.Params.copyright "{year}" now.Year }}</span>
+                {{ with .Site.Params.email -}}
+                <span class="email">&lt;<a href="mailto:{{ . }}">{{ . }}</a>&gt;.</span>
+                {{ end }}
+            </p>
+        </div>
+    </div>
 </footer>
