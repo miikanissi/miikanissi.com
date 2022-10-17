@@ -47,3 +47,10 @@ projects on these platforms:
 - [GitHub](https://github.com/miikanissi)
 - [GitLab](https://gitlab.com/miikanissi)
 - [LinkedIn](https://www.linkedin.com/in/miikanissi/)
+
+#### Miscellaneous Links
+
+- BTC:
+  <font size="1">[bc1qw5lun4wxx4tx9vaztywusnlk7nr5fn773swa98](bitcoin:bc1qw5lun4wxx4tx9vaztywusnlk7nr5fn773swa98)</font>
+- Monero:
+  <font size="1">[483ax3yva2Ub23ZEsAJV93hQvZvkkyMHScF7H7zd9C9FaVq3Hnxw7fMVvNwLbV6sqdbGGo2GuHYofQrV2xgK7eNpTrM4YKm](monero:483ax3yva2Ub23ZEsAJV93hQvZvkkyMHScF7H7zd9C9FaVq3Hnxw7fMVvNwLbV6sqdbGGo2GuHYofQrV2xgK7eNpTrM4YKm)</font>
