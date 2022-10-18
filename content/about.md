@@ -54,3 +54,11 @@ projects on these platforms:
   <font size="1">[bc1qw5lun4wxx4tx9vaztywusnlk7nr5fn773swa98](bitcoin:bc1qw5lun4wxx4tx9vaztywusnlk7nr5fn773swa98)</font>
 - Monero:
   <font size="1">[483ax3yva2Ub23ZEsAJV93hQvZvkkyMHScF7H7zd9C9FaVq3Hnxw7fMVvNwLbV6sqdbGGo2GuHYofQrV2xgK7eNpTrM4YKm](monero:483ax3yva2Ub23ZEsAJV93hQvZvkkyMHScF7H7zd9C9FaVq3Hnxw7fMVvNwLbV6sqdbGGo2GuHYofQrV2xgK7eNpTrM4YKm)</font>
+
+##### P.S. I love early web style gifs and badges
+
+[![Send Email Gif Banner](/media/email-me.gif)](mailto:miika@miikanissi.com)
+![Edited With Vim Gif Banner](/media/edited-with-vim.gif)
+![Made With NeoVim Banner](/media/made-with-neovim.png)
+![Linux Now Gif Banner](/media/linux-now.gif)
+![Powered by Debian Gif Banner](/media/powered-by-debian.gif)
