@@ -62,3 +62,5 @@ projects on these platforms:
 ![Made With NeoVim Banner](/media/made-with-neovim.png)
 ![Linux Now Gif Banner](/media/linux-now.gif)
 ![Powered by Debian Gif Banner](/media/powered-by-debian.gif)
+![WorldWide Web Connecting People Since 1991 Gif Banner](/media/www-connecting-since-1991.gif)
+![Linux Today Gif Banner](/media/linux-today.gif)
