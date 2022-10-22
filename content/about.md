@@ -1,32 +1,34 @@
 ---
 title: "About Me"
 description:
-  "About Me: Miika Nissi. I'm a software engineer and a Linux/UNIX enthusiast located in
-  Queens, New York City."
+  "About Miika Nissi — I am a software engineer and a Linux/Unix enthusiast located in
+  Queens, New York City. I particularly enjoy finding simple, efficient solutions and
+  building on the knowledge of the past to solve new problems."
 sitemap:
-  changefreq: yearly
+  changefreq: monthly
   priority: 0.8
 ---
 
 ![Portrait of Miika Nissi](/media/miika.jpg)
 
-My name is Miika, I'm a software engineer and a Linux/UNIX enthusiast located in Queens,
-New York City. I particularly enjoy learning new paradigms of programming languages and
-finding simple, efficient solutions.
+My name is Miika, I am a software engineer and a Linux/Unix enthusiast located in
+Queens, New York City. I particularly enjoy finding simple, efficient solutions and
+building on the knowledge of the past to solve new problems.
 
 I work as a software engineer at [Tawasta](https://tawasta.fi/en/). My work revolves
 around building open source business solutions for [Odoo](https://www.odoo.com/),
 enterprise resource planning (ERP) system, using a technology stack of Python,
-JavaScript, PostgreSQL, XML, Sass, and Docker. I also help with Linux system
-administration to ensure services are running smoothly.
+JavaScript, PostgreSQL, XML, and Sass. I also automate and improve DevOps processes by
+employing tools such as Docker, Ansible, and Bash scripting.
 
-When I'm not programming or working with computers, I enjoy lifting weights, working
-with animals and being in nature.
+When I'm not in front of a screen, I enjoy lifting weights, being in nature and helping
+cat rescue organizations.
 
-## My Website
+## My Website Setup and Tools
 
 The publishing method of my website has migrated from an
-[automated bash script](https://github.com/miikanissi/blogi), to Emacs Org-mode to a
+[automated bash script](https://github.com/miikanissi/blogi), to
+[Emacs Org-mode](http://localhost:1313/blog/website-with-emacs/) to a
 [Makefile based static website generator (mblog)](https://github.com/miikanissi/mblog)
 and now to [Hugo](https://github.com/miikanissi/miikanissi.com) with my own
 [custom theme](https://github.com/miikanissi/debet-esse). Throughout these changes my

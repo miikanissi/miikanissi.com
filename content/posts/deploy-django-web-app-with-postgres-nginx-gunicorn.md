@@ -1,7 +1,9 @@
 ---
 title: "Deploying Django Web Application in Docker With PostgreSQL, NGINX, and Gunicorn"
+description:
+  "Guide on deploying a Django web application in Docker with PostgreSQL, NGINX, and
+  Gunicorn. Showcasing Christina Nissi's website as an example."
 date: 2022-10-16T14:19:10-04:00
-draft: false
 ---
 
 I recently created a clean art portfolio website for my wife at

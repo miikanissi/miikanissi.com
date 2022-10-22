@@ -4,5 +4,5 @@ sitemap:
   priority: 1
 ---
 
-This is my personal website: a place where you can read and learn about technology
-related subjects and stay up to date with my endeavors.
+Personal website of Miika Nissi — a technology blog focused on Linux configuration,
+programming, development tools, and the Unix philosophy.
