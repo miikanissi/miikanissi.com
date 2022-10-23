@@ -7,11 +7,11 @@ date: 2022-10-22T00:19:51-04:00
 ---
 
 The Unix philosophy originated in the early days of
-[Unix](https://en.wikipedia.org/wiki/Unix) as a set of rules and approaches to
-desigining a simple yet capable operating system. The point of the philosophy has
-evolved over the years and has often been misunderstood to simply mean writing small
-programs or dividing a program into small modules/functions. In this post I will try to
-explain what Unix philosophy is and present practical reasons to follow it.
+[Unix](https://en.wikipedia.org/wiki/Unix) as a set of rules and approaches to designing
+a simple yet capable operating system. The point of the philosophy has evolved over the
+years and has often been misunderstood to simply mean writing small programs or dividing
+a program into small modules/functions. In this post, I will try to explain what Unix
+philosophy is and present practical reasons to follow it.
 
 > “This is the Unix philosophy: Write programs that do one thing and do it well. Write
 > programs to work together. Write programs to handle text streams, because that is a
@@ -31,27 +31,27 @@ future to change parts of them or replace a program with a different one as requ
 change.
 
 This is usually where most people's understanding of Unix philosophy stops and they end
-up missing the rest of the picture which is just as important.
+up missing the rest of the picture, which is just as important.
 
 ## Write Programs to Work Together
 
 Now that we have these small programs each doing a single task we need to be able to
 connect them to each other in order to solve real life applications. This is where Unix
 pipes come into play. Unix pipes are a simple communication method between programs that
-allows them to receive a text input from one program and output a new text output which
-can then be used by something else. In a way each program acts as a filter — They take
+allows them to receive a text input from one program and output a new text output, which
+can then be used by something else. In a way, each program acts as a filter — They take
 an input, modify it, and then outputs the result.
 
-Unix pipes are not the only way for programs to communicate with each other but the
+Unix pipes are not the only way for programs to communicate with each other, but the
 important part is the principle of connecting programs with a simple interface and thus
 making each program interchangeable.
 
 Notice how in the original definition the output of a program should be a text stream —
 not JSON, or XML, or any other structured data format. By using a universal text
-interface each program does not need their own parser to parse different data inputs.
-Personally, I have nothing against these structured data formats but this is something
-to consider when creating a new program. Does it need a complicated data format or could
-it simply output text streams?
+interface, each program does not need their own parser to parse different data inputs.
+Personally, I have nothing against these structured data formats, but this is something
+to consider when creating a new program. Does it need a complicated data format, or
+could it simply output text streams?
 
 ## Unix Philosophy in Practice
 
@@ -93,12 +93,12 @@ Here we are combining four different programs in order to complete a trivial tas
 way that the creators of these programs might have never imagined they were going to be
 used for.
 
-First we use the curl program to transfer the desired html page from Wikipedia. Next we
-use grep program on the output to get the line containing "This is the Unix
-philosophy:". Then in order to clean the html tags we use the sed program to parse and
+First, we use the curl program to transfer the desired HTML page from Wikipedia. Next,
+we use the grep program on the output to get the line containing "This is the Unix
+philosophy:". Then in order to clean the HTML tags, we use the sed program to parse and
 remove the tags. We then use sed again to append an extra bit of text at the end of the
-output. Finally we use a cool program called cowsay to create an ASCII art speech bubble
-of the sentence.
+output. Finally, we use a cool program called cowsay to create an ASCII art speech
+bubble of the sentence.
 
 The point I would like to highlight with this example is how we were able to complete a
 specialized task without having to create a new specific program to do so. We got text
@@ -107,11 +107,10 @@ which each do one simple task — and it took just a few lines of Bash script to
 
 ## Conclusion
 
-To conclude Unix philosophy is about writing lots of programs that do one thing well and
-having those programs connect with a simple text based communication via inputs and
+To conclude, Unix philosophy is about writing lots of programs that do one thing well
+and having those programs connect with a simple text based communication via inputs and
 outputs. Although it can be applied to these, Unix philosophy is not about
 microservices, APIs, object-oriented programming, or any other modern buzzword.
 
-If you disagree with my interpretation on the Unix philosphy or have any other thoughts
-regarding it I would like to hear from you. I can be reached via email at
+If you have any thoughts on Unix philosophy you'd like to contribute, email me at
 [miika@miikanissi.com](miika@miikanissi.com).
