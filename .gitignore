@@ -1,3 +1,4 @@
 tags
 tags.*
 public/
+.hugo_build.lock

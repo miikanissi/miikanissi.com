@@ -28,7 +28,7 @@ cat rescue organizations.
 
 The publishing method of my website has migrated from an
 [automated bash script](https://github.com/miikanissi/blogi), to
-[Emacs Org-mode](http://localhost:1313/blog/website-with-emacs/) to a
+[Emacs Org-mode](/blog/website-with-emacs/) to a
 [Makefile based static website generator (mblog)](https://github.com/miikanissi/mblog)
 and now to [Hugo](https://github.com/miikanissi/miikanissi.com) with my own
 [custom theme](https://github.com/miikanissi/debet-esse). Throughout these changes my
