@@ -5,8 +5,8 @@ description: "Satirical git guide for basic git commands and functions."
 ---
 
 This simple Git guide is satire and not meant to offend anyone. If you are a dummy or a
-beginner to using Git this might actually be helpful to you and work as a cheatsheet (I
-sometimes visit this post when I forget a command).
+beginner to using Git, this might actually be helpful to you and work as a cheat sheet
+(I sometimes visit this post when I forget a command).
 
 ### `git clone`
 
@@ -75,8 +75,8 @@ sometimes visit this post when I forget a command).
 ### `git rebase -i [--autosquash] <old commit>`
 
 - Are you dumb?
-  1. No, Let's clean this shit up.
-  2. Yes, Just fuck my shit up.
+  1. No, let's clean this shit up.
+  2. Yes, just fuck my shit up.
 
 ## That's It
 

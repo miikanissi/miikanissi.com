@@ -8,21 +8,21 @@ date: 2022-10-16T14:19:10-04:00
 
 I recently created a clean art portfolio website for my wife at
 [christinanissi.com](https://christinanissi.com) and I wanted to deploy it in Docker. As
-I was looking for the best solution for my needs I stumbled upon many guides that ran
+I was looking for the best solution for my needs, I stumbled upon many guides that ran
 the Django web application inside a Docker container behind an NGINX reverse proxy
-_which also ran in a container_. However, this solution has many downsides which you can
-read more about from
+_which also ran in a container_. However, this solution has many downsides, which you
+can read more about from
 [this article](https://nickjanetakis.com/blog/why-i-prefer-running-nginx-on-my-docker-host-instead-of-in-a-container).
 
 In this post I will show my solution which runs NGINX on the host server while the
-actual Django web application is running inside of a container on a Gunicorn WSGI
-server. I'm also using poetry to manage my python requirements but you can use the
-traditional approach of requirements.txt file (or manually manage python packages in the
+actual Django web application is running inside a container on a Gunicorn WSGI server.
+I'm also using poetry to manage my python requirements, but you can use the traditional
+approach of requirements.txt file (or manually manage python packages in the
 Dockerfile).
 
 ## Dockerfile and Docker Compose to Run Gunicorn WSGI Server and PostgreSQL
 
-To start off I have created a Dockerfile which builds a Docker Image suitable for the
+To start off, I have created a Dockerfile which builds a Docker Image suitable for the
 container based on Alpine Linux.
 
 ```dockerfile
@@ -59,14 +59,14 @@ COPY . .
 ENTRYPOINT ["/usr/src/app/entrypoint.prod.sh"]
 ```
 
-To summarize the dockerfile, I first begin by using the official Alpine Linux Python
+To summarize the Dockerfile, I first begin by using the official Alpine Linux Python
 image as a base. I then install some additional packages which are required to build
-[Werkzeug](https://werkzeug.palletsprojects.com/en/2.2.x/) Python package among other
-things. Next I use poetry to install the Python dependencies. Lastly I copy the project
-files inside of the image, set the entrypoint script as executable and define the image
-entrypoint as that script. The entrypoint script in my case just checks if PostgreSQL is
-running and when it is it begins executing the command defined in the docker compose
-file:
+[Werkzeug](https://werkzeug.palletsprojects.com/en/2.2.x/) Python package, among other
+things. Next, I use poetry to install the Python dependencies. Lastly, I copy the
+project files inside the image, set the entry point script as executable and define the
+image entry point as that script. The entry point script in my case just checks if
+PostgreSQL is running and when it is, it begins executing the command defined in the
+docker compose file:
 
 ```sh
 #!/bin/sh
@@ -85,10 +85,9 @@ fi
 exec "$@"
 ```
 
-As I mentioned earlier I am running the Django web application with a Gunicorn WSGI
+As I mentioned earlier, I am running the Django web application with a Gunicorn WSGI
 server. This is done by using the following Docker Compose file. I am also running my
-PostgreSQL database inside of a container with the default Alpine Linux PostgreSQL
-image.
+PostgreSQL database inside a container with the default Alpine Linux PostgreSQL image.
 
 ```docker
 version: "3.9"
@@ -122,29 +121,29 @@ volumes:
 The important details here are to note that I am using
 [bind mounts](https://docs.docker.com/storage/bind-mounts/) instead of named volumes.
 This is important as we need access to this data on the host server for our NGINX
-configuration. I am also opening the gunicorn server to a local port 8005 on the host
-server which is how we can access it from NGINX.
+configuration. I am also opening the Gunicorn server to a local port 8005 on the host
+server, which is how we can access it from NGINX.
 
-After building the image and running our containers we can move on to the NGINX
+After building the image and running our containers, we can move on to the NGINX
 configuration.
 
 ## NGINX Configuration as a Reverse Proxy on the Host Machine
 
 Now we should have two containers running on our server — the PostgreSQL container and
 our web application container running a Gunicorn WSGI server which is open to a local
-port 8005. To setup the NGINX reverse proxy we need to listen to port 80 for http
-traffic (https traffic comes from port 443 which I won't go over on this guide). We
-define the server name and then to connect the traffic to our gunicorn WSGI server we
+port 8005. To set up the NGINX reverse proxy we need to listen to port 80 for HTTP
+traffic (HTTPS traffic comes from port 443 which I won't go over in this guide). We
+define the server name and then to connect the traffic to our Gunicorn WSGI server we
 use NGINX proxy pass to direct the traffic to our local port 8005. We need to also make
-sure that the local WSGI server gets the correct headers from each request so we also
+sure that the local WSGI server gets the correct headers from each request, so we also
 pass those.
 
-In the last section I mentioned how I mounted the static and media file directories as
+In the last section, I mentioned how I mounted the static and media file directories as
 bind mounts. The reason for that is so we can access the files with NGINX on the host
-machine since we don't want to serve the static files with a WSGI server (that is bad
+machine, since we don't want to serve the static files with a WSGI server (that is bad
 practice and very slow compared to NGINX). To serve the static and media files with
-NGINX we define the url location such as `/static/` and the path to the bind mount where
-these static files reside on the host server.
+NGINX, we define the URL location such as `/static/` and the path to the bind mount
+where these static files reside on the host server.
 
 ```nginx
 server {
@@ -179,5 +178,5 @@ running and we can also have multiple web applications or static websites runnin
 same server as they are not limited to a docker container.
 
 To see the full configuration for this web application I used as an example in this
-guide you can visit its
+guide, you can visit its
 [git repository](https://github.com/miikanissi/christinanissi.com).

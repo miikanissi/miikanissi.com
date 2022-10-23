@@ -6,18 +6,18 @@ date: 2021-03-21T00:00:00-04:00
 
 **NOTE**: I am no longer using this setup for my website.
 
-In this post I will briefly go over my setup of using
+In this post, I will briefly go over my setup of using
 [Emacs Org-mode](https://orgmode.org/) for managing and publishing my blog website.
 
 ## Workflow
 
 I write all of my posts and static sites in Org-mode within Emacs and when I want to
 update my site I run a custom publishing function which exports Org-mode files into
-html. My custom function also creates a sitemap for my blog posts and an RSS feed.
+HTML. My custom function also creates a sitemap for my blog posts and an RSS feed.
 
 ## Setup
 
-My setup is in my Emacs configuration file which you can find in its entirety from my
+My setup is in my Emacs configuration file, which you can find in its entirety from my
 [GitHub](https://github.com/miikanissi/dotfiles/tree/master/.emacs.d/).
 
 ### File Structure
@@ -245,6 +245,6 @@ modified files. When used with additional arguments, a full update can be forced
 
 ## Afterword
 
-My setup is constantly changing but for now I'm happy with the setup I've built. For the
-latest updates you can check my
+My setup is constantly changing, but for now I'm happy with the setup I've built. For
+the latest updates, you can check my
 [GitHub](https://github.com/miikanissi/dotfiles/tree/master/.emacs.d/).

@@ -10,8 +10,8 @@ manager written and configured in Python. I chose to give Qtile a try as I mainl
 program in Python on a day-to-day basis and thought it was a good idea to have a window
 manager which uses the same language.
 
-After a couple of weeks of use I'm already loving the customizability and workflow. In
-this post I will shortly go over my setup and share my configuration files.
+After a couple of weeks of use, I'm already loving the customizability and workflow. In
+this post, I will shortly go over my setup and share my configuration files.
 
 ## My Setup
 
@@ -20,10 +20,10 @@ this post I will shortly go over my setup and share my configuration files.
 My setup is similar to what I have used in the past. I have a top bar which contains
 basic information such as time, date, volume, battery, system tray, workspaces and so
 on. The main color scheme I went with was a
-[Gruvbox community light theme](https://github.com/gruvbox-community/gruvbox). This is
-very pleasant theme on the eyes and I'm a big fan of light color themes.
+[Gruvbox community light theme](https://github.com/gruvbox-community/gruvbox). This is a
+very pleasant theme on the eyes, and I'm a big fan of light color themes.
 
-The rest of my setup is mostly the same as previously with Vim as my main text editor.
+The rest of my setup is mostly the same as previously, with Vim as my main text editor.
 Dunts as a notification manager. LightDM as a display manager. Autorandr to hot plug my
 external laptop monitors. Network Manager as a network manager (duh). St as my terminal
 emulator and bash as a shell.
@@ -505,5 +505,5 @@ wmname = "LG3D"
 os.environ["QT_QPA_PLATFORMTHEME"] = "qt5ct"
 ```
 
-This configuration will surely change in the future and you can always find my most
+This configuration will surely change in the future, and you can always find my most
 up-to-date setup on my [GitHub](https://github.com/miikanissi/dotfiles).

@@ -6,7 +6,7 @@ description:
   dynamic survey creation."
 ---
 
-For the past year I have been working for a company that specializes in open source
+For the past year, I have been working for a company that specializes in open source
 business management software, especially
 [Odoo - Open Source ERP and CRM](https://www.odoo.com/). In spring 2021 I was tasked to
 research Odoo's (version 14) abilities as an Event Management System for a customer and
@@ -36,11 +36,11 @@ booked. However, Odoo 14 does not have this feature. My solution was to make a
 user-friendly way to sign up for a waiting list with an email notification if the event
 had more seats available.
 
-The process of joining a waiting list followed the same process as registrations with
+The process of joining a waiting list followed the same process as registrations, with
 the difference that the registrant was not required to make a payment. If the event got
-more seats available the waiting list, members would receive an email to confirm their
-seat in a first-come first-serve basis. For a paid event this confirmation included
-making a payment through the system.
+more seats available in the waiting list, members would receive an email to confirm
+their seat in a first-come first-serve basis. For a paid event, this confirmation
+included making a payment through the system.
 
 ### 3. Questions
 
@@ -48,7 +48,7 @@ Odoo 14 has the ability to ask registrants custom questions in the registration 
 These questions could either be free text questions or drop down selections, but our
 customer had a need for more complex registration forms. My solution was to integrate
 Odoo's event management with an existing Odoo survey feature. This survey allows a more
-customizable way of creating complex forms and with this integration we saved time and
+customizable way of creating complex forms, and with this integration we saved time and
 future maintenance cost by not creating a fully custom form creation system and instead
 used a pre-existing feature.
 

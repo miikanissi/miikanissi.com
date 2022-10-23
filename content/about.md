@@ -16,7 +16,7 @@ Queens, New York City. I particularly enjoy finding simple, efficient solutions 
 building on the knowledge of the past to solve new problems.
 
 I work as a software engineer at [Tawasta](https://tawasta.fi/en/). My work revolves
-around building open source business solutions for [Odoo](https://www.odoo.com/),
+around building open source business solutions for [Odoo](https://www.odoo.com/), an
 enterprise resource planning (ERP) system, using a technology stack of Python,
 JavaScript, PostgreSQL, XML, and Sass. I also automate and improve DevOps processes by
 employing tools such as Docker, Ansible, and Bash scripting.
@@ -57,7 +57,7 @@ projects on these platforms:
 - Monero:
   <font size="1">[483ax3yva2Ub23ZEsAJV93hQvZvkkyMHScF7H7zd9C9FaVq3Hnxw7fMVvNwLbV6sqdbGGo2GuHYofQrV2xgK7eNpTrM4YKm](monero:483ax3yva2Ub23ZEsAJV93hQvZvkkyMHScF7H7zd9C9FaVq3Hnxw7fMVvNwLbV6sqdbGGo2GuHYofQrV2xgK7eNpTrM4YKm)</font>
 
-##### P.S. I love early web style gifs and badges
+##### P.S. I love early web style GIFs and badges
 
 [![Send Email Gif Banner](/media/email-me.gif)](mailto:miika@miikanissi.com)
 ![Edited With Vim Gif Banner](/media/edited-with-vim.gif)

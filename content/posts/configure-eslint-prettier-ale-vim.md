@@ -4,16 +4,16 @@ date: 2021-05-22T00:56:55-04:00
 description: "How to configure ESLint and Prettier for Vim with ALE for code linting."
 ---
 
-Recently, I wanted to setup Vim with ESLint and Prettier for JavaScript development and
-it took me a surprisingly long time to find the best solution. In this post, I'm going
-to go over the steps needed to get your JavaScript linting and automatic fixing working
-inside of Vim.
+Recently, I wanted to set up Vim with ESLint and Prettier for JavaScript development,
+and it took me a surprisingly long time to find the best solution. In this post, I'm
+going to go over the steps needed to get your JavaScript linting and automatic fixing
+working inside of Vim.
 
 ## Asynchronous Lint Engine (ALE) for Vim
 
 First, we are going to need a Vim plugin to help us integrate ESLint and Prettier into
 Vim. [Asynchronous Lint Engine(ALE)](https://github.com/dense-analysis/ale) is a
-Vim/NeoVim plugin providing on-the-fly syntax checking and automatic file formatting. It
+Vim/Neovim plugin providing on-the-fly syntax checking and automatic file formatting. It
 integrates with various linters and is easy to customize.
 
 I'm not going to go into depth on all the different ways of installing VIM plugins. For
@@ -29,7 +29,7 @@ Plug 'dense-analysis/ale'
 call plug#end()
 ```
 
-Running `:PlugInstall` in Vim will install ALE for us and we can move on.
+Running `:PlugInstall` in Vim will install ALE for us, and we can move on.
 
 ## Installing ESLint and Prettier From NPM
 

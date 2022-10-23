@@ -7,23 +7,23 @@ description:
 ---
 
 Mu4e is a powerful email client for Emacs. It is rather simple to use and having your
-mail in Emacs is the best thing ever. I recently started using mu4e as my email client
+mail in Emacs is the best thing ever. I recently started using mu4e as my email client,
 and it turns out configuring it is a bit of a hassle. This post works as a guide on
 setting up mu4e email client for Emacs with mbsync to sync email.
 
 ## Pass To Securely Store Your Passwords
 
-To be able to store your email password securely you need to setup gpg and pass. I have
-previously made a post on [configuring
+To be able to store your email password securely, you need to set up GPG and pass. I
+have previously made a post on [configuring
 pass]({{< relref "pass-the-standard-unix-password-manager.md" >}}) so take a look at it
 before you proceed.
 
-Every time you want to add a new email make sure you add a pass entry for it first.
+Every time you want to add a new email, make sure you add a pass entry for it first.
 
 ## Setting up Mbsync
 
-To fetch and sync email from the mail server using imap, you need to use
-[isync/mbsync](https://wiki.archlinux.org/index.php/isync). First you need to install
+To fetch and sync email from the mail server using IMAP, you need to use
+[isync/mbsync](https://wiki.archlinux.org/index.php/isync). First, you need to install
 this on your system with your package manager.
 
 For Arch Linux:
@@ -71,7 +71,7 @@ CopyArrivalDate yes
 Sync All
 ```
 
-**Note**: If you have 2FA enabled you might need to use an app specific password.
+**Note**: If you have 2FA enabled, you might need to use an app specific password.
 Confirm this from your email provider.
 
 **Note2**: See
@@ -84,7 +84,8 @@ Make sure to create the root folder used in the mbsync configuration:
 mkdir -p ~/Mail/<account>
 ```
 
-If everything was configured correctly you can now sync your email to your local folder:
+If everything was configured correctly, you can now sync your email to your local
+folder:
 
 ```bash
 mbsybc <account>
@@ -186,6 +187,6 @@ you can check my
 
 ## Afterword
 
-If everything was configured correctly you should now be able to read and send email
-from Emacs using mu4e. If you need any help with your configuration don't hesitate to
+If everything was configured correctly, you should now be able to read and send email
+from Emacs using mu4e. If you need any help with your configuration, don't hesitate to
 contact me with email: [miika@miikanissi.com](mailto:miika@miikanissi.com).

@@ -6,20 +6,20 @@ description:
   code linting and fixing."
 ---
 
-Neovim or nvim has come a long way to overtake vim with support of multitude of new
+Neovim or nvim has come a long way to overtake vim with support of a multitude of new
 features natively out of the box. One of these features is the support for the Language
 Server Protocol (LSP), which means nvim acts as a client to LSP servers. In order to
-take advantage of this feature there are a couple of important plugins that do the heavy
-lifting of getting a working LSP server and client communication set up. In this post I
-will go over what you need to get started on how to setup nvim LSP client for analysing
-code, autocompletion and even automatic code linting and fixing.
+take advantage of this feature, there are a couple of important plugins that do the
+heavy lifting of getting a working LSP server and client communication set up. In this
+post I will go over what you need to get started on how to set up nvim LSP client for
+analyzing code, autocompletion and even automatic code linting and fixing.
 
 ## Installing the Nvim Plugins With Packer
 
-To get started we first need to install the plugins. My preferred nvim plugin manager is
-[Packer](https://github.com/wbthomason/packer.nvim) but this step can be done with any
-other plugin manager as well. Please note I am configuring nvim in an `init.lua` file.
-To learn more about how to configure nvim in lua you may refer to
+To get started, we first need to install the plugins. My preferred nvim plugin manager
+is [Packer](https://github.com/wbthomason/packer.nvim), but this step can be done with
+any other plugin manager as well. Please note, I am configuring nvim in an `init.lua`
+file. To learn more about how to configure nvim in Lua you may refer to
 [this helpful guide](https://github.com/nanotee/nvim-lua-guide).
 
 ```lua
@@ -36,7 +36,7 @@ After saving the `init.lua` we can run `:PackerSync` to install the declared pac
 
 ## Installing LSP Servers
 
-In order to install the LSP servers used by the nvim LSP client we use a helpful plugin
+In order to install the LSP servers used by the nvim LSP client, we use a helpful plugin
 called [nvim-lsp-installer](https://github.com/williamboman/nvim-lsp-installer). It is
 not necessary to use this plugin as each LSP server can be installed manually, but I
 like to use this plugin for convenience.
@@ -63,16 +63,16 @@ require("nvim-lsp-installer").setup({
 
 ## Enabling LSP Servers in Nvim
 
-Now that we have installed the required plugins and LSP servers we have to enable them.
-For this we are using [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig). The
-easiest way to setup a language server (pyright in this example) is by adding
+Now that we have installed the required plugins and LSP servers, we have to enable them.
+For this, we are using [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig). The
+easiest way to set up a language server (pyright in this example) is by adding
 `require'lspconfig'.pyright.setup{}` in the configuration file. However, nvim-lspconfig
-does not automatically setup any keybindings or autocompletion. These can be setup in
-the `on_attach` and `capabilities` functions respectively. In the snippet below I am
+does not automatically set up any keybindings or autocompletion. These can be setup in
+the `on_attach` and `capabilities` functions, respectively. In the snippet below, I am
 creating a local function for `on_attach` and `capabilities` which can be reused for
-each language server configuration. In the `on_attach` function I am setting up keybinds
-which will be enabled whenever nvim detects a filetype with an active LSP server. For
-the `capabilities` function I am calling the plugin
+each language server configuration. In the `on_attach` function, I am setting up key
+binds which will be enabled whenever nvim detects a file type with an active LSP server.
+For the `capabilities` function, I am calling the plugin
 [cmp-nvim-lsp](https://github.com/hrsh7th/cmp-nvim-lsp), which provides autocompletion.
 
 ```lua
@@ -104,7 +104,7 @@ capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 ```
 
 In order to override the default `on_attach` and `capabilities` functions for each LSP
-server we can add the following snippet in the configuration, which will loop through
+server, we can add the following snippet in the configuration, which will loop through
 all the defined LSP servers and enable them using our local override functions:
 
 ```lua
@@ -166,7 +166,7 @@ cmp.setup {
 
 ## Automatic Code Linting and Fixing on Save Using Null-ls
 
-So far we have installed all the necessary plugins and enabled LSP servers with custom
+So far, we have installed all the necessary plugins and enabled LSP servers with custom
 keybindings and autocompletion. Now we can use a plugin called
 [null-ls](https://github.com/jose-elias-alvarez/null-ls.nvim) to automatically use any
 available linters on a file to fix code formatting on file save.
@@ -207,9 +207,9 @@ vim.keymap.set('n', '<leader>bf', vim.lsp.buf.formatting, {})
 ## Afterword
 
 Setting up the nvim LSP client to work with different LSP servers can seem a bit
-intimidating as most things need to be configured manually. The benefit of this is that
-most of everything on how the LSP client behaves can be customized from keybindings to
-default behavior. There are plenty of other things that can be customized but this basic
-setup should get you started on using the power of LSP servers in nvim. If you need more
-assistance or have any ideas for improvement feel free to send me an email at
+intimidating, as most things need to be configured manually. The benefit of this is that
+most everything on how the LSP client behaves can be customized, from keybindings to
+default behavior. There are plenty of other things that can be customized, but this
+basic setup should get you started on using the power of LSP servers in nvim. If you
+need more assistance or have any ideas for improvement, feel free to send me an email at
 [miika@miikanissi.com](mailto:miika@miikanissi.com).

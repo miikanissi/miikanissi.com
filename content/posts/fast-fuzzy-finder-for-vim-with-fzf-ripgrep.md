@@ -16,7 +16,7 @@ efficiently jump from file to file and improve our workflow.
 
 ## Setting up Fzf in Vim
 
-fzf has an official Vim plugin that can be installed with any Vim plugin manager. We can
+Fzf has an official Vim plugin that can be installed with any Vim plugin manager. We can
 install fzf with [vim-plug](https://github.com/junegunn/vim-plug) by adding this to our
 `.vimrc` and by running `:PlugInstall`:
 
@@ -40,13 +40,13 @@ Plug 'junegunn/fzf.vim'
 
 ## Integrating Ripgrep With Fzf
 
-By default fzf uses the `find` command to walk through a file hierarchy to locate files
-based on a search criteria. However, fzf supports other similar search tools such as
+By default, fzf uses the `find` command to walk through a file hierarchy to locate files
+based on a search criterion. However, fzf supports other similar search tools such as
 [fd](https://github.com/sharkdp/fd), [ripgrep](https://github.com/BurntSushi/ripgrep),
 or [the silver searcher](https://github.com/ggreer/the_silver_searcher) for creating a
-list of files to traverse through. My preferred search tool to use is ripgrep. ripgrep
+list of files to traverse through. My preferred search tool to use is ripgrep. Ripgrep
 is a fast line-oriented search tool that recursively searches the current directory for
-a regex pattern. ripgrep also automatically respects rules defined in `.gitignore`,
+a regex pattern. Ripgrep also automatically respects rules defined in `.gitignore`,
 `.ignore`, and `.rgignore` for cleaner search results.
 
 We can override the default fzf find command by defining `FZF_DEFAULT_COMMAND` in our
@@ -57,13 +57,13 @@ export FZF_DEFAULT_COMMAND='rg --files --ignore-vcs --hidden'
 ```
 
 This command passes three options to ripgrep to make ripgrep print the output of files,
-including hidden files while respecting rules set in `.gitignore`.
+including hidden files, while respecting rules set in `.gitignore`.
 
 Now if we call `:Files` in Vim we should see a list of files based on the search results
 from `rg --files --ignore-vcs --hidden`.
 
-We can also use ripgrep to interactively search for file contents. fzf supports this
-behaviour out of the box with the command `:Rg`.
+We can also use ripgrep to interactively search for file contents. Fzf supports this
+behavior out of the box with the command `:Rg`.
 
 ## Fzf File Previews Inside Vim
 
@@ -86,15 +86,15 @@ previews.
 
 ### Syntax Highlighting
 
-By default fzf uses the `cat` command to show the file previews, but if we are mostly
+By default, fzf uses the `cat` command to show the file previews, but if we are mostly
 working on code, we might want to also see some syntax highlighting in our file
-previews. Luckily fzf supports this out of the box with an external program
+previews. Luckily, fzf supports this out of the box with an external program
 [bat](https://github.com/sharkdp/bat). All we need to do is to install it and fzf will
 automatically use it.
 
 ## Afterword
 
-Overall fzf has great performance and it has improved my programming workflow,
+Overall, fzf has great performance, and it has improved my programming workflow,
 especially when working with big projects. If you are interested in checking out my
 complete Vim configuration, go to
 [https://github.com/miikanissi/dotfiles](https://github.com/miikanissi/dotfiles).

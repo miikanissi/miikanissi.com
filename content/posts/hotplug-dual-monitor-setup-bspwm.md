@@ -9,36 +9,36 @@ There are many features people take for granted on a typical desktop environment
 [Gnome](https://www.gnome.org/) or [KDE](https://kde.org/). One of these features is the
 support for hot plugging an external monitor to a laptop while it's running and having
 your desktop environment set everything up automatically. On a minimal window manager
-setup, features like these are typically missing and you are required to configure
+setup, features like these are typically missing, and you are required to configure
 everything manually. This post will go over my own monitor hot plugging setup and
 scripts for [BSPWM](https://github.com/baskerville/bspwm). Every window manager is
-different and this configuration might not work for [i3](https://i3wm.org/) or
+different, and this configuration might not work for [i3](https://i3wm.org/) or
 [dwm](https://dwm.suckless.org/), but it might give an idea of things that need to be
 considered.
 
 ## BSPWM Startup
 
 The first thing to consider with an external monitor setup is what happens on startup.
-When you boot up your laptop with no external monitors connected you should have
+When you boot up your laptop with no external monitors connected, you should have
 everything on your laptop display. However, if you have an external monitor attached on
 boot up, you should allocate some workspaces and a status bar to both monitors.
 
-Every time BSPWM loads up it automatically runs it's configuration file located in
-`~/.config/bspwm/bspwmrc`. This configuration file is just a shell script so you can run
-any command-line commands and tools directly inside of the configuration file. In this
+Every time BSPWM loads up, it automatically runs its configuration file located in
+`~/.config/bspwm/bspwmrc`. This configuration file is just a shell script, so you can
+run any command-line commands and tools directly inside the configuration file. In this
 file we can define the amount of workspaces to create depending on what monitors are
 connected.
 
 In the following snippet of the configuration file, we first define the internal and
 external monitor connected to the laptop. You can get the monitor names by running
-`xrandr -q` while your external monitor is connected. After defining the monitors we
+`xrandr -q` while your external monitor is connected. After defining the monitors, we
 check to see if BSPWM is loading for the first time of the session. This is important
 because we don't want to create additional workspaces every time BSPWM is reloaded. We
 can access this information by getting the first passed parameter with `$1`. This
 parameter tells us the amount of reloads in the session. If the number is 0 we know that
-we are loading BSPWM for the first time. Next we use XRandR to query for the status of
-the external monitor. If it is connected we assing half of the workspaces to it and the
-other half to the internal monitor. If the external monitor is not connected we create
+we are loading BSPWM for the first time. Next, we use XRandR to query for the status of
+the external monitor. If it is connected, we assign half of the workspaces to it and the
+other half to the internal monitor. If the external monitor is not connected, we create
 all 10 workspaces on the internal monitor.
 
 ```bash
@@ -58,9 +58,9 @@ fi
 
 ## External Monitor Is Connected During a Session
 
-Next we create a function where we write the logic which we want to happen when an
+Next, we create a function where we write the logic which we want to happen when an
 external monitor is plugged in during the session. Here we simply want to move half of
-the workspaces to the newly connected monitor and we also want to make sure that the
+the workspaces to the newly connected monitor, and we also want to make sure that the
 external monitor becomes the new primary monitor.
 
 ```bash
@@ -80,9 +80,9 @@ monitor_add() {
 
 ## External Monitor Is Removed
 
-When the external monitor is removed we essentially want the opposite to happen. We want
-to move all of the workspaces (and the windows they contain) from our external monitor
-back to the internal monitor which becomes the new primary monitor.
+When the external monitor is removed, we essentially want the opposite to happen. We
+want to move all the workspaces (and the windows they contain) from our external monitor
+back to the internal monitor, which becomes the new primary monitor.
 
 ```bash
 monitor_remove() {
@@ -104,16 +104,16 @@ monitor_remove() {
 
 ## Putting It All Together
 
-Now that we have our functions declared all that is missing is writing the logic to
+Now that we have our functions declared, all that is missing is writing the logic to
 trigger them. This is done at the end of the configuration file. Here we once again use
-XRandR to check for the state of our external monitor. If it is connected we want to
-setup its resolution, position and to make it the primary monitor. After that, we check
-if the monitor already has half of the workspaces on it. If not, we know this monitor
-was recently connected and we want to run our `monitor_add` function.
+XRandR to check for the state of our external monitor. If it is connected we want to set
+up its resolution, position and to make it the primary monitor. After that, we check if
+the monitor already has half of the workspaces on it. If not, we know this monitor was
+recently connected, and we want to run our `monitor_add` function.
 
-In the situation we only have one monitor connected and we check to see if it already
-has all of the workspaces assigned to it. If that is not the case we run the
-`monitor_remove` function. In this case we also use XRandR to only setup the internal
+In the situation, we only have one monitor connected, and we check to see if it already
+has all the workspaces assigned to it. If that is not the case, we run the
+`monitor_remove` function. In this case, we also use XRandR to only set up the internal
 monitor.
 
 ```bash
@@ -137,13 +137,13 @@ fi
 
 At this point our configuration is fully working and every time we reload BSPWM it
 checks for the state of the monitors and sets them up correctly. However, we have not
-made BSPWM make an automatic reload when a screen change occurs. In order to do this we
-need to create a custom Udev rule. Udev monitors device events and we can use it to
+made BSPWM make an automatic reload when a screen change occurs. In order to do this, we
+need to create a custom Udev rule. Udev monitors device events, and we can use it to
 reload BSPWM automatically when a monitor gets plugged in or out. I won't be going into
-detail on how Udev rules work but you can read more about them
+detail on how Udev rules work, but you can read more about them
 [here](https://wiki.debian.org/udev).
 
-In the following snippet make sure to replace the `m` after `/bin/su` and `/home/` as
+In the following snippet, make sure to replace the `m` after `/bin/su` and `/home/` as
 your own username. Save this snippet in a file called
 `/etc/udev/rules.d/99-reload-monitor.rules`.
 
@@ -153,8 +153,8 @@ ACTION=="change", SUBSYSTEM=="drm", RUN+="/bin/su m --command='/home/m/.config/b
 
 ## Bonus: Set a Wallpaper and Run Polybar
 
-After a new monitor is added it won't have any wallpaper by default. This is why in the
-configuration file after we setup our monitors we want to use some program such as
+After a new monitor is added, it won't have any wallpaper by default. This is why in the
+configuration file after we set up our monitors we want to use some program such as
 [feh](https://feh.finalrewind.org/) to add a wallpaper. This can be done with the
 following snippet:
 
@@ -163,7 +163,7 @@ feh --no-fehbg --bg-scale <path-to-wallpaper>
 ```
 
 The simplest way of setting [Polybar](https://github.com/polybar/polybar) is to first
-make sure we kill all existing polybar processes and then we relaunch it based on what
+make sure we kill all existing polybar processes, and then we relaunch it based on what
 monitors are connected. The following polybar command has the option `--reload` which
 will monitor any changes to polybar and automatically reload it when a configuration is
 changed.
