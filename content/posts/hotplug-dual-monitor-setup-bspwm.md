@@ -143,7 +143,7 @@ oneshot systemd service to reload BSPWM automatically when a monitor gets plugge
 out. I won't be going into detail on how Udev rules work, but you can read more about
 them [here](https://wiki.debian.org/udev).
 
-In order to trigger a BSPWM reload from udev as user process, we need to use a oneshot
+In order to trigger a BSPWM reload from udev as a user process, we need to use a oneshot
 systemd service. Copy this to a file located at
 `~/.config/systemd/user/bspwm-reload.service`:
 
@@ -158,8 +158,8 @@ StandardOutput=journal
 ```
 
 Next, we create the udev rule which triggers the systemd service process. In the
-following snippet, make sure to replace the `m` after `/bin/su` and `/home/` as your own
-username. Save this snippet in a file called
+following snippet, make sure to replace the `m` after `/bin/su` and `/home/` as your
+**own username**. Save this snippet in a file called
 `/etc/udev/rules.d/99-reload-monitor.rules`.
 
 ```text
