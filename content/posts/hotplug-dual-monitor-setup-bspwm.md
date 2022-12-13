@@ -138,17 +138,32 @@ fi
 At this point our configuration is fully working and every time we reload BSPWM it
 checks for the state of the monitors and sets them up correctly. However, we have not
 made BSPWM make an automatic reload when a screen change occurs. In order to do this, we
-need to create a custom Udev rule. Udev monitors device events, and we can use it to
-reload BSPWM automatically when a monitor gets plugged in or out. I won't be going into
-detail on how Udev rules work, but you can read more about them
-[here](https://wiki.debian.org/udev).
+need to create a custom Udev rule. Udev monitors device events, and we can use it with a
+oneshot systemd service to reload BSPWM automatically when a monitor gets plugged in or
+out. I won't be going into detail on how Udev rules work, but you can read more about
+them [here](https://wiki.debian.org/udev).
 
-In the following snippet, make sure to replace the `m` after `/bin/su` and `/home/` as
-your own username. Save this snippet in a file called
+In order to trigger a BSPWM reload from udev as user process, we need to use a oneshot
+systemd service. Copy this to a file located at
+`~/.config/systemd/user/bspwm-reload.service`:
+
+```text
+[Unit]
+Description=Reload BSPWM
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash -c "bspc wm -r"
+StandardOutput=journal
+```
+
+Next, we create the udev rule which triggers the systemd service process. In the
+following snippet, make sure to replace the `m` after `/bin/su` and `/home/` as your own
+username. Save this snippet in a file called
 `/etc/udev/rules.d/99-reload-monitor.rules`.
 
 ```text
-ACTION=="change", SUBSYSTEM=="drm", RUN+="/bin/su m --command='/home/m/.config/bspwm/bspwmrc'"
+ACTION=="change", SUBSYSTEM=="drm", RUN+="/bin/su m --command='systemctl --user start bspwm-reload.service'"
 ```
 
 ## Bonus: Set a Wallpaper and Run Polybar
