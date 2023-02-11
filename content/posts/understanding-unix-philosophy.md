@@ -113,4 +113,4 @@ outputs. Although it can be applied to these, Unix philosophy is not about
 microservices, APIs, object-oriented programming, or any other modern buzzword.
 
 If you have any thoughts on Unix philosophy you'd like to contribute, email me at
-[miika@miikanissi.com](miika@miikanissi.com).
+[miika@miikanissi.com](mailto:miika@miikanissi.com).

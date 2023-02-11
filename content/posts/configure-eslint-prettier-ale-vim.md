@@ -94,4 +94,5 @@ I felt the need to write this post as most solutions I could find on search engi
 outdated or unnecessarily complicated.
 
 Notice a mistake in this post or need help setting up your JavaScript environment in
-Vim? Feel free to contact me via email at `miika@miikanissi.com`.
+Vim? Feel free to contact me via email at
+[miika@miikanissi.com](mailto:miika@miikanissi.com).

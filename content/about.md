@@ -2,7 +2,7 @@
 title: "About Me"
 description:
   "About Miika Nissi — I am a software engineer and a Linux/Unix enthusiast located in
-  Queens, New York City. I particularly enjoy finding simple, efficient solutions and
+  Queens, New York. I particularly enjoy finding simple, efficient solutions and
   building on the knowledge of the past to solve new problems."
 sitemap:
   changefreq: monthly
@@ -12,17 +12,18 @@ sitemap:
 ![Portrait of Miika Nissi](/media/miika.jpg)
 
 My name is Miika, I am a software engineer and a Linux/Unix enthusiast located in
-Queens, New York City. I particularly enjoy finding simple, efficient solutions and
-building on the knowledge of the past to solve new problems.
+Queens, New York. I particularly enjoy finding simple, efficient solutions and building
+on the knowledge of the past to solve new problems.
 
-I work as a software engineer at [Tawasta](https://tawasta.fi/en/). My work revolves
-around building open source business solutions for [Odoo](https://www.odoo.com/), an
-enterprise resource planning (ERP) system, using a technology stack of Python,
-JavaScript, PostgreSQL, XML, and Sass. I also automate and improve DevOps processes by
-employing tools such as Docker, Ansible, and Bash scripting.
+I work as a software developer at [Wildpack Beverage](https://wildpackbev.com/). At
+work, I use technology to improve and streamline manufacturing and business processes to
+increase efficiency, reduce costs, and save time. I mostly work on
+[Odoo](https://www.odoo.com/), an enterprise resource planning (ERP) system, using a
+technology stack of Python, JavaScript, PostgreSQL, XML, and Sass. I also automate and
+improve DevOps processes by employing tools such as Docker, Ansible, and Bash scripting.
 
-When I'm not in front of a screen, I enjoy lifting weights, being in nature and helping
-cat rescue organizations.
+When I'm not in front of a screen, I enjoy lifting weights, being in nature, and going
+to church.
 
 ## My Website Setup and Tools
 
@@ -64,5 +65,5 @@ projects on these platforms:
 ![Made With NeoVim Banner](/media/made-with-neovim.png)
 ![Linux Now Gif Banner](/media/linux-now.gif)
 ![Powered by Debian Gif Banner](/media/powered-by-debian.gif)
-![WorldWide Web Connecting People Since 1991 Gif Banner](/media/www-connecting-since-1991.gif)
+![World Wide Web Connecting People Since 1991 Gif Banner](/media/www-connecting-since-1991.gif)
 ![Linux Today Gif Banner](/media/linux-today.gif)
