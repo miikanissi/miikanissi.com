@@ -6,118 +6,183 @@ description:
   code linting and fixing."
 ---
 
-Neovim or nvim has come a long way to overtake vim with support of a multitude of new
+Neovim or Nvim has come a long way to overtake vim with support of a multitude of new
 features natively out of the box. One of these features is the support for the Language
-Server Protocol (LSP), which means nvim acts as a client to LSP servers. In order to
+Server Protocol (LSP), which means Nvim acts as a client to LSP servers. In order to
 take advantage of this feature, there are a couple of important plugins that do the
 heavy lifting of getting a working LSP server and client communication set up. In this
-post I will go over what you need to get started on how to set up nvim LSP client for
+post I will go over what you need to get started on how to set up Nvim LSP client for
 analyzing code, autocompletion and even automatic code linting and fixing.
 
 ## Installing the Nvim Plugins With Packer
 
-To get started, we first need to install the plugins. My preferred nvim plugin manager
+To get started, we first need to install the plugins. My preferred Nvim plugin manager
 is [Packer](https://github.com/wbthomason/packer.nvim), but this step can be done with
-any other plugin manager as well. Please note, I am configuring nvim in an `init.lua`
-file. To learn more about how to configure nvim in Lua you may refer to
+any other plugin manager as well. Please note, I am configuring Nvim in an `init.lua`
+file. To learn more about how to configure Nvim in Lua you may refer to
 [this helpful guide](https://github.com/nanotee/nvim-lua-guide).
 
 ```lua
 require('packer').startup(function(use)
-    use 'williamboman/nvim-lsp-installer' -- Automatically install LSPs
-    use 'neovim/nvim-lspconfig' -- Collection of configurations for built-in LSP client
-    use 'jose-elias-alvarez/null-ls.nvim' -- Null ls is used for code formatting and pylint analysis
+    --
+    -- ...
+    --
+	use({
+		"neovim/nvim-lspconfig",
+		requires = {
+			-- Automatically install LSPs to stdpath for neovim
+			"williamboman/mason.nvim",
+			"williamboman/mason-lspconfig.nvim",
+		},
+	}) -- Collection of configurations for built-in LSP client
+	use("jose-elias-alvarez/null-ls.nvim") -- Null ls is used for code formatting and pylint analysis
     use 'hrsh7th/nvim-cmp' -- Autocompletion plugin
     use 'hrsh7th/cmp-nvim-lsp' -- Autocompletion with LSPs
+    --
+    -- ...
+    --
 end)
 ```
 
 After saving the `init.lua` we can run `:PackerSync` to install the declared packages.
 
-## Installing LSP Servers
+## Installing and configuring LSP Servers
 
-In order to install the LSP servers used by the nvim LSP client, we use a helpful plugin
-called [nvim-lsp-installer](https://github.com/williamboman/nvim-lsp-installer). It is
-not necessary to use this plugin as each LSP server can be installed manually, but I
-like to use this plugin for convenience.
+In order to install and configure the LSP servers used by the Nvim LSP client, we use a
+helpful plugin called [mason.nvim](https://github.com/williamboman/mason.nvim) and
+[mason-lspconfig.nvim](https://github.com/williamboman/mason-lspconfig.nvim). It is not
+necessary to use this plugin as each LSP server can be installed manually, but I like to
+use this plugin for convenience.
 
-Below is a snippet of my setup for nvim-lsp-installer. For a full list of supported LSPs
-refer to
-[this manual](https://github.com/williamboman/nvim-lsp-installer#available-lsps=).
+Below is a snippet of my setup for mason.nvim. For a full list of supported LSPs refer
+to [this manual](https://github.com/williamboman/mason.nvim/blob/main/PACKAGES.md).
+
+First, we define the common on_attach and capabilities functions for the LSPs. In the
+on_attach function we define the keymappings to interact with the LSP server. In
+capabilities function we hook the autocompletion plugin, so we get LSP completion
+suggestions.
 
 ```lua
-require("nvim-lsp-installer").setup({
-    -- List of servers to automatically install
-    ensure_installed = { 'pyright', 'tsserver', 'eslint', 'bashls', 'cssls', 'html', 'sumneko_lua', 'jsonls', 'clangd', 'lemminx' },
-    -- automatically detect which servers to install (based on which servers are set up via lspconfig)
-    automatic_installation = true,
-    ui = {
-        icons = {
-            server_installed = "✓",
-            server_pending = "➜",
-            server_uninstalled = "✗"
-        }
-    }
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
+
+local on_attach = function(_, bufnr)
+	local nmap = function(keys, func, desc)
+		if desc then
+			desc = "LSP: " .. desc
+		end
+
+		vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc })
+	end
+
+	-- Theme, colors and gui
+	nmap("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
+	nmap("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
+
+	nmap("gd", vim.lsp.buf.definition, "[G]oto [D]efinition")
+	nmap("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
+	nmap("gI", vim.lsp.buf.implementation, "[G]oto [I]mplementation")
+	nmap("<leader>D", vim.lsp.buf.type_definition, "Type [D]efinition")
+	nmap("<leader>ds", require("telescope.builtin").lsp_document_symbols, "[D]ocument [S]ymbols")
+	nmap("<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
+
+	-- See `:help K` for why this keymap
+	nmap("K", vim.lsp.buf.hover, "Hover Documentation")
+	nmap("<C-k>", vim.lsp.buf.signature_help, "Signature Documentation")
+
+	-- Lesser used LSP functionality
+	nmap("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
+	nmap("<leader>wa", vim.lsp.buf.add_workspace_folder, "[W]orkspace [A]dd Folder")
+	nmap("<leader>wr", vim.lsp.buf.remove_workspace_folder, "[W]orkspace [R]emove Folder")
+	nmap("<leader>wl", function()
+		print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+	end, "[W]orkspace [L]ist Folders")
+
+	-- Create a command `:Format` local to the LSP buffer
+	vim.api.nvim_buf_create_user_command(bufnr, "Format", function(_)
+		vim.lsp.buf.format()
+	end, { desc = "Format current buffer with LSP" })
+end
+```
+
+Next, we need to define the LSP servers we want to enable and pass any custom settings.
+Following is what servers I'm using. You can customize the list as you wish. For the
+full list of available LSP servers refer to this
+[document](https://github.com/williamboman/mason.nvim/blob/main/PACKAGES.md).
+
+```lua
+local servers = {
+	pyright = {},
+	eslint = {
+		codeAction = {
+			disableRuleComment = {
+				enable = true,
+				location = "separateLine",
+			},
+			showDocumentation = {
+				enable = true,
+			},
+		},
+		codeActionOnSave = {
+			enable = false,
+			mode = "all",
+		},
+		format = false,
+		nodePath = "",
+		onIgnoredFiles = "off",
+		packageManager = "npm",
+		quiet = false,
+		rulesCustomizations = {},
+		run = "onType",
+		useESLintClass = false,
+		validate = "on",
+		workingDirectory = {
+			mode = "location",
+		},
+	},
+	bashls = {},
+	cssls = {},
+	html = {},
+	jsonls = {},
+	lemminx = {},
+	gopls = {},
+	lua_ls = {
+		Lua = {
+			workspace = { checkThirdParty = false },
+			telemetry = { enable = false },
+			diagnostics = {
+				globals = { "vim" },
+			},
+		},
+	},
+}
+```
+
+In this final part, we pass these functions and the list of servers to mason.nvim which
+handles the rest.
+
+```lua
+-- MASON.NVIM
+require("mason").setup()
+
+-- MASON-LSPCONFIG.NVIM
+local mason_lspconfig = require("mason-lspconfig")
+mason_lspconfig.setup({
+	ensure_installed = vim.tbl_keys(servers),
+})
+
+mason_lspconfig.setup_handlers({
+	function(server_name)
+		require("lspconfig")[server_name].setup({
+			capabilities = capabilities,
+			on_attach = on_attach,
+			settings = servers[server_name],
+		})
+	end,
 })
 ```
 
-## Enabling LSP Servers in Nvim
-
-Now that we have installed the required plugins and LSP servers, we have to enable them.
-For this, we are using [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig). The
-easiest way to set up a language server (pyright in this example) is by adding
-`require'lspconfig'.pyright.setup{}` in the configuration file. However, nvim-lspconfig
-does not automatically set up any keybindings or autocompletion. These can be setup in
-the `on_attach` and `capabilities` functions, respectively. In the snippet below, I am
-creating a local function for `on_attach` and `capabilities` which can be reused for
-each language server configuration. In the `on_attach` function, I am setting up key
-binds which will be enabled whenever nvim detects a file type with an active LSP server.
-For the `capabilities` function, I am calling the plugin
-[cmp-nvim-lsp](https://github.com/hrsh7th/cmp-nvim-lsp), which provides autocompletion.
-
-```lua
-local lspconfig = require 'lspconfig'
-
--- Common LSP On Attach function
-local on_attach = function(_, bufnr)
-    local opts = { buffer = bufnr }
-    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
-    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
-    vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
-    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
-    vim.keymap.set('n', '<leader>sh', vim.lsp.buf.signature_help, opts)
-    vim.keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, opts)
-    vim.keymap.set('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, opts)
-    vim.keymap.set('n', '<leader>wl', function()
-        vim.inspect(vim.lsp.buf.list_workspace_folders())
-    end, opts)
-    vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, opts)
-    vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
-    vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
-    vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, opts)
-    vim.keymap.set('n', '<leader>so', require('telescope.builtin').lsp_document_symbols, opts)
-end
-
--- nvim-cmp supports additional completion capabilities
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
-```
-
-In order to override the default `on_attach` and `capabilities` functions for each LSP
-server, we can add the following snippet in the configuration, which will loop through
-all the defined LSP servers and enable them using our local override functions:
-
-```lua
--- LSPs with default setup: bashls (Bash), cssls (CSS), html (HTML), clangd (C/C++), jsonls (JSON)
-for _, lsp in ipairs { 'bashls', 'cssls', 'html', 'clangd', 'jsonls'} do
-    lspconfig[lsp].setup {
-        on_attach = on_attach,
-        capabilities = capabilities,
-    }
-end
-```
-
-### Additional Keybindings for Autocompletion
+### Enable Autocompletion and Add Additional Keybindings
 
 The following snippet adds custom keybindings for autocompletion:
 
@@ -169,47 +234,67 @@ cmp.setup {
 So far, we have installed all the necessary plugins and enabled LSP servers with custom
 keybindings and autocompletion. Now we can use a plugin called
 [null-ls](https://github.com/jose-elias-alvarez/null-ls.nvim) to automatically use any
-available linters on a file to fix code formatting on file save.
+available linters on a file to fix code formatting on file save. Refer to the available
+sources in the
+[manual](https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md).
 
 ```lua
--- Null ls for automatic formatting and additional analysis
+-- NULL-LS.NVIM
+-- LSP formatting filter
+local lsp_formatting = function(bufnr)
+	vim.lsp.buf.format({
+		filter = function(client)
+			-- Ignore formatting from these LSPs
+			local lsp_formatting_denylist = {
+				eslint = true,
+				lemminx = true,
+				lua_ls = true,
+			}
+			if lsp_formatting_denylist[client.name] then
+				return false
+			end
+			return true
+		end,
+		bufnr = bufnr,
+	})
+end
+
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 require("null-ls").setup({
-    -- you can reuse a shared lspconfig on_attach callback here
-    on_attach = function(client, bufnr)
-        if client.supports_method("textDocument/formatting") then
-            vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-            vim.api.nvim_create_autocmd("BufWritePre", {
-                group = augroup,
-                buffer = bufnr,
-                callback = function()
-                    -- on 0.8, you should use vim.lsp.buf.format({ bufnr = bufnr }) instead
-                    vim.lsp.buf.formatting_sync()
-                end,
-            })
-        end
-    end,
-    sources = {
-        require("null-ls").builtins.formatting.prettier.with({
-            extra_filetypes = { "xml" }
-        }),
-        require("null-ls").builtins.formatting.black,
-        require("null-ls").builtins.formatting.isort,
-        require("null-ls").builtins.diagnostics.pylint.with({
-            extra_args = { "--load-plugins=pylint_odoo", "-e", "odoolint" } -- Load pylint_odoo plugin for pylint
-        }),
-    },
+	-- you can reuse a shared lspconfig on_attach callback here
+	on_attach = function(client, bufnr)
+		if client.supports_method("textDocument/formatting") then
+			vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+			vim.api.nvim_create_autocmd("BufWritePre", {
+				group = augroup,
+				buffer = bufnr,
+				callback = function()
+					lsp_formatting(bufnr)
+				end,
+			})
+		end
+	end,
+	sources = {
+		require("null-ls").builtins.formatting.prettier.with({
+			extra_filetypes = { "xml" },
+		}),
+		require("null-ls").builtins.formatting.black,
+		require("null-ls").builtins.formatting.djlint,
+		require("null-ls").builtins.formatting.isort,
+		require("null-ls").builtins.formatting.stylua,
+		require("null-ls").builtins.diagnostics.djlint,
+		require("null-ls").builtins.diagnostics.flake8,
+		require("null-ls").builtins.diagnostics.pylint,
+	},
 })
--- Manually format buffer
-vim.keymap.set('n', '<leader>bf', vim.lsp.buf.formatting, {})
 ```
 
 ## Afterword
 
-Setting up the nvim LSP client to work with different LSP servers can seem a bit
+Setting up the Nvim LSP client to work with different LSP servers can seem a bit
 intimidating, as most things need to be configured manually. The benefit of this is that
 most everything on how the LSP client behaves can be customized, from keybindings to
 default behavior. There are plenty of other things that can be customized, but this
-basic setup should get you started on using the power of LSP servers in nvim. If you
-need more assistance or have any ideas for improvement, feel free to send me an email at
+basic setup should get you started on using the power of LSP servers in Nvim. If you
+need more assistance or have any ideas for improvement, feel free to email me at
 [miika@miikanissi.com](mailto:miika@miikanissi.com).
