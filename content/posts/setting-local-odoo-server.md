@@ -4,20 +4,21 @@ description:
   "Guide on setting up a local Odoo 16 development server with Docker to create and
   develop custom Odoo modules"
 date: 2023-07-15T23:48:21-04:00
+toc: True
 ---
 
-Odoo is a framework and a suite of open source business applications including for
-example CRM, e-commerce, accounting, manufacturing, warehouse, and inventory management.
-It is fully customizable to every business need, as its extensible architecture allows
-developers to modify existing applications and create new applications. I have extensive
-experience solving business needs from small clients to larger enterprises using the
-Odoo framework. In this quick guide, I will share my personal development environment
-and help you create your own local development server for Odoo 16 utilizing Docker.
+Odoo is a framework and a suite of open source business applications including CRM,
+e-commerce, accounting, manufacturing, warehouse, and inventory management to name a
+few. It is fully customizable to every business need because its extensible architecture
+allows developers to modify existing applications and create new applications. I have
+ample experience solving business needs from small clients to larger enterprises using
+the Odoo framework. In this guide, I will share my personal development environment and
+help you create your own local development server for Odoo 16 utilizing Docker.
 
 ## Installing Docker
 
 To begin, we must first have Docker Engine and Docker Compose installed on our system.
-The installation will vary depending on what platform you're on, and detailed
+The installation will vary depending on what platform you're on and detailed
 instructions for your platform can be found from the
 [official Docker documentation](https://docs.docker.com/engine/install/). Here, I will
 share the installation process on Debian 12:
@@ -74,7 +75,7 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin 
 
 Now that we have Docker installed, we can start setting up our Odoo configuration. You
 are free to choose whatever directory works for you, but for the purpose of this
-tutorial we will be placing our Odoo 16 files in `/opt/odoo/16/` directory.
+tutorial, we will be placing our Odoo 16 files in `/opt/odoo/16/` directory.
 
 First, let's create the directory and navigate inside of it:
 
@@ -83,8 +84,7 @@ mkdir -p /opt/odoo/16
 cd /opt/odoo/16
 ```
 
-Next, we want to create another directory here that will house all the configuration
-files:
+Next, create another directory here that will house all the configuration files:
 
 ```bash
 mkdir -p /opt/odoo/16/conf
@@ -92,7 +92,7 @@ mkdir -p /opt/odoo/16/conf
 
 ### Creating a Dockerfile
 
-In the `conf` directory we will create a Dockerfile which will contain instructions for
+In the `conf` directory, we will create a Dockerfile which will contain instructions for
 Docker to build an image. A Docker image is essentially a template containing
 instructions for Docker to build a container out of.
 
@@ -100,7 +100,7 @@ instructions for Docker to build a container out of.
 nano /opt/odoo/16/conf/Dockerfile
 ```
 
-In this file, you would install any additional external dependencies required by your
+In this file, you can install any additional external dependencies required by your
 custom Odoo modules. The following is a great basic template to use for your first
 Dockerfile:
 
@@ -122,10 +122,9 @@ Docker image, which we are using to build a custom image on top of.
 
 ### Setting up Odoo configuration
 
-Next we will be creating a new directory inside the `/opt/odoo/16/conf/` directory. This
+Next we will be creating a new directory inside the `/opt/odoo/16/conf/` directory. The
 new directory will be the name of your Odoo development database. This will make sense
-later in order for us to have multiple Odoo instances running on our computer for
-different databases.
+when we have multiple Odoo instances running on our computers for different databases.
 
 ```bash
 mkdir -p /opt/odoo/16/conf/odoo1
@@ -186,18 +185,17 @@ data_dir = /var/lib/odoo/
 addons_path = /usr/lib/python3/dist-packages/odoo/addons,/opt/odoo/16/addons/
 ```
 
-In the configuration file, the most likely setting you will be changing is the
-`addons_path` option. This addons path is a comma separated list of directory paths
-which contain Odoo modules. In this basic example we are only using two directory
-paths - base Odoo addons path and the root directory of `opt/odoo/16/addons` which we
-will get back to later in this guide.
+In the configuration file, the setting you might change is the `addons_path` option. The
+addons path is a comma separated list of directory paths which contain Odoo modules. In
+this basic example we are only using two directory paths - base Odoo addons path and the
+root directory of `opt/odoo/16/addons` (which we will get back to later in this guide).
 
 ### Docker Compose Configuration
 
-Now that we have created our Dockerfile with instructions on building a Docker image
-that contains all of our system tools and packages, and we have a simple Odoo
-configuration file set up, we can move on to creating a Docker compose file which will
-take the Docker image and build a container where our Odoo instance will be running on.
+Now that we have created our Dockerfile with instructions for building a Docker image
+containing all of our system tools and packages, and we have a simple Odoo configuration
+file set up, we can move on to creating a Docker compose file which will take the Docker
+image and build a container where our Odoo instance will be running on.
 
 ```bash
 nano /opt/odoo/16/conf/odoo1/docker-compose.yml
@@ -213,7 +211,7 @@ parts to take note of are as follows:
 - Ports: This option defines what local system ports will be used to access certain
   ports on the container. Odoo runs on the port 8069 by default, so we will be using
   that. If you have multiple Odoo containers running on your system, you need to assign
-  different ports for each container, so that they won't overlap. For example, you could
+  different ports for each container so that they won't overlap. For example, you could
   set up your local port 8079 to connect to the container's port 8069 by typing
   "8079:8069" instead.
 - Volumes: Volumes will map certain directories from your system to be accessible in the
@@ -266,8 +264,8 @@ directory which will contain all of your custom Odoo modules.
 mkdir -p /opt/odoo/16/addons/
 ```
 
-You may now add any of your custom modules in this directory and once we boot up our
-Odoo container they will be available to you inside the Odoo applications list.
+You may now add any of your custom modules in this directory. Once we boot up our Odoo
+container, they will be available to you inside the Odoo applications list.
 
 ### Recap of the configuration
 
@@ -298,9 +296,9 @@ then run our first Odoo container.
 
 ### Building the Docker Image for Odoo
 
-After running this command, we only need to run it again in order to build a new image
-in case there is an upstream Odoo update or if we modify our Dockerfile with additional
-instructions.
+After running this command, we would only need to run it again in order to build a new
+image in case there is an upstream Odoo update or if we modify our Dockerfile with
+additional instructions.
 
 ```bash
 cd /opt/odoo/16/conf/
@@ -327,7 +325,7 @@ in the `odoo.conf` file - in our case _SecretPassword123_.
 Due to the way we have set up our directory structure, we can now easily duplicate this
 setup for any other Odoo version or have multiple Odoo instances running on our machine.
 
-To set up an Odoo instance for another Odoo version. All you have to do is copy the
+To set up an Odoo instance for another Odoo version, all you have to do is copy the
 entire `/opt/odoo/16/` directory into `/opt/odoo/<version_number>` and then go through
 the files and change each instance of 16 into the version number you want to use.
 
