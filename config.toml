@@ -58,6 +58,7 @@ disableHugoGeneratorInject = true
 
   [markup.tableOfContents]
     ordered = true
+    endLevel = 4
 
 [frontmatter]
   lastmod = ["lastmod", ":git", "date", "publishDate"]

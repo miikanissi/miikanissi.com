@@ -1,8 +1,8 @@
 ---
 title: "Setting up a Local Odoo 16 Development Server With Docker"
 description:
-  "Guide on setting up a local Odoo 16 development server with Docker to create and
-  develop custom Odoo modules"
+  "Guide on setting up a local Odoo 16 development server on Debian or Ubuntu with
+  Docker to create and develop custom Odoo modules"
 date: 2023-07-15T23:48:21-04:00
 toc: True
 ---
@@ -21,7 +21,8 @@ To begin, we must first have Docker Engine and Docker Compose installed on our s
 The installation will vary depending on what platform you're on and detailed
 instructions for your platform can be found from the
 [official Docker documentation](https://docs.docker.com/engine/install/). Here, I will
-share the installation process on Debian 12:
+share the installation process for Debian 11 and 12 or Ubuntu 20.04, 22.04, 22.10, and
+23.04:
 
 ### Uninstall Old Docker Versions
 
@@ -46,17 +47,26 @@ sudo apt-get install ca-certificates curl gnupg
 Next, we add the official Docker GPG key to ensure authenticity and security of our
 Docker packages:
 
+#### Debian 11 and 12
+
 ```bash
 sudo install -m 0755 -d /etc/apt/keyrings
 curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
 sudo chmod a+r /etc/apt/keyrings/docker.gpg
-```
-
-Lastly, the following command will set up the repository:
-
-```bash
 echo \
   "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian \
+  "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+```
+
+#### Ubuntu 20.04, 22.04, 22.10, and 23.04
+
+```bash
+sudo install -m 0755 -d /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+sudo chmod a+r /etc/apt/keyrings/docker.gpg
+echo \
+  "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
   "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
   sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 ```
@@ -319,6 +329,12 @@ If you followed the guide closely, you should now be able to navigate to
 [http://localhost:8069](http://localhost:8069) to log in to your Odoo database. The
 credentials will be admin as the username and the password will be the password defined
 in the `odoo.conf` file - in our case _SecretPassword123_.
+
+To view Odoo logs from the container we can run this command:
+
+```bash
+sudo docker logs -f --tail=500 odoo1
+```
 
 ## Bonus Tips
 
