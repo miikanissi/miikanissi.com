@@ -312,7 +312,7 @@ additional instructions.
 
 ```bash
 cd /opt/odoo/16/conf/
-sudo docker build custom-odoo:16.0 .
+sudo docker build -t custom-odoo:16.0 .
 ```
 
 ### Creating the Docker container for an Odoo instance
