@@ -234,7 +234,7 @@ parts to take note of are as follows:
 version: "3.1"
 services:
   web:
-    image: custom-odoo:16
+    image: custom-odoo:16.0
     container_name: odoo1
     depends_on:
       - db
