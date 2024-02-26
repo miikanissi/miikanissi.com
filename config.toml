@@ -34,14 +34,21 @@ disableHugoGeneratorInject = true
     title = "About"
     url = "/about/"
     weight = 20
-  
+
+  [[menu.main]]
+    identifier = "services"
+    name = "Services"
+    title = "Services"
+    url = "/odoo-development-services"
+    weight = 25
+
   [[menu.main]]
     identifier = "github"
     name = "GitHub"
     title = "GitHub"
     url = "https://github.com/miikanissi"
     weight = 30
-  
+
   [[menu.main]]
     identifier = "rss"
     name = "RSS"

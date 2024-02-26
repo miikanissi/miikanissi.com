@@ -41,6 +41,12 @@ my thought process for this site:
 
 ![Developer's side projects](/media/blog-meme.jpg)
 
+## Odoo Development Services
+
+I provide reliable, high-quality Odoo ERP development services. With attention to
+detail, I offer practical solutions tailored to your specific business needs.
+[Learn more here](/odoo-development-services).
+
 ## Contact Me
 
 The fastest way to reach me is via email at
