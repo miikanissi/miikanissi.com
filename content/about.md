@@ -73,3 +73,4 @@ projects on these platforms:
 ![Powered by Debian Gif Banner](/media/powered-by-debian.gif)
 ![World Wide Web Connecting People Since 1991 Gif Banner](/media/www-connecting-since-1991.gif)
 ![Linux Today Gif Banner](/media/linux-today.gif)
+![Tux on a laptop gif](/media/tux-laptop.gif)
