@@ -107,45 +107,53 @@ If using the default options, there is no need to explicitly call `setup`.
 ```lua
 -- Default options
 require("modus-themes").setup({
-  -- Theme comes in two styles `modus_operandi` and `modus_vivendi`
-  -- `auto` will automatically set style based on background set with vim.o.background
-  style = "auto",
-  variant = "default", -- Theme comes in four variants `default`, `tinted`, `deuteranopia`, and `tritanopia`
-  styles = {
-    -- Style to be applied to different syntax groups
-    -- Value is any valid attr-list value for `:help nvim_set_hl`
-    comments = { italic = true },
-    keywords = { italic = true },
-    functions = {},
-    variables = {},
-  },
+	-- Theme comes in two styles `modus_operandi` and `modus_vivendi`
+	-- `auto` will automatically set style based on background set with vim.o.background
+	style = "auto",
+	variant = "default", -- Theme comes in four variants `default`, `tinted`, `deuteranopia`, and `tritanopia`
+	transparent = false, -- Transparent background (as supported by the terminal)
+	dim_inactive = false, -- "non-current" windows are dimmed
+	hide_inactive_statusline = false, -- Hide statuslines on inactive windows. Works with the standard **StatusLine**, **LuaLine** and **mini.statusline**
+	styles = {
+		-- Style to be applied to different syntax groups
+		-- Value is any valid attr-list value for `:help nvim_set_hl`
+		comments = { italic = true },
+		keywords = { italic = true },
+		functions = {},
+		variables = {},
+	},
 
-  --- You can override specific color groups to use other groups or a hex color
-  --- function will be called with a ColorScheme table
-  ---@param colors ColorScheme
-  on_colors = function(colors) end,
+	--- You can override specific color groups to use other groups or a hex color
+	--- Function will be called with a ColorScheme table
+	--- Refer to `extras/lua/modus_operandi.lua` or `extras/lua/modus_vivendi.lua` for the ColorScheme table
+	---@param colors ColorScheme
+	on_colors = function(colors) end,
 
-  --- You can override specific highlights to use other groups or a hex color
-  --- function will be called with a Highlights and ColorScheme table
-  ---@param highlights Highlights
-  ---@param colors ColorScheme
-  on_highlights = function(highlights, colors) end,
+	--- You can override specific highlights to use other groups or a hex color
+	--- Function will be called with a Highlights and ColorScheme table
+	--- Refer to `extras/lua/modus_operandi.lua` or `extras/lua/modus_vivendi.lua` for the Highlights and ColorScheme table
+	---@param highlights Highlights
+	---@param colors ColorScheme
+	on_highlights = function(highlights, colors) end,
 })
 ```
 
-### Example Settings and Color Overrides
+### Example Settings with Color and Highlight Overrides
 
 ```lua
 require("modus-themes").setup({
-  style = "modus_operandi", -- Always use modus_operandi regardless of `vim.o.background`
-  variant = "deuteranopia", -- Use deuteranopia variant
-  styles = {
-    functions = { italic = true }, -- Enable italics for functions
-  },
+	style = "modus_operandi", -- Always use modus_operandi regardless of `vim.o.background`
+	variant = "deuteranopia", -- Use deuteranopia variant
+	styles = {
+		functions = { italic = true }, -- Enable italics for functions
+	},
 
-  on_colors = function(colors)
-    colors.error = colors.red_faint -- Change error color to the "faint" variant
-  end,
+	on_colors = function(colors)
+		colors.error = colors.red_faint -- Change error color to the "faint" variant
+	end,
+	on_highlights = function(highlight, color)
+		highlight.Boolean = { fg = color.green } -- Change Boolean highlight to use the green color
+	end,
 })
 ```
 
@@ -154,7 +162,9 @@ require("modus-themes").setup({
 <!-- prettier-ignore-start -->
 <!-- extras:start -->
 
+- [Aerc](https://git.sr.ht/~rjarry/aerc) ([aerc](https://github.com/miikanissi/modus-themes.nvim/tree/master/extras/aerc))
 - [Alacritty](https://github.com/alacritty/alacritty) ([alacritty](https://github.com/miikanissi/modus-themes.nvim/tree/master/extras/alacritty))
+- [Bat](https://github.com/sharkdp/bat) ([bat](https://github.com/miikanissi/modus-themes.nvim/tree/master/extras/bat))
 - [Delta](https://github.com/dandavison/delta) ([delta](https://github.com/miikanissi/modus-themes.nvim/tree/master/extras/delta))
 - [Dunst](https://dunst-project.org/) ([dunst](https://github.com/miikanissi/modus-themes.nvim/tree/master/extras/dunst))
 - [Fish](https://fishshell.com/docs/current/index.html) ([fish](https://github.com/miikanissi/modus-themes.nvim/tree/master/extras/fish))
@@ -162,15 +172,20 @@ require("modus-themes").setup({
 - [GitUI](https://github.com/extrawurst/gitui) ([gitui](https://github.com/miikanissi/modus-themes.nvim/tree/master/extras/gitui))
 - [iTerm](https://iterm2.com/) ([iterm](https://github.com/miikanissi/modus-themes.nvim/tree/master/extras/iterm))
 - [Kitty](https://sw.kovidgoyal.net/kitty/conf.html) ([kitty](https://github.com/miikanissi/modus-themes.nvim/tree/master/extras/kitty))
-- [Lua Table for testing](https://www.lua.org) ([lua](https://github.com/miikanissi/modus-themes.nvim/tree/master/extras/lua))
+- [Lua Table for testing and reference](https://www.lua.org) ([lua](https://github.com/miikanissi/modus-themes.nvim/tree/master/extras/lua))
+- [Oomox/Themix](https://github.com/themix-project/themix-gui) ([oomox](https://github.com/miikanissi/modus-themes.nvim/tree/master/extras/oomox))
 - [PrismJS](https://prismjs.com) ([prismjs](https://github.com/miikanissi/modus-themes.nvim/tree/master/extras/prismjs))
+- [qt5ct](https://sourceforge.net/projects/qt5ct/) ([qt5ct](https://github.com/miikanissi/modus-themes.nvim/tree/master/extras/qt5ct))
 - [Terminator](https://gnome-terminator.readthedocs.io/en/latest/config.html) ([terminator](https://github.com/miikanissi/modus-themes.nvim/tree/master/extras/terminator))
 - [Tilix](https://github.com/gnunn1/tilix) ([tilix](https://github.com/miikanissi/modus-themes.nvim/tree/master/extras/tilix))
+- [Tmux](https://github.com/tmux/tmux/wiki) ([tmux](https://github.com/miikanissi/modus-themes.nvim/tree/master/extras/tmux))
 - [WezTerm](https://wezfurlong.org/wezterm/config/files.html) ([wezterm](https://github.com/miikanissi/modus-themes.nvim/tree/master/extras/wezterm))
 - [Windows Terminal](https://aka.ms/terminal-documentation) ([windows_terminal](https://github.com/miikanissi/modus-themes.nvim/tree/master/extras/windows_terminal))
 - [Xfce Terminal](https://docs.xfce.org/apps/terminal/advanced) ([xfceterm](https://github.com/miikanissi/modus-themes.nvim/tree/master/extras/xfceterm))
 - [Xresources](https://wiki.archlinux.org/title/X_resources) ([xresources](https://github.com/miikanissi/modus-themes.nvim/tree/master/extras/xresources))
+- [Yazi](https://github.com/sxyazi/yazi) ([yazi](https://github.com/miikanissi/modus-themes.nvim/tree/master/extras/yazi))
 - [Zathura](https://pwmt.org/projects/zathura/) ([zathura](https://github.com/miikanissi/modus-themes.nvim/tree/master/extras/zathura))
+- [Zellij](https://github.com/zellij-org/zellij) ([zellij](https://github.com/miikanissi/modus-themes.nvim/tree/master/extras/zellij))
 
 <!-- extras:end -->
 <!-- prettier-ignore-end -->
@@ -196,7 +211,7 @@ How to create a new extra template:
    plugin directory:
 
    ```sh
-   nvim --headless "+lua require('modus-themes.extras').setup()" +qa
+   ./scripts/extras.sh
    ```
 
 4. Ensure the newly created themes in the `extras/` directory are correct. Please **DO
