@@ -11,9 +11,9 @@ sitemap:
 
 ![Portrait of Miika Nissi](/media/miika.jpg)
 
-My name is Miika, I am a software engineer and a Linux/Unix enthusiast located in
-Queens, New York. I particularly enjoy finding simple, efficient solutions and building
-on the knowledge of the past to solve new problems.
+My name is Miika, I am a software engineer, father, and a Linux/Unix enthusiast located
+in Queens, New York. I particularly enjoy finding simple, efficient solutions and
+building on the knowledge of the past to solve new problems.
 
 I work as a software developer at [Wildpack Beverage](https://wildpackbev.com/). At
 work, I use technology to improve and streamline manufacturing and business processes to
