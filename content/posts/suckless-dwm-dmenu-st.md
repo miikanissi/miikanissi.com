@@ -82,8 +82,7 @@ which allows you to easily kill unresponsive programs.
 Another useful dmenu script I found is
 [passmenu](https://github.com/miikanissi/dotfiles/blob/master/.local/bin/passmenu.sh).
 Passmenu allows you to get your passwords from Pass (The Standard UNIX Password
-Manager). I have made a separate blog post about Pass
-[here]({{< relref "/pass-the-standard-unix-password-manager.md" >}}).
+Manager). 
 
 I also have applied a couple of dmenu patches:
 
