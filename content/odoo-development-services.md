@@ -54,5 +54,4 @@ Ready to elevate your business with Odoo? Contact me today to schedule a consult
 and learn more how my personalized development solutions can benefit you.
 
 The fastest way to reach me is via email at
-[miika@miikanissi.com](mailto:miika@miikanissi.com). You can also find me on
-[LinkedIn](https://www.linkedin.com/in/miikanissi/).
+[miika@miikanissi.com](mailto:miika@miikanissi.com).

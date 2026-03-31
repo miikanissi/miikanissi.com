@@ -55,7 +55,6 @@ projects on these platforms:
 
 - [GitHub](https://github.com/miikanissi)
 - [GitLab](https://gitlab.com/miikanissi)
-- [LinkedIn](https://www.linkedin.com/in/miikanissi/)
 
 #### Miscellaneous Links
 
