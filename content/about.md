@@ -15,12 +15,10 @@ My name is Miika, I am a software engineer, father, and a Linux/Unix enthusiast 
 in Queens, New York. I particularly enjoy finding simple, efficient solutions and
 building on the knowledge of the past to solve new problems.
 
-I work as a software developer at [Wildpack Beverage](https://wildpackbev.com/). At
-work, I use technology to improve and streamline manufacturing and business processes to
-increase efficiency, reduce costs, and save time. I mostly work on
-[Odoo](https://www.odoo.com/), an enterprise resource planning (ERP) system, using a
-technology stack of Python, JavaScript, PostgreSQL, XML, and Sass. I also automate and
-improve DevOps processes by employing tools such as Docker, Ansible, and Bash scripting.
+I mostly work on [Odoo](https://www.odoo.com/), an enterprise resource planning (ERP)
+system, using a technology stack of Python, JavaScript, PostgreSQL, XML, and Sass. I
+also automate and improve DevOps processes by employing tools such as Docker, Ansible,
+and Bash scripting.
 
 When I'm not in front of a screen, I enjoy lifting weights, being in nature, and going
 to church.
