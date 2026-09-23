@@ -4,11 +4,13 @@
 import { discoverPages } from "./lib/pages.mjs";
 
 const publicDir = process.argv[2] || "public";
+// Minified HTML drops quotes on simple attribute values, so match both
+// quoted and unquoted forms.
 const REQUIRED = [
-  { name: "og:title", re: /<meta[^>]+property=["']og:title["']/i },
-  { name: "og:description", re: /<meta[^>]+property=["']og:description["']/i },
-  { name: "og:image", re: /<meta[^>]+property=["']og:image["']/i },
-  { name: "canonical link", re: /<link[^>]+rel=["']canonical["']/i },
+  { name: "og:title", re: /<meta[^>]+property=["']?og:title["' >]/i },
+  { name: "og:description", re: /<meta[^>]+property=["']?og:description["' >]/i },
+  { name: "og:image", re: /<meta[^>]+property=["']?og:image["' >]/i },
+  { name: "canonical link", re: /<link[^>]+rel=["']?canonical["' >]/i },
 ];
 
 const { readFile } = await import("node:fs/promises");

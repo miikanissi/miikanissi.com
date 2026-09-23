@@ -1,0 +1,15 @@
+<nav aria-label="Table of contents">
+    <ol>{{ template "toc-li" .Fragments.Headings }}</ol>
+</nav>
+{{ define "toc-li" }}
+{{- range . }}
+{{- if .Title }}
+<li>
+    <a href="#{{ .ID }}">{{ .Title }}</a>
+    {{- with .Headings }}<ol>{{ template "toc-li" . }}</ol>{{ end }}
+</li>
+{{- else }}
+{{- template "toc-li" .Headings }}
+{{- end }}
+{{- end }}
+{{- end }}

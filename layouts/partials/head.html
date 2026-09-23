@@ -1,54 +1,71 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {{ if .IsHome }}
-    <meta name="description" content="{{ .Site.Params.description }}">
+
+    {{- $title := "" }}
+    {{- if .IsHome }}
+    {{- $title = "Miika Nissi — Odoo development & consulting" }}
+    {{- else }}
+    {{- $base := .Title }}
+    {{- if gt (len $base) 60 }}
+    {{- $base = strings.Truncate 60 $base }}
+    {{- end }}
+    {{- $withSuffix := printf "%s — %s" $base .Site.Params.brand }}
+    {{- if le (len $withSuffix) 70 }}
+    {{- $title = $withSuffix }}
+    {{- else }}
+    {{- $title = $base }}
+    {{- end }}
+    {{- end }}
+    <title>{{ $title }}</title>
+
+    {{- $description := .Description | default .Site.Params.description }}
+    <meta name="description" content="{{ $description }}">
     <meta name="author" content="{{ .Site.Params.author }}">
-    <title>{{ .Site.Params.title }}</title>
-    {{ else }}
-    {{- if isset .Params "description" }}
-    <meta name="description" content="{{ .Description }}">
-    {{ else }}
-    <meta name="description" content="{{ .Site.Params.description }}">
-    {{ end }}
-    {{- if isset .Params "title" }}
-    <title>{{ .Title }}</title>
-    {{ else }}
-    <title>{{ .Site.Params.title }}</title>
-    {{ end }}
-    <meta name="author" content="{{ .Site.Params.author }}">
-    {{ end }}
-    {{ with .Params.relcanonical }}
-    <link rel="canonical" href="{{ . | relLangURL }}" itemprop="url" />
-    {{ else -}}
-    <link rel="canonical" href="{{ .Permalink }}" itemprop="url" />
-    {{ end -}}
-    {{ printf `
-    <link rel="shortcut icon" href="%s">` ("favicon.ico" | absURL) | safeHTML }}
-    {{ with .OutputFormats.Get "rss" -}}
-    {{ printf `
-    <link rel="%s" type="%s" href="%s" title="%s">` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }}
-    {{ end -}}
+    {{ with .Params.relcanonical -}}
+    <link rel="canonical" href="{{ . | relLangURL }}">
+    {{- else -}}
+    <link rel="canonical" href="{{ .Permalink }}">
+    {{- end }}
 
-    {{ $resources := slice -}}
+    {{- with .OutputFormats.Get "rss" }}
+    <link rel="{{ .Rel }}" type="{{ .MediaType.Type }}" href="{{ .Permalink }}" title="{{ $.Site.Title }}">
+    {{- end }}
 
-    {{ $resources = $resources | append (resources.Get "css/main.css") -}}
+    {{- $ogImageURL := "" }}
+    {{- $ogImageRes := resources.Get "brand/og-image-1200x630.png" }}
+    {{- if and (eq .Section "posts") .Params.images }}
+    {{- $ogImageURL = index .Params.images 0 | absURL }}
+    {{- $ogImageRes = false }}
+    {{- else if eq .Section "apps" }}
+    {{- with .Resources.GetMatch "banner*" }}
+    {{- $ogImageRes = . }}
+    {{- end }}
+    {{- end }}
+    <meta property="og:site_name" content="{{ .Site.Params.brand }}">
+    <meta property="og:title" content="{{ $title }}">
+    <meta property="og:description" content="{{ $description }}">
+    <meta property="og:url" content="{{ .Permalink }}">
+    <meta property="og:type" content="{{ if eq .Section "posts" }}article{{ else }}website{{ end }}">
+    {{- if $ogImageRes }}
+    <meta property="og:image" content="{{ $ogImageRes.Permalink }}">
+    <meta property="og:image:width" content="{{ $ogImageRes.Width }}">
+    <meta property="og:image:height" content="{{ $ogImageRes.Height }}">
+    {{- else }}
+    <meta property="og:image" content="{{ $ogImageURL }}">
+    {{- end }}
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ $title }}">
+    <meta name="twitter:description" content="{{ $description }}">
 
-    {{ $dark := .Site.Params.dark | default "auto" -}}
-    {{ if not (eq $dark "off") -}}
-    {{ $resources = $resources | append (resources.Get "css/dark.css" | resources.ExecuteAsTemplate "dark.css" .) -}}
-    {{ end -}}
-
-    {{ if .Site.Params.highlight -}}
-    {{ $resources = $resources | append (resources.Get "css/syntax.css") -}}
-    {{ if not (eq $dark "off") -}}
-    {{ $resources = $resources | append (resources.Get "css/syntax-dark.css" | resources.ExecuteAsTemplate "syntax-dark.css" .) -}}
-    {{ end -}}
-    {{ end -}}
-
-    {{ $css := $resources | resources.Concat "css/style.css" | minify }}
-    {{ printf `
-    <link rel="stylesheet" href="%s">` $css.RelPermalink | safeHTML }}
+    {{- $resources := slice (resources.Get "css/main.css") (resources.Get "css/syntax.css") }}
+    {{- if .Site.Params.highlight }}
+    {{- $resources = $resources | append (resources.Get "css/syntax-dark.css") }}
+    {{- end }}
+    {{- $css := $resources | resources.Concat "css/main.css" | minify | fingerprint }}
+    <link rel="preload" href="/fonts/ubuntu-400.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/ubuntu-mono-700.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
 
     {{ partial "favicon.html" . }}
     {{ partial "jsonld.html" . }}

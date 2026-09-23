@@ -1,21 +1,21 @@
-<header id="banner">
-    {{ if .IsHome }}
-    <h1 class="site-title">
-        {{ .Site.Title }} <small><em><a href="{{ .Site.BaseURL }}">({{ .Site.BaseURL }})</a></em></small>
-    </h1>
-    {{ else }}
-    <h2 class="site-title">
-        {{ .Site.Title }} <small><em><a href="{{ .Site.BaseURL }}">({{ .Site.BaseURL }})</a></em></small>
-    </h2>
-    {{ end }}
-    <hr />
-    <nav>
-        <ul>
-            {{ range .Site.Menus.main.ByWeight -}}
-            <li>
-                {{ .Pre }}<a href="{{ .URL }}" title="{{ .Title }}"{{ if strings.HasPrefix .URL "http" }} target="_blank" rel="noopener"{{ end }}>{{- .Name -}}</a>{{ .Post }}
-            </li>
-            {{- end }}
-        </ul>
+<header class="site-header">
+    {{- $wordmark := resources.Get "brand/wordmark-full-colour.svg" | fingerprint }}
+    {{- $wordmarkDark := resources.Get "brand/wordmark-reverse-white.svg" | fingerprint }}
+    <a href="{{ "/" | relLangURL }}" class="wordmark" aria-label="{{ .Site.Params.brand }} home">
+        <picture>
+            <source srcset="{{ $wordmarkDark.RelPermalink }}" media="(prefers-color-scheme: dark)">
+            <img src="{{ $wordmark.RelPermalink }}" alt="{{ .Site.Params.brand }}" width="140" height="36">
+        </picture>
+    </a>
+    <nav class="site-nav" aria-label="Primary">
+        <details class="nav-toggle" open>
+            <summary>Menu</summary>
+            <ul>
+                {{- range .Site.Menus.main }}
+                <li><a href="{{ .URL }}">{{ .Name }}</a></li>
+                {{- end }}
+                <li><a class="btn btn-primary" href="mailto:{{ .Site.Params.email }}">Contact</a></li>
+            </ul>
+        </details>
     </nav>
 </header>

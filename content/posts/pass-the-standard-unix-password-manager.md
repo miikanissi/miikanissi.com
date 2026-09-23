@@ -107,5 +107,5 @@ workflow.
 ## Afterword
 
 To learn more about Pass, you can check the official website at
-[](https://www.passwordstore.org/). They also have a list of other extensions and
-conversion tools to migrate from other password managers.
+[passwordstore.org](https://www.passwordstore.org/). They also have a list of other
+extensions and conversion tools to migrate from other password managers.

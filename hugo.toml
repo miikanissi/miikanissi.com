@@ -17,6 +17,7 @@ disableHugoGeneratorInject = true
 [params]
   author = "Miika Nissi"
   email = "miika@miikanissi.com"
+  brand = "m.nissi"
   title = "Miika Nissi"
   logo = "favicon-32x32.png"
   description = "Personal website of Miika Nissi — a technology blog focused on Linux configuration, programming, development tools, and the Unix philosophy."
@@ -25,11 +26,14 @@ disableHugoGeneratorInject = true
   highlight = true
 
 [menu]
+  # Apps and Blog land in the "Pages and content" step, once /apps/ and
+  # /blog/ exist; Services points at the current URL until it moves to
+  # /services/ in that same step.
   [[menu.main]]
-    identifier = "home"
-    name = "Home"
-    title = "Home"
-    url = "/"
+    identifier = "services"
+    name = "Services"
+    title = "Services"
+    url = "/odoo-development-services/"
     weight = 10
 
   [[menu.main]]
@@ -37,28 +41,28 @@ disableHugoGeneratorInject = true
     name = "About"
     title = "About"
     url = "/about/"
-    weight = 20
+    weight = 40
 
-  [[menu.main]]
-    identifier = "services"
-    name = "Services"
-    title = "Services"
-    url = "/odoo-development-services"
-    weight = 25
-
-  [[menu.main]]
+  [[menu.footer]]
     identifier = "github"
     name = "GitHub"
     title = "GitHub"
     url = "https://github.com/miikanissi"
-    weight = 30
+    weight = 10
 
-  [[menu.main]]
+  [[menu.footer]]
+    identifier = "gitlab"
+    name = "GitLab"
+    title = "GitLab"
+    url = "https://gitlab.com/miikanissi"
+    weight = 20
+
+  [[menu.footer]]
     identifier = "rss"
     name = "RSS"
     title = "RSS"
     url = "/index.xml"
-    weight = 40
+    weight = 30
 
 [permalinks]
   posts = "/blog/:filename/"
@@ -78,3 +82,7 @@ disableHugoGeneratorInject = true
   changefreq = 'monthly'
   filename = 'sitemap.xml'
   priority = 0.6
+
+[minify]
+  [minify.tdewolff.html]
+    keepQuotes = true

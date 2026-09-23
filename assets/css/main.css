@@ -1,175 +1,562 @@
-*,
-*:before,
-*:after {
+/* m.nissi — site stylesheet. Tokens copied from the brand kit's brand.css,
+   fonts self-hosted instead of the Google Fonts @import. */
+
+@font-face {
+  font-family: "Ubuntu";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/ubuntu-400.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Ubuntu";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("/fonts/ubuntu-500.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Ubuntu Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/ubuntu-mono-400.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Ubuntu Mono";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/fonts/ubuntu-mono-700.woff2") format("woff2");
+}
+
+:root {
+  /* Brand */
+  --maroon: #721042; /* primary: logo, buttons, headings accents */
+  --maroon-deep: #4a0a2a; /* hover/pressed, pattern on maroon */
+  --maroon-tint: #f3e6ec; /* soft backgrounds, highlights */
+  --amber: #f4a340; /* accent: the dot. Small doses only */
+  --amber-text: #8a5208; /* amber-family text/links on light backgrounds (6:1) */
+
+  /* Neutrals */
+  --paper: #fbf8f6; /* page background */
+  --white: #ffffff; /* cards */
+  --ink: #24121b; /* body text */
+  --ink-muted: #6b5561; /* secondary text */
+  --line: #e4dad5; /* borders, dividers */
+
+  /* Type */
+  --font-display: "Ubuntu Mono", ui-monospace, Menlo, Consolas, monospace;
+  --font-body: "Ubuntu", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  /* Spacing (4px base) */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-5: 40px;
+  --space-6: 64px;
+
+  /* Radius */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 24px;
+  --radius-pill: 999px;
+
+  /* Semantic */
+  --bg: var(--paper);
+  --surface: var(--white);
+  --text: var(--ink);
+  --text-muted: var(--ink-muted);
+  --brand: var(--maroon);
+  --on-brand: var(--white);
+  --accent: var(--amber);
+  --link: var(--maroon);
+  --link-hover: var(--maroon-deep);
+
+  /* Layout */
+  --width-prose: 68ch;
+  --width-grid: 1080px;
+  --gutter: 16px;
+  --motion: 150ms ease;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #1c0e15;
+    --surface: #2a1520;
+    --text: #f7eef2;
+    --text-muted: #bfa9b4;
+    --line: #3f2632;
+    --brand: #9b2a62;
+    --on-brand: #ffffff;
+    --link: #e889b3;
+    /* brand.css's own dark hover (--maroon-deep, #4A0A2A) is 1.6:1 on this
+       background — unreadable. Use a lighter tint instead; kept only here,
+       not filed against the kit since v1 shouldn't touch shared assets. */
+    --link-hover: #f2b3d2;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --motion: 0ms;
+  }
+}
+
+/* Base */
+* {
   box-sizing: border-box;
 }
 html {
-  font-size: 62.5%;
   width: 100%;
 }
 body {
-  font-size: 18px;
-  font-size: 1.8rem;
-  line-height: 1.5;
-  margin: 0 auto;
-  color: #000000;
-  background-color: #ffffff;
-  width: 100%;
-  padding: 0 16px;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial,
-    sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  word-break: break-word;
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 400 17px/1.65 var(--font-body);
 }
 h1,
 h2,
 h3,
-h4,
-h5 {
-  line-height: 1.2;
+.display {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  margin: 0 0 var(--space-3);
 }
 h1 {
-  font-size: 1.5em;
+  font-size: clamp(40px, 6vw, 64px);
 }
 h2 {
-  font-size: 1.3em;
+  font-size: clamp(28px, 4vw, 40px);
 }
 h3 {
-  font-size: 1.1em;
+  font-size: 22px;
 }
-h4 {
-  font-size: 1em;
+p {
+  margin: 0 0 var(--space-3);
 }
-h5 {
-  font-size: 0.85em;
+code,
+pre,
+kbd {
+  font-family: var(--font-display);
+  font-size: 15px;
 }
-header#banner {
-  margin: 25px 0;
+img,
+svg {
+  max-width: 100%;
+  height: auto;
 }
-header#banner em a {
-  color: #595959;
-  text-decoration: none;
+a {
+  color: var(--link);
+  text-underline-offset: 3px;
+  transition: color var(--motion);
 }
-header#banner em a:hover {
-  text-decoration: underline;
+a:hover {
+  color: var(--link-hover);
 }
-header#banner h2,
-header#banner h1 {
-  font-size: 34px;
-  font-size: 3.4rem;
-  overflow: hidden;
-  margin-block-start: 0.83em;
-  margin-block-end: 0.83em;
+:focus-visible {
+  outline: 2px solid var(--amber);
+  outline-offset: 2px;
 }
-header#banner nav {
-  text-align: right;
-  margin-top: 8px;
-}
-header#banner nav ul {
-  list-style: none;
-  padding: 0;
-}
-header#banner nav ul li {
+
+/* The signature: an amber full stop after a heading. Once per page. */
+.dot::after {
+  content: "";
   display: inline-block;
-  margin: 0;
-  padding-right: 8px;
+  width: 0.22em;
+  height: 0.22em;
+  margin-left: 0.06em;
+  border-radius: 50%;
+  background: var(--amber);
+  vertical-align: baseline;
 }
-header#banner nav ul li a {
-  color: #0031a9;
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 44px;
+  padding: 0 var(--space-4);
+  border-radius: var(--radius-pill);
+  font: 500 16px/1 var(--font-body);
   text-decoration: none;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition:
+    background var(--motion),
+    color var(--motion),
+    border-color var(--motion);
 }
-header#banner nav ul li a:visited {
-  color: #721045;
+.btn-primary {
+  background: var(--brand);
+  color: var(--on-brand);
 }
-header#banner nav ul li a:hover {
-  text-decoration: underline;
+.btn-primary:hover {
+  background: var(--maroon-deep);
+  color: var(--on-brand);
 }
-main#content a {
-  color: #0031a9;
-  text-decoration: none;
+.btn-secondary {
+  background: transparent;
+  color: var(--brand);
+  border-color: var(--brand);
 }
-main#content a:hover {
-  text-decoration: underline;
+.btn-secondary:hover {
+  background: var(--maroon-tint);
+  color: var(--brand);
 }
-main#content a:visited {
-  color: #721045;
+.btn-white {
+  background: var(--white);
+  color: var(--maroon);
 }
-main#content img {
-  max-width: 100%;
+.btn-white:hover {
+  background: var(--maroon-tint);
+  color: var(--maroon);
 }
-main#content figure {
-  margin: auto;
-}
-main#content table {
-  table-layout: fixed;
-  width: 100%;
-}
-main#content table thead {
-  text-align: left;
-}
-footer#footer {
-  color: #595959;
-  padding-bottom: 28px;
-}
-footer .footer {
-  width: 100%;
-  display: flex;
-}
-footer .footer-right {
-  text-align: -webkit-right;
-  text-align: right;
-  flex-basis: 90%;
-}
-footer .footer-left {
-  flex-basis: 10%;
-}
-footer .footer-left img {
-  max-width: 100%;
-}
-footer p {
-  margin: 0;
-}
-footer#footer a {
-  color: #595959;
-  text-decoration: none;
-}
-footer#footer a:hover {
-  text-decoration: underline;
-}
-footer#footer a:visited {
-  color: #595959;
-}
-pre {
-  border: 1px solid #595959;
-  padding: 8pt;
-  font-family: monospace;
-  overflow: auto;
-  margin: 1.2em;
-}
-pre.chroma {
-  position: relative;
-  overflow: auto;
-}
-pre.chroma:before {
-  display: none;
-  position: absolute;
-  background-color: #ffffff;
-  top: -10px;
-  right: 10px;
-  padding: 3px;
-  border: 1px solid #000000;
-}
-pre.chroma:hover:before {
-  display: inline;
-  margin-top: 14px;
-}
-/* Responsive */
-@media (min-width: 770px) {
-  body {
-    max-width: 720px;
+@media (prefers-color-scheme: dark) {
+  .btn-secondary:hover {
+    background: var(--surface);
+  }
+  .btn-white:hover {
+    background: var(--surface);
   }
 }
-@media print {
-  body {
-    max-width: none;
+
+/* Layout containers */
+.wrap {
+  max-width: var(--width-grid);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+.prose-wrap {
+  max-width: var(--width-prose);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+/* Header */
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--gutter);
+  max-width: var(--width-grid);
+  margin: 0 auto;
+}
+.site-header .wordmark {
+  display: block;
+  line-height: 0;
+}
+.site-header .wordmark img {
+  height: 36px;
+  width: auto;
+  display: block;
+}
+.site-header .wordmark picture source,
+.site-header .wordmark picture img {
+  height: 36px;
+  width: auto;
+}
+
+.site-nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+.site-nav a:not(.btn) {
+  text-decoration: none;
+  color: var(--text);
+  font-family: var(--font-display);
+  font-size: 15px;
+}
+.site-nav a:not(.btn):hover {
+  color: var(--brand);
+}
+
+.nav-toggle summary {
+  display: none;
+}
+.nav-toggle[open] summary {
+  margin-bottom: var(--space-3);
+}
+
+@media (max-width: 700px) {
+  .site-header {
+    flex-wrap: wrap;
+  }
+  .nav-toggle {
+    width: 100%;
+  }
+  .nav-toggle summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    font-family: var(--font-display);
+    font-size: 15px;
+    list-style: none;
+    padding: var(--space-2) 0;
+  }
+  .nav-toggle summary::-webkit-details-marker {
+    display: none;
+  }
+  .nav-toggle summary::after {
+    content: "+";
+    font-size: 20px;
+  }
+  .nav-toggle[open] summary::after {
+    content: "\2212";
+  }
+  .nav-toggle ul {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-3);
+    padding-bottom: var(--space-3);
+  }
+}
+
+/* Hero */
+.hero {
+  position: relative;
+  max-width: var(--width-grid);
+  margin: 0 auto;
+  padding: var(--space-6) var(--gutter);
+  overflow: hidden;
+}
+.hero .hero-content {
+  max-width: 640px;
+}
+.hero p.subhead {
+  font-size: 20px;
+  color: var(--text-muted);
+  max-width: 56ch;
+}
+.hero .actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+}
+.hero .hero-pattern {
+  display: none;
+}
+@media (min-width: 900px) {
+  .hero .hero-pattern {
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 30%;
+    background: url("/brand/arches-tile-light.svg") repeat;
+    background-size: 30px 60px;
+    mask-image: linear-gradient(to left, black, transparent);
+  }
+}
+
+/* Grids */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--space-4);
+  max-width: var(--width-grid);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+/* Cards */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+}
+.card h3 {
+  margin-bottom: var(--space-2);
+}
+.card p {
+  color: var(--text-muted);
+  margin-bottom: 0;
+}
+
+.app-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+.app-card .app-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: var(--radius-md);
+}
+.app-card .app-versions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+  margin: var(--space-1) 0;
+}
+.app-card .version-tag {
+  font-family: var(--font-display);
+  font-size: 12px;
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+  background: var(--maroon-tint);
+  color: var(--maroon);
+}
+@media (prefers-color-scheme: dark) {
+  .app-card .version-tag {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    color: var(--link);
+  }
+}
+.app-card .app-price {
+  font-family: var(--font-display);
+  font-weight: 700;
+  margin: var(--space-1) 0;
+}
+
+/* Section titles */
+.section {
+  padding: var(--space-6) 0;
+}
+.section-title {
+  max-width: var(--width-grid);
+  margin: 0 auto var(--space-4);
+  padding: 0 var(--gutter);
+}
+
+/* CTA band — full-width maroon, once per page, above the footer */
+.cta-band {
+  background: var(--maroon) url("/brand/arches-tile-maroon.svg") repeat;
+  background-size: 30px 60px;
+  color: var(--on-brand);
+  text-align: center;
+  padding: var(--space-6) var(--gutter);
+}
+.cta-band h2 {
+  color: var(--on-brand);
+}
+@media (prefers-color-scheme: dark) {
+  .cta-band {
+    background-color: var(--maroon-deep);
+  }
+}
+
+/* Footer */
+.site-footer {
+  padding: var(--space-5) var(--gutter);
+  max-width: var(--width-grid);
+  margin: 0 auto;
+  color: var(--text-muted);
+  font-size: 14px;
+}
+.site-footer .footer-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+.site-footer .footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.site-footer a {
+  color: var(--text-muted);
+}
+.site-footer .footer-mark {
+  width: 20px;
+  height: 20px;
+}
+.site-footer p {
+  margin: var(--space-2) 0 0;
+}
+
+/* Prose (posts, about, services body) */
+article.prose {
+  max-width: var(--width-prose);
+  margin: 0 auto;
+  padding: var(--space-5) var(--gutter);
+}
+.post-meta {
+  font-family: var(--font-display);
+  color: var(--text-muted);
+  font-size: 14px;
+  margin-bottom: var(--space-4);
+}
+article.prose h1 {
+  font-size: clamp(32px, 5vw, 40px);
+}
+article.prose p,
+article.prose li {
+  overflow-wrap: anywhere;
+}
+article.prose img {
+  border-radius: var(--radius-md);
+}
+article.prose blockquote {
+  margin: var(--space-4) 0;
+  padding: 0 var(--space-4);
+  border-left: 2px solid var(--line);
+  color: var(--text-muted);
+}
+article.prose table {
+  width: 100%;
+  border-collapse: collapse;
+}
+article.prose th,
+article.prose td {
+  border: 1px solid var(--line);
+  padding: var(--space-2);
+  text-align: left;
+}
+
+#toc {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-4);
+  margin: 0 0 var(--space-4);
+}
+#toc h4 {
+  font-family: var(--font-display);
+  font-size: 15px;
+  margin: 0 0 var(--space-2);
+}
+
+pre {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: var(--space-3);
+  overflow: auto;
+  margin: 0 0 var(--space-4);
+}
+:not(pre) > code {
+  background: var(--maroon-tint);
+  border-radius: var(--radius-sm);
+  padding: 0.1em 0.4em;
+}
+@media (prefers-color-scheme: dark) {
+  :not(pre) > code {
+    background: var(--surface);
+  }
+}
+
+@media (max-width: 480px) {
+  .hero p.subhead {
+    font-size: 18px;
   }
 }

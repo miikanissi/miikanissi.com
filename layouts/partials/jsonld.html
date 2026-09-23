@@ -1,68 +1,66 @@
-{{ if .IsHome -}}
+{{- if .IsHome -}}
 <script type="application/ld+json">
 {
-    "@context": "http://schema.org",
-    "@type": "WebSite",
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ProfessionalService",
+      "name": "{{ .Site.Title }}",
+      "url": "{{ .Site.BaseURL }}",
+      "description": "{{ .Site.Params.description }}",
+      "email": "{{ .Site.Params.email }}",
+      "founder": { "@type": "Person", "name": "{{ .Site.Params.author }}" }
+    },
+    {
+      "@type": "Person",
+      "name": "{{ .Site.Params.author }}",
+      "url": "{{ .Site.BaseURL }}",
+      "email": "{{ .Site.Params.email }}"
+    }
+  ]
+}
+</script>
+{{- else if eq .Section "apps" }}
+{{- if .Params.price }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "{{ .Title }}",
+  "description": "{{ .Description | default .Params.summary }}",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Odoo {{ delimit .Params.odoo_versions ", " }}",
+  "url": "{{ .Permalink }}",
+  "offers": {
+    "@type": "Offer",
+    "price": "{{ .Params.price }}",
+    "priceCurrency": "{{ .Params.currency | default "USD" }}",
+    "url": "{{ .Params.store_url }}"
+  },
+  "author": { "@type": "Person", "name": "{{ .Site.Params.author }}" }
+}
+</script>
+{{- end }}
+{{- else if eq .Section "posts" }}
+{{- $author := or .Params.author .Site.Params.author }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "{{ .Title | safeJS }}",
+  "description": "{{ if .Description }}{{ .Description | safeJS }}{{ else }}{{ .Summary | safeJS }}{{ end }}",
+  "inLanguage": "{{ .Site.Language.Locale }}",
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "{{ .Permalink }}" },
+  "author": { "@type": "Person", "name": "{{ $author }}", "url": "{{ .Site.BaseURL }}" },
+  "publisher": {
+    "@type": "Organization",
     "name": "{{ .Site.Title }}",
-    "url": "{{ .Site.BaseURL }}",
-    "description": "{{ .Site.Params.description }}",
-    "thumbnailUrl": "{{ .Site.Params.Logo | absURL }}",
-    "license": "{{ replace .Site.Params.Copyright "{year}" now.Year }}"
+    "url": "{{ .Site.BaseURL }}"
+  },
+  "datePublished": "{{ .PublishDate.Format "2006-01-02T15:04:05Z07:00" }}",
+  "dateModified": "{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}",
+  "url": "{{ .Permalink }}",
+  "wordCount": "{{ .WordCount }}"
 }
 </script>
-{{ else if .IsPage }}
-{{ $author :=  or (.Params.author) (.Site.Params.author) }}
-{{ $author_url :=  or (.Params.author.url) (.Site.BaseURL) }}
-{{ $org_name :=  .Site.Title }}
-<script type="application/ld+json">
-{
-    "@context": "http://schema.org",
-    "@type": "BlogPosting",
-    "articleSection": "{{ .Section }}",
-    "name": "{{ .Title | safeJS }}",
-    "headline": "{{ .Title | safeJS }}",
-    "alternativeHeadline": "{{ .Params.lead }}",
-    "description": "{{ if .Description }}{{ .Description | safeJS }}{{ else }}{{if .IsPage}}{{ .Summary  }}{{ end }}{{ end }}",
-    "inLanguage": {{ .Site.Language.Locale | default "en-us" }},
-    "isFamilyFriendly": "true",
-    "mainEntityOfPage": {
-        "@type": "WebPage",
-        "@id": "{{ .Permalink }}"
-    },
-    "author" : {
-        "@type": "Person",
-        "name": "{{ $author }}",
-        "url": "{{ $author_url }}"
-    },
-    "creator" : {
-        "@type": "Person",
-        "name": "{{ $author }}"
-    },
-    "accountablePerson" : {
-        "@type": "Person",
-        "name": "{{ $author }}"
-    },
-    "copyrightHolder" : "{{ $org_name }}",
-    "copyrightYear" : "{{ .Date.Format "2006" }}",
-    "dateCreated": "{{ .Date.Format "2006-01-02T15:04:05.00Z" | safeHTML }}",
-    "datePublished": "{{ .PublishDate.Format "2006-01-02T15:04:05.00Z" | safeHTML }}",
-    "dateModified": "{{ .Lastmod.Format "2006-01-02T15:04:05.00Z" | safeHTML }}",
-    "publisher":{
-        "@type":"Organization",
-        "name": {{ $org_name }},
-        "url": {{ .Site.BaseURL }},
-        "logo": {
-            "@type": "ImageObject",
-            "url": "{{ .Site.Params.logo | absURL }}",
-            "width":"32",
-            "height":"32"
-        }
-    },
-    "image": {{ if .Params.images }}[{{ range $i, $e := .Params.images }}{{ if $i }}, {{ end }}{{ $e | absURL }}{{ end }}]{{ else}}{{.Site.Params.logo | absURL }}{{ end }},
-    "url" : "{{ .Permalink }}",
-    "wordCount" : "{{ .WordCount }}",
-    "genre" : [ {{ range $index, $tag := .Params.tags }}{{ if $index }}, {{ end }}"{{ $tag }}" {{ end }}],
-    "keywords" : [ {{ range $index, $keyword := .Params.keywords }}{{ if $index }}, {{ end }}"{{ $keyword }}" {{ end }}]
-}
-</script>
-{{ end }}
+{{- end }}
