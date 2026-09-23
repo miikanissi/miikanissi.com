@@ -19,22 +19,32 @@ disableHugoGeneratorInject = true
   email = "miika@miikanissi.com"
   brand = "m.nissi"
   title = "Miika Nissi"
-  logo = "favicon-32x32.png"
-  description = "Personal website of Miika Nissi — a technology blog focused on Linux configuration, programming, development tools, and the Unix philosophy."
+  description = "Miika Nissi (m.nissi): Odoo development, customization and business process consulting."
   copyright = "Copyright © 2020-{year} Miika Nissi"
   dark = "auto"
   highlight = true
 
 [menu]
-  # Apps and Blog land in the "Pages and content" step, once /apps/ and
-  # /blog/ exist; Services points at the current URL until it moves to
-  # /services/ in that same step.
   [[menu.main]]
     identifier = "services"
     name = "Services"
     title = "Services"
-    url = "/odoo-development-services/"
+    url = "/services/"
     weight = 10
+
+  [[menu.main]]
+    identifier = "apps"
+    name = "Apps"
+    title = "Apps"
+    url = "/apps/"
+    weight = 20
+
+  [[menu.main]]
+    identifier = "blog"
+    name = "Blog"
+    title = "Blog"
+    url = "/blog/"
+    weight = 30
 
   [[menu.main]]
     identifier = "about"

@@ -1,0 +1,15 @@
+{{- $icon := .Resources.GetMatch "icon*" }}
+<div class="card app-card">
+    {{- with $icon }}
+    <img class="app-icon" src="{{ .RelPermalink }}" alt="" width="64" height="64">
+    {{- end }}
+    <h3><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
+    <p>{{ .Params.summary }}</p>
+    <div class="app-versions">
+        {{- range .Params.odoo_versions }}
+        <span class="version-tag">Odoo {{ . }}</span>
+        {{- end }}
+    </div>
+    <p class="app-price">{{ .Params.currency | default "USD" }} {{ printf "%.2f" (float .Params.price) }}</p>
+    <a class="btn btn-primary" href="{{ .Params.store_url }}" target="_blank" rel="noopener">View on Odoo Apps</a>
+</div>

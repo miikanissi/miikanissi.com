@@ -218,6 +218,12 @@ a:hover {
   color: var(--maroon);
 }
 @media (prefers-color-scheme: dark) {
+  .btn-secondary {
+    /* --brand is only 2.6:1 on --bg here (it's tuned for use as a fill, not
+       text on the page background) — use --link, which is readable. */
+    color: var(--link);
+    border-color: var(--link);
+  }
   .btn-secondary:hover {
     background: var(--surface);
   }
@@ -361,6 +367,13 @@ a:hover {
     mask-image: linear-gradient(to left, black, transparent);
   }
 }
+@media (prefers-color-scheme: dark) {
+  .hero .hero-pattern {
+    /* arches-tile-light is tint-on-paper — built for a light surface, so it
+       reads as a stray bright panel on the dark background instead. */
+    display: none;
+  }
+}
 
 /* Grids */
 .grid {
@@ -392,18 +405,18 @@ a:hover {
   flex-direction: column;
   gap: var(--space-2);
 }
-.app-card .app-icon {
+.app-icon {
   width: 64px;
   height: 64px;
   border-radius: var(--radius-md);
 }
-.app-card .app-versions {
+.app-versions {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-1);
   margin: var(--space-1) 0;
 }
-.app-card .version-tag {
+.version-tag {
   font-family: var(--font-display);
   font-size: 12px;
   padding: 2px 8px;
@@ -412,16 +425,46 @@ a:hover {
   color: var(--maroon);
 }
 @media (prefers-color-scheme: dark) {
-  .app-card .version-tag {
+  .version-tag {
     background: var(--surface);
     border: 1px solid var(--line);
     color: var(--link);
   }
 }
-.app-card .app-price {
+.app-price {
   font-family: var(--font-display);
   font-weight: 700;
   margin: var(--space-1) 0;
+}
+
+/* App detail page */
+.app-hero .app-icon {
+  width: 64px;
+  height: 64px;
+  margin-bottom: var(--space-3);
+}
+.app-demo-wrap {
+  padding: 0 var(--gutter) var(--space-5);
+}
+.app-demo {
+  display: block;
+  width: 100%;
+  max-width: var(--width-grid);
+  margin: 0 auto;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--line);
+}
+.app-features {
+  padding-bottom: var(--space-5);
+}
+.app-screens {
+  padding-bottom: var(--space-6);
+}
+.app-screens img {
+  border-radius: var(--radius-md);
+  border: 1px solid var(--line);
+  width: 100%;
+  height: auto;
 }
 
 /* Section titles */
@@ -432,6 +475,25 @@ a:hover {
   max-width: var(--width-grid);
   margin: 0 auto var(--space-4);
   padding: 0 var(--gutter);
+}
+
+/* Blog index */
+.post-list {
+  list-style: none;
+  margin: 0 0 var(--space-5);
+  padding: 0;
+}
+.post-list li {
+  display: flex;
+  gap: var(--space-3);
+  padding: var(--space-2) 0;
+  border-bottom: 1px solid var(--line);
+}
+.post-list-date {
+  font-family: var(--font-display);
+  color: var(--text-muted);
+  font-size: 14px;
+  flex: 0 0 64px;
 }
 
 /* CTA band — full-width maroon, once per page, above the footer */
@@ -559,4 +621,22 @@ pre {
   .hero p.subhead {
     font-size: 18px;
   }
+}
+
+/* About strip (homepage) */
+.about-strip {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+.about-photo {
+  width: 160px;
+  height: 160px;
+  border-radius: var(--radius-lg);
+  object-fit: cover;
+  flex: none;
+}
+.about-strip > div {
+  flex: 1 1 320px;
 }

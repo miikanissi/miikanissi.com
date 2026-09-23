@@ -1,6 +1,11 @@
 {{ define "main" }}
-<p>This page does not exist. Here is a cat!</p>
-<p>
-    <img src="/media/cat-in-a-box.gif" alt="Gif of a cat in a box" />
-</p>
+<div class="section wrap">
+    <h1 class="dot">Page not found</h1>
+    <p>This page doesn't exist. Here's a cat!</p>
+    <p><img src="/media/cat-in-a-box.gif" alt="Gif of a cat in a box" width="320" height="240" /></p>
+    <div class="actions">
+        <a class="btn btn-primary" href="{{ "/" | relLangURL }}">Go home</a>
+        <a class="btn btn-secondary" href="{{ "/services/" | relLangURL }}">See services</a>
+    </div>
+</div>
 {{ end }}

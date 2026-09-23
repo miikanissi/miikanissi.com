@@ -1,6 +1,7 @@
 // Minimal static file server for tests/*.mjs — no extra runtime dependency.
 import { createServer } from "node:http";
-import { readFile, stat } from "node:fs/promises";
+import { createReadStream } from "node:fs";
+import { stat } from "node:fs/promises";
 import path from "node:path";
 
 const MIME = {
@@ -14,9 +15,12 @@ const MIME = {
   ".gif": "image/gif",
   ".jpg": "image/jpeg",
   ".jpeg": "image/jpeg",
+  ".webp": "image/webp",
   ".ico": "image/x-icon",
   ".webmanifest": "application/manifest+json",
   ".woff2": "font/woff2",
+  ".mp4": "video/mp4",
+  ".webm": "video/webm",
 };
 
 export async function serve(root) {
@@ -25,12 +29,35 @@ export async function serve(root) {
     if (reqPath.endsWith("/")) reqPath += "index.html";
     let filePath = path.join(root, reqPath);
     try {
-      const s = await stat(filePath);
-      if (s.isDirectory()) filePath = path.join(filePath, "index.html");
-      const body = await readFile(filePath);
+      let s = await stat(filePath);
+      if (s.isDirectory()) {
+        filePath = path.join(filePath, "index.html");
+        s = await stat(filePath);
+      }
       const ext = path.extname(filePath);
-      res.writeHead(200, { "Content-Type": MIME[ext] || "application/octet-stream" });
-      res.end(body);
+      const contentType = MIME[ext] || "application/octet-stream";
+      const range = req.headers.range;
+
+      if (range) {
+        const [startStr, endStr] = range.replace(/bytes=/, "").split("-");
+        const start = parseInt(startStr, 10);
+        const end = endStr ? parseInt(endStr, 10) : s.size - 1;
+        res.writeHead(206, {
+          "Content-Range": `bytes ${start}-${end}/${s.size}`,
+          "Accept-Ranges": "bytes",
+          "Content-Length": end - start + 1,
+          "Content-Type": contentType,
+        });
+        createReadStream(filePath, { start, end }).pipe(res);
+        return;
+      }
+
+      res.writeHead(200, {
+        "Content-Type": contentType,
+        "Content-Length": s.size,
+        "Accept-Ranges": "bytes",
+      });
+      createReadStream(filePath).pipe(res);
     } catch {
       res.writeHead(404);
       res.end("Not found");

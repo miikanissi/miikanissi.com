@@ -1,3 +1,16 @@
 {{ define "main" }}
-{{- partial "posts.html" . -}}
+<div class="section wrap">
+    <h1 class="dot">{{ .Title }}</h1>
+    {{ range .Pages.GroupByDate "2006" }}
+    <h2>{{ .Key }}</h2>
+    <ul class="post-list">
+        {{- range .Pages }}
+        <li>
+            <time class="post-list-date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2" }}</time>
+            <a href="{{ .Permalink }}">{{ .Title }}</a>
+        </li>
+        {{- end }}
+    </ul>
+    {{ end }}
+</div>
 {{ end }}

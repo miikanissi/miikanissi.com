@@ -1,0 +1,47 @@
+{{ define "main" }}
+<article class="app-page">
+    <header class="hero app-hero">
+        <div class="hero-content">
+            {{- with .Resources.GetMatch "icon*" }}
+            <img class="app-icon" src="{{ .RelPermalink }}" alt="" width="64" height="64">
+            {{- end }}
+            <h1 class="dot">{{ .Title }}</h1>
+            <p class="subhead">{{ .Params.summary }}</p>
+            <div class="app-versions">
+                {{- range .Params.odoo_versions }}
+                <span class="version-tag">Odoo {{ . }}</span>
+                {{- end }}
+            </div>
+            <p class="app-price">{{ .Params.currency | default "USD" }} {{ printf "%.2f" (float .Params.price) }} · {{ .Params.license }}</p>
+            <div class="actions">
+                <a class="btn btn-primary" href="{{ .Params.store_url }}" target="_blank" rel="noopener">View on Odoo Apps</a>
+            </div>
+        </div>
+    </header>
+
+    {{ with .Resources.GetMatch "demo.*" }}
+    <div class="wrap app-demo-wrap">
+        <video class="app-demo" src="{{ .RelPermalink }}" controls muted loop playsinline width="1120" height="940"></video>
+    </div>
+    {{ end }}
+
+    <div class="prose-wrap app-features">
+        {{ .Content }}
+    </div>
+
+    {{ $shots := .Resources.Match "shot-*" }}
+    {{ with $shots }}
+    <div class="grid app-screens">
+        {{- range . }}
+        {{- $img := . }}
+        {{- if in (slice "image/png" "image/jpeg") .MediaType.Type }}
+        {{- $w := .Width }}
+        {{- if gt $w 1100 }}{{ $w = 1100 }}{{ end }}
+        {{- $img = .Resize (printf "%dx webp q80" $w) }}
+        {{- end }}
+        <img src="{{ $img.RelPermalink }}" width="{{ $img.Width }}" height="{{ $img.Height }}" loading="lazy" alt="">
+        {{- end }}
+    </div>
+    {{ end }}
+</article>
+{{ end }}

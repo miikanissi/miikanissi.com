@@ -1,0 +1,14 @@
+{{- $dest := .Destination -}}
+{{- if strings.HasPrefix $dest "/images/" -}}
+{{- with resources.Get (strings.TrimPrefix "/" $dest) -}}
+{{- $img := . -}}
+{{- if in (slice "image/png" "image/jpeg") .MediaType.Type -}}
+{{- $w := .Width -}}
+{{- if gt $w 1200 }}{{ $w = 1200 }}{{ end -}}
+{{- $img = .Resize (printf "%dx webp q82" $w) -}}
+{{- end -}}
+<img src="{{ $img.RelPermalink }}" width="{{ $img.Width }}" height="{{ $img.Height }}" alt="{{ $.Text }}" loading="lazy">
+{{- end -}}
+{{- else -}}
+<img src="{{ $dest | safeURL }}" alt="{{ .Text }}" loading="lazy">
+{{- end -}}

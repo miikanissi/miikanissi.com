@@ -1,7 +1,7 @@
 {{ define "main" }}
 <article class="prose">
     <header id="post-header">
-        <h1>{{ .Title }}</h1>
+        <h1 class="dot">{{ .Title }}</h1>
         {{- if isset .Params "date" }}
         <p class="post-meta">
             <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">{{ .Date | time.Format ":date_long" }}</time>
@@ -17,4 +17,10 @@
     {{ end }}
     {{- .Content -}}
 </article>
+{{ with .Params.cta }}
+<div class="cta-band">
+    <h2 class="dot">{{ .heading }}</h2>
+    <a class="btn btn-white" href="{{ .url }}">{{ .label }}</a>
+</div>
+{{ end }}
 {{ end }}

@@ -40,6 +40,10 @@ try {
           if (msg.type() === "error") consoleErrors.push(msg.text());
         });
         page.on("requestfailed", (req) => {
+          // ERR_ABORTED shows up on <video>/<audio> preload requests that are
+          // still in flight when we close the context for the next
+          // iteration — a harness timing artifact, not a broken resource.
+          if (req.failure()?.errorText === "net::ERR_ABORTED") return;
           failedRequests.push(`${req.url()} (${req.failure()?.errorText})`);
         });
         page.on("response", (res) => {
