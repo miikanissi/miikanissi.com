@@ -15,7 +15,7 @@ this post, I will shortly go over my setup and share my configuration files.
 
 ## My Setup
 
-![Desktop Environment screenshot](/media/desktop.png)
+![Desktop Environment screenshot](/images/desktop.png)
 
 My setup is similar to what I have used in the past. I have a top bar which contains
 basic information such as time, date, volume, battery, system tray, workspaces and so

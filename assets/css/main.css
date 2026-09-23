@@ -593,7 +593,7 @@ article.prose td {
   padding: var(--space-3) var(--space-4);
   margin: 0 0 var(--space-4);
 }
-#toc h4 {
+#toc h2 {
   font-family: var(--font-display);
   font-size: 15px;
   margin: 0 0 var(--space-2);
