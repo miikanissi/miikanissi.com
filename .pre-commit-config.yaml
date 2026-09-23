@@ -1,0 +1,33 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+        exclude: ^public/
+
+  - repo: local
+    hooks:
+      - id: prettier
+        name: prettier (markdown, css)
+        entry: npx prettier --write
+        language: system
+        types_or: [markdown, css]
+
+      - id: hugo-build
+        name: hugo build (--panicOnWarning)
+        entry: make build
+        language: system
+        pass_filenames: false
+
+      - id: check-urls
+        name: baseline URL check
+        entry: make check-urls
+        language: system
+        pass_filenames: false
+
+      - id: check-links-internal
+        name: internal link check (lychee --offline)
+        entry: make check-links-internal
+        language: system
+        pass_filenames: false
