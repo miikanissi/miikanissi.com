@@ -1,0 +1,19 @@
+{{ define "main" }}
+<article>
+    <header id="post-header">
+        <h1>{{ .Title }}</h1>
+        <div>
+            {{- if isset .Params "date" -}}
+            <em><time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">{{ .Date | time.Format ":date_long" }}</time></em>
+            {{- end -}}
+        </div>
+    </header>
+    {{ if .Params.toc }}
+    <aside id="toc">
+      <h4>Table of Contents</h4>
+      {{ .TableOfContents }}
+    </aside>
+    {{ end }}
+    {{- .Content -}}
+</article>
+{{ end }}

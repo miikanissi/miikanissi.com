@@ -1,0 +1,10 @@
+[posts]
+
+[posts.title]
+other = "Blog Posts"
+
+[posts.posted_on]
+other = "Posted on"
+
+[posts.updated_on]
+other = "Updated on"

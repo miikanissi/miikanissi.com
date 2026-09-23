@@ -1,10 +1,10 @@
 ---
 cascade:
-  _build:
+  build:
     render: always
     list: always
 
-_build:
+build:
   render: never
   list: never
 ---

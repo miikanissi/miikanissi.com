@@ -1,14 +1,18 @@
 baseURL = "https://miikanissi.com/"
-languageCode = "en-us"
+locale = "en-US"
 title = "Miika Nissi"
-theme = "debet-esse"
 enableInlineShortcodes = true
 enableRobotsTXT = true
 enableGitInfo = true
-pygmentsCodeFences = true
-pygmentsUseClasses = true
 disableKinds = ['taxonomy', 'term']
 disableHugoGeneratorInject = true
+
+[module.hugoVersion]
+  min = "0.166.0"
+  extended = true
+
+[markup.highlight]
+  noClasses = false
 
 [params]
   author = "Miika Nissi"
