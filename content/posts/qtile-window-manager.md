@@ -1,6 +1,7 @@
 ---
 title: "Qtile Window Manager"
 date: 2021-11-30T17:23:03-04:00
+lastmod: 2022-10-23T16:30:39-04:00
 description: "Minimal tiling window manager desktop environment with Qtile in Python."
 ---
 
@@ -15,7 +16,7 @@ this post, I will shortly go over my setup and share my configuration files.
 
 ## My Setup
 
-![Desktop Environment screenshot](/media/desktop.png)
+![Desktop Environment screenshot](/images/desktop.png)
 
 My setup is similar to what I have used in the past. I have a top bar which contains
 basic information such as time, date, volume, battery, system tray, workspaces and so

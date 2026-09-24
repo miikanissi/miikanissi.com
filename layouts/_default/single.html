@@ -1,0 +1,26 @@
+{{ define "main" }}
+<article class="prose{{ with .Params.class }} {{ . }}{{ end }}">
+    <header id="post-header">
+        <h1 class="dot">{{ .Title }}</h1>
+        {{- if isset .Params "date" }}
+        <p class="post-meta">
+            <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">{{ .Date | time.Format ":date_long" }}</time>
+            · {{ .ReadingTime }} min read
+        </p>
+        {{- end }}
+    </header>
+    {{ if .Params.toc }}
+    <aside id="toc">
+      <h2>Table of Contents</h2>
+      {{ partial "toc.html" . }}
+    </aside>
+    {{ end }}
+    {{- .Content -}}
+</article>
+{{ with .Params.cta }}
+<div class="cta-band band-brand">
+    <h2>{{ .heading }}</h2>
+    <a class="btn btn-white" href="{{ .url }}">{{ .label }}</a>
+</div>
+{{ end }}
+{{ end }}

@@ -1,6 +1,7 @@
 ---
 title: "Suckless Dwm Dmenu and St"
 date: 2021-06-28T21:08:01-04:00
+lastmod: 2022-10-23T16:30:39-04:00
 description:
   "Minimalist window manager setup with suckless software: dwm, dmenu, and st."
 ---
@@ -82,7 +83,7 @@ which allows you to easily kill unresponsive programs.
 Another useful dmenu script I found is
 [passmenu](https://github.com/miikanissi/dotfiles/blob/master/.local/bin/passmenu.sh).
 Passmenu allows you to get your passwords from Pass (The Standard UNIX Password
-Manager). 
+Manager).
 
 I also have applied a couple of dmenu patches:
 

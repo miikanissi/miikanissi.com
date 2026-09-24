@@ -1,9 +1,8 @@
 ---
 title: "Highly Accessible Modus Themes for Neovim"
 description:
-  "Highly accessible Modus Themes for Neovim. Includes Modus Operandi and Modus Vivendi
-  ported over to Neovim from GNU Emacs. Prioritizes accessibility by conforming to the
-  WCAG AAA guidelines regarding color contrast ratio."
+  "Modus Operandi and Modus Vivendi ported from GNU Emacs to Neovim, with color contrast
+  that meets the WCAG AAA guidelines."
 date: 2023-11-02T01:13:34-04:00
 toc: True
 relcanonical: https://github.com/miikanissi/modus-themes.nvim/

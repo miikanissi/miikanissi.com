@@ -1,0 +1,111 @@
+{{ define "main" }}
+{{- $price := printf "%s %.2f" (.Params.currency | default "USD") (float .Params.price) }}
+<article class="app-page">
+    <header class="hero band-brand">
+        <div class="wrap">
+            <p class="app-name">
+                {{- with .Resources.GetMatch "icon*" }}
+                <img class="app-icon" src="{{ .RelPermalink }}" alt="" width="56" height="56">
+                {{- end }}
+                {{ .Title }}
+            </p>
+            <div class="hero-content">
+                <h1 class="dot">{{ .Params.headline | default .Title }}</h1>
+                <p class="lead">{{ .Params.lead | default .Params.summary }}</p>
+                <ul class="pills">
+                    {{- range .Params.pills }}
+                    <li>{{ . }}</li>
+                    {{- end }}
+                </ul>
+                <div class="actions">
+                    <a class="btn btn-white" href="{{ .Params.store_url }}" target="_blank" rel="noopener">Buy on Odoo Apps</a>
+                    <span class="app-price">{{ $price }}</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    {{- with .Params.demo }}
+    {{- with $.Resources.GetMatch "demo.*" }}
+    <section class="section band">
+        <div class="wrap">
+            <p class="eyebrow">{{ $.Params.demo.eyebrow }}</p>
+            <h2>{{ $.Params.demo.heading }}</h2>
+            <img class="shot" src="{{ .RelPermalink }}" width="{{ .Width }}" height="{{ .Height }}" alt="{{ $.Params.demo.alt }}">
+        </div>
+    </section>
+    {{- end }}
+    {{- end }}
+
+    {{- range $i, $s := .Params.sections }}
+    {{- $img := $.Resources.Get $s.image }}
+    {{- $shotClass := "shot" }}
+    {{- if eq $s.style "even" }}{{ $shotClass = "shot shot-phone" }}{{ end }}
+    {{- if eq $s.style "wide" }}{{ $shotClass = "shot shot-bare" }}{{ end }}
+    <section class="section{{ if modBool $i 2 | not }} band{{ end }}">
+        <div class="wrap">
+            {{- $text := printf "<h2>%s</h2>%s" $s.heading ($.Page.RenderString (dict "display" "block") $s.body) }}
+            {{- $picture := "" }}
+            {{- with $img }}
+            {{- $w := .Width }}
+            {{- if gt $w 1400 }}{{ $w = 1400 }}{{ end }}
+            {{- $webp := .Resize (printf "%dx webp q80" $w) }}
+            {{- $picture = printf "<img class=%q src=%q width=\"%d\" height=\"%d\" alt=%q loading=\"lazy\">" $shotClass $webp.RelPermalink $webp.Width $webp.Height $s.alt }}
+            {{- end }}
+            {{- if eq $s.style "wide" }}
+            <div class="measure">{{ $text | safeHTML }}</div>
+            {{ $picture | safeHTML }}
+            {{- else }}
+            <div class="split{{ with $s.style }} split-{{ . }}{{ end }}">
+                <div>{{ $text | safeHTML }}</div>
+                <div>{{ $picture | safeHTML }}</div>
+            </div>
+            {{- end }}
+        </div>
+    </section>
+    {{- end }}
+
+    {{- with .Params.details }}
+    <section class="section">
+        <div class="wrap">
+            <h2 class="section-head">{{ .heading }}</h2>
+            <div class="grid grid-3">
+                {{- range .items }}
+                <div class="card">
+                    <h3>{{ .title }}</h3>
+                    <p>{{ .body | markdownify }}</p>
+                </div>
+                {{- end }}
+            </div>
+        </div>
+    </section>
+    {{- end }}
+
+    {{- with .Params.faq }}
+    <section class="section band-tint">
+        <div class="wrap faq">
+            <h2>{{ .heading }}</h2>
+            {{- range .items }}
+            <h3>{{ .q }}</h3>
+            <p>{{ .a | markdownify }}</p>
+            {{- end }}
+        </div>
+    </section>
+    {{- end }}
+
+    <section class="section">
+        <div class="wrap">
+            <h2>Questions before you buy?</h2>
+            <p>Email me at <a href="mailto:{{ .Site.Params.email }}">{{ .Site.Params.email }}</a>.
+            Bug reports and feature ideas are welcome too.</p>
+            <div class="actions">
+                <a class="btn btn-primary" href="{{ .Params.store_url }}" target="_blank" rel="noopener">Buy on Odoo Apps · {{ $price }}</a>
+                <a class="btn btn-secondary" href="mailto:{{ .Site.Params.email }}">Email me</a>
+            </div>
+            {{- with .Params.fineprint }}
+            <p class="fineprint">{{ . }}</p>
+            {{- end }}
+        </div>
+    </section>
+</article>
+{{ end }}

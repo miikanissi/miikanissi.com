@@ -1,0 +1,15 @@
+{{ define "main" }}
+<div class="section">
+    <div class="wrap">
+        <div class="section-head">
+            <h1 class="dot">{{ .Title }}</h1>
+            {{ with .Content }}<div class="lead">{{ . }}</div>{{ end }}
+        </div>
+        <div class="grid">
+            {{- range .Pages }}
+            {{ partial "app-card.html" . }}
+            {{- end }}
+        </div>
+    </div>
+</div>
+{{ end }}
