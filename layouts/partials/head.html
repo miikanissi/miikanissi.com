@@ -4,14 +4,16 @@
 
     {{- $title := "" }}
     {{- if .IsHome }}
-    {{- $title = "Miika Nissi — Odoo development & consulting" }}
+    {{- $title = "Miika Nissi | Software Engineer and Odoo ERP Specialist" }}
     {{- else }}
-    {{- $base := .Title }}
+    {{- $base := .Params.seo_title | default .Title }}
     {{- if gt (len $base) 60 }}
     {{- $base = strings.Truncate 60 $base }}
     {{- end }}
-    {{- $withSuffix := printf "%s — %s" $base .Site.Params.brand }}
-    {{- if le (len $withSuffix) 70 }}
+    {{- $withSuffix := printf "%s | %s" $base .Site.Title }}
+    {{- if strings.Contains $base .Site.Title }}
+    {{- $title = $base }}
+    {{- else if le (len $withSuffix) 70 }}
     {{- $title = $withSuffix }}
     {{- else }}
     {{- $title = $base }}
@@ -22,6 +24,9 @@
     {{- $description := .Description | default .Site.Params.description }}
     <meta name="description" content="{{ $description }}">
     <meta name="author" content="{{ .Site.Params.author }}">
+    {{- if eq .Kind "404" }}
+    <meta name="robots" content="noindex">
+    {{- end }}
     {{ with .Params.relcanonical -}}
     <link rel="canonical" href="{{ . | relLangURL }}">
     {{- else -}}
@@ -42,30 +47,41 @@
     {{- $ogImageRes = . }}
     {{- end }}
     {{- end }}
-    <meta property="og:site_name" content="{{ .Site.Params.brand }}">
+    <meta property="og:site_name" content="{{ .Site.Title }}">
     <meta property="og:title" content="{{ $title }}">
     <meta property="og:description" content="{{ $description }}">
     <meta property="og:url" content="{{ .Permalink }}">
-    <meta property="og:type" content="{{ if eq .Section "posts" }}article{{ else }}website{{ end }}">
+    <meta property="og:locale" content="{{ replace .Site.Language.Locale "-" "_" }}">
+    {{- $isPost := and (eq .Section "posts") .IsPage }}
+    <meta property="og:type" content="{{ if $isPost }}article{{ else }}website{{ end }}">
+    {{- if $isPost }}
+    <meta property="article:published_time" content="{{ .PublishDate.Format "2006-01-02T15:04:05Z07:00" }}">
+    <meta property="article:modified_time" content="{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}">
+    <meta property="article:author" content="{{ .Site.Params.author }}">
+    {{- end }}
     {{- if $ogImageRes }}
-    <meta property="og:image" content="{{ $ogImageRes.Permalink }}">
+    {{- $ogImageURL = $ogImageRes.Permalink }}
+    <meta property="og:image" content="{{ $ogImageURL }}">
     <meta property="og:image:width" content="{{ $ogImageRes.Width }}">
     <meta property="og:image:height" content="{{ $ogImageRes.Height }}">
     {{- else }}
     <meta property="og:image" content="{{ $ogImageURL }}">
     {{- end }}
+    <meta property="og:image:alt" content="{{ if eq .Section "apps" }}{{ .Title }}{{ else }}{{ .Site.Params.brand }} logo{{ end }}">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{{ $title }}">
     <meta name="twitter:description" content="{{ $description }}">
+    <meta name="twitter:image" content="{{ $ogImageURL }}">
 
-    {{- $resources := slice (resources.Get "css/main.css") (resources.Get "css/syntax.css") }}
-    {{- if .Site.Params.highlight }}
-    {{- $resources = $resources | append (resources.Get "css/syntax-dark.css") }}
-    {{- end }}
-    {{- $css := $resources | resources.Concat "css/main.css" | minify | fingerprint }}
+    {{- $css := resources.Get "css/main.css" | minify | fingerprint }}
     <link rel="preload" href="/fonts/ubuntu-400.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/fonts/ubuntu-mono-700.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
+    {{- /* Code highlighting only appears in posts, so only posts load it. */}}
+    {{- if and .Site.Params.highlight $isPost }}
+    {{- $syntax := slice (resources.Get "css/syntax.css") (resources.Get "css/syntax-dark.css") | resources.Concat "css/syntax.css" | minify | fingerprint }}
+    <link rel="stylesheet" href="{{ $syntax.RelPermalink }}" integrity="{{ $syntax.Data.Integrity }}">
+    {{- end }}
 
     {{ partial "favicon.html" . }}
     {{ partial "jsonld.html" . }}

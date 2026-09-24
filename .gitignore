@@ -4,3 +4,7 @@ public/
 .hugo_build.lock
 node_modules/
 resources/
+
+# Local notes
+CLAUDE.local.md
+.claude/

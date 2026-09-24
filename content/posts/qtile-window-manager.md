@@ -1,6 +1,7 @@
 ---
 title: "Qtile Window Manager"
 date: 2021-11-30T17:23:03-04:00
+lastmod: 2022-10-23T16:30:39-04:00
 description: "Minimal tiling window manager desktop environment with Qtile in Python."
 ---
 

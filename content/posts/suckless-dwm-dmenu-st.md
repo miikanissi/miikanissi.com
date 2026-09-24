@@ -1,6 +1,7 @@
 ---
 title: "Suckless Dwm Dmenu and St"
 date: 2021-06-28T21:08:01-04:00
+lastmod: 2022-10-23T16:30:39-04:00
 description:
   "Minimalist window manager setup with suckless software: dwm, dmenu, and st."
 ---

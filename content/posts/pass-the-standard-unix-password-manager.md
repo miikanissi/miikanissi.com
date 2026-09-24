@@ -2,6 +2,7 @@
 title: "Pass: The Standard Unix Password Manager"
 description: "Setting up Pass: The Standard Unix Password Manager to manage passwords."
 date: 2021-02-04T00:00:00-04:00
+lastmod: 2022-10-23T16:30:39-04:00
 ---
 
 [Pass](https://www.passwordstore.org/) is a simple password manager that strictly

@@ -1,66 +1,129 @@
-{{- if .IsHome -}}
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "ProfessionalService",
-      "name": "{{ .Site.Title }}",
-      "url": "{{ .Site.BaseURL }}",
-      "description": "{{ .Site.Params.description }}",
-      "email": "{{ .Site.Params.email }}",
-      "founder": { "@type": "Person", "name": "{{ .Site.Params.author }}" }
-    },
-    {
-      "@type": "Person",
-      "name": "{{ .Site.Params.author }}",
-      "url": "{{ .Site.BaseURL }}",
-      "email": "{{ .Site.Params.email }}"
-    }
-  ]
-}
-</script>
-{{- else if eq .Section "apps" }}
-{{- if .Params.price }}
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  "name": "{{ .Title }}",
-  "description": "{{ .Description | default .Params.summary }}",
-  "applicationCategory": "BusinessApplication",
-  "operatingSystem": "Odoo {{ delimit .Params.odoo_versions ", " }}",
-  "url": "{{ .Permalink }}",
-  "offers": {
-    "@type": "Offer",
-    "price": "{{ .Params.price }}",
-    "priceCurrency": "{{ .Params.currency | default "USD" }}",
-    "url": "{{ .Params.store_url }}"
-  },
-  "author": { "@type": "Person", "name": "{{ .Site.Params.author }}" }
-}
-</script>
+{{- /* schema.org graph, built as data and serialized with jsonify so titles
+       and descriptions are always escaped correctly. Every page carries the
+       Person and WebSite nodes so the @id references resolve. */ -}}
+{{- $base := .Site.BaseURL }}
+{{- $personID := printf "%s#person" $base }}
+{{- $person := dict
+    "@type" "Person"
+    "@id" $personID
+    "name" .Site.Params.author
+    "url" $base
+    "email" (printf "mailto:%s" .Site.Params.email)
+    "jobTitle" "Software engineer and Odoo ERP specialist"
+    "address" (dict "@type" "PostalAddress" "addressLocality" "Queens" "addressRegion" "NY" "addressCountry" "US")
+    "knowsAbout" (slice "Odoo" "Odoo ERP" "Odoo migrations" "Odoo custom module development" "Odoo integrations" "Odoo Community Association (OCA)" "Avalara" "TaxCloud" "Python" "Linux")
+    "sameAs" (slice "https://github.com/miikanissi")
+}}
+{{- with resources.Get "images/miika.jpg" }}
+{{- $person = merge $person (dict "image" (.Resize "400x400 jpg q82").Permalink) }}
 {{- end }}
-{{- else if eq .Section "posts" }}
-{{- $author := or .Params.author .Site.Params.author }}
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "{{ .Title | safeJS }}",
-  "description": "{{ if .Description }}{{ .Description | safeJS }}{{ else }}{{ .Summary | safeJS }}{{ end }}",
-  "inLanguage": "{{ .Site.Language.Locale }}",
-  "mainEntityOfPage": { "@type": "WebPage", "@id": "{{ .Permalink }}" },
-  "author": { "@type": "Person", "name": "{{ $author }}", "url": "{{ .Site.BaseURL }}" },
-  "publisher": {
-    "@type": "Organization",
-    "name": "{{ .Site.Title }}",
-    "url": "{{ .Site.BaseURL }}"
-  },
-  "datePublished": "{{ .PublishDate.Format "2006-01-02T15:04:05Z07:00" }}",
-  "dateModified": "{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}",
-  "url": "{{ .Permalink }}",
-  "wordCount": "{{ .WordCount }}"
-}
-</script>
+{{- $website := dict
+    "@type" "WebSite"
+    "@id" (printf "%s#website" $base)
+    "url" $base
+    "name" .Site.Title
+    "description" .Site.Params.description
+    "inLanguage" .Site.Language.Locale
+    "publisher" (dict "@id" $personID)
+}}
+{{- $graph := slice $website $person }}
+
+{{- if .IsHome }}
+{{- $graph = $graph | append (dict
+    "@type" "ProfessionalService"
+    "@id" (printf "%s#service" $base)
+    "name" .Site.Title
+    "url" $base
+    "description" .Site.Params.description
+    "email" .Site.Params.email
+    "image" (resources.Get "brand/og-image-1200x630.png").Permalink
+    "address" (dict "@type" "PostalAddress" "addressLocality" "Queens" "addressRegion" "NY" "addressCountry" "US")
+    "founder" (dict "@id" $personID)
+) }}
+{{- else if ne .Kind "404" }}
+{{- /* Breadcrumbs: Home > section > page */}}
+{{- $crumbs := slice (dict "@type" "ListItem" "position" 1 "name" "Home" "item" $base) }}
+{{- with .Parent }}
+{{- if not .IsHome }}
+{{- $crumbs = $crumbs | append (dict "@type" "ListItem" "position" 2 "name" .LinkTitle "item" .Permalink) }}
 {{- end }}
+{{- end }}
+{{- $crumbs = $crumbs | append (dict "@type" "ListItem" "position" (add (len $crumbs) 1) "name" .LinkTitle "item" .Permalink) }}
+{{- $graph = $graph | append (dict "@type" "BreadcrumbList" "itemListElement" $crumbs) }}
+{{- end }}
+
+{{- if eq .Params.class "about" }}
+{{- $graph = $graph | append (dict
+    "@type" "ProfilePage"
+    "url" .Permalink
+    "name" .Title
+    "mainEntity" (dict "@id" $personID)
+) }}
+{{- end }}
+
+{{- range .Params.services }}
+{{- $graph = $graph | append (dict
+    "@type" "Service"
+    "name" .title
+    "serviceType" .title
+    "description" (index (split (strings.TrimSpace .body) "\n\n") 0 | $.RenderString | plainify | htmlUnescape | replaceRE `\s+` " ")
+    "url" (printf "%s#%s" $.Permalink (anchorize .title))
+    "provider" (dict "@id" $personID)
+) }}
+{{- end }}
+
+{{- if and (eq .Section "apps") .IsPage .Params.price }}
+{{- $app := dict
+    "@type" "SoftwareApplication"
+    "name" .Title
+    "description" (.Description | default .Params.summary)
+    "applicationCategory" "BusinessApplication"
+    "applicationSubCategory" "Odoo module"
+    "operatingSystem" (printf "Odoo %s" (delimit .Params.odoo_versions ", "))
+    "url" .Permalink
+    "offers" (dict
+        "@type" "Offer"
+        "price" (printf "%.2f" (float .Params.price))
+        "priceCurrency" (.Params.currency | default "USD")
+        "availability" "https://schema.org/InStock"
+        "url" .Params.store_url)
+    "author" (dict "@id" $personID)
+    "publisher" (dict "@id" $personID)
+}}
+{{- with .Resources.GetMatch "banner*" }}
+{{- $app = merge $app (dict "image" .Permalink) }}
+{{- end }}
+{{- $shots := slice }}
+{{- range .Resources.Match "shot-*" }}{{ $shots = $shots | append .Permalink }}{{ end }}
+{{- with $shots }}{{ $app = merge $app (dict "screenshot" .) }}{{ end }}
+{{- $graph = $graph | append $app }}
+{{- with .Params.faq }}
+{{- $qs := slice }}
+{{- range .items }}
+{{- $qs = $qs | append (dict "@type" "Question" "name" .q "acceptedAnswer" (dict "@type" "Answer" "text" .a)) }}
+{{- end }}
+{{- $graph = $graph | append (dict "@type" "FAQPage" "mainEntity" $qs) }}
+{{- end }}
+{{- end }}
+
+{{- if and (eq .Section "posts") .IsPage }}
+{{- $image := (resources.Get "brand/og-image-1200x630.png").Permalink }}
+{{- with .Params.images }}{{ $image = index . 0 | absURL }}{{ end }}
+{{- $graph = $graph | append (dict
+    "@type" "BlogPosting"
+    "headline" .Title
+    "description" (.Description | default (.Summary | plainify))
+    "inLanguage" .Site.Language.Locale
+    "mainEntityOfPage" (dict "@type" "WebPage" "@id" .Permalink)
+    "image" $image
+    "author" (dict "@id" $personID)
+    "publisher" (dict "@id" $personID)
+    "isPartOf" (dict "@id" (printf "%s#website" $base))
+    "datePublished" (.PublishDate.Format "2006-01-02T15:04:05Z07:00")
+    "dateModified" (.Lastmod.Format "2006-01-02T15:04:05Z07:00")
+    "url" .Permalink
+    "wordCount" .WordCount
+    "license" .Site.Params.license
+) }}
+{{- end }}
+<script type="application/ld+json">{{ dict "@context" "https://schema.org" "@graph" $graph | jsonify | safeJS }}</script>

@@ -1,7 +1,10 @@
 ---
 title: "Blog"
+seo_title: "Blog on Odoo, Linux and Neovim"
 url: /blog/
-description: "Posts by Miika Nissi (m.nissi) on Odoo, Linux, and software development."
+description:
+  "Posts by Miika Nissi on Odoo development, Linux, Vim and Neovim, and software
+  development."
 cascade:
   build:
     render: always

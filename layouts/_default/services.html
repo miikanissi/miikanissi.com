@@ -1,0 +1,85 @@
+{{ define "main" }}
+<section class="hero">
+    <div class="wrap">
+        <div class="hero-content">
+            <h1 class="dot">{{ .Title }}</h1>
+            <p class="lead">{{ .Params.intro }}</p>
+        </div>
+        {{- with .Params.stats }}
+        <dl class="stats">
+            {{- range . }}
+            <div>
+                <dt>{{ .value }}</dt>
+                <dd>{{ .label }}</dd>
+            </div>
+            {{- end }}
+        </dl>
+        {{- end }}
+    </div>
+    <div class="hero-pattern" aria-hidden="true"></div>
+</section>
+
+<section class="section band">
+    <div class="wrap">
+        <ol class="rows">
+            {{- range .Params.services }}
+            <li id="{{ anchorize .title }}">
+                <h2>{{ .title }}</h2>
+                <div>{{ $.Page.RenderString (dict "display" "block") .body }}</div>
+            </li>
+            {{- end }}
+        </ol>
+    </div>
+</section>
+
+{{- with .Params.partners }}
+<section class="section band-tint">
+    <div class="wrap">
+        <h2 id="{{ anchorize .title }}">{{ .title }}</h2>
+        <p class="lead">{{ .body }}</p>
+    </div>
+</section>
+{{- end }}
+
+{{- with .Params.industries }}
+<section class="section">
+    <div class="wrap">
+        <h2 class="section-head" id="{{ anchorize .title }}">{{ .title }}</h2>
+        <div class="cols">
+            {{- range .items }}
+            <div>
+                <h3>{{ .title }}</h3>
+                <p>{{ .body }}</p>
+            </div>
+            {{- end }}
+        </div>
+    </div>
+</section>
+{{- end }}
+
+{{- with .Params.process }}
+<section class="section band">
+    <div class="wrap">
+        <div class="section-head">
+            <h2 id="{{ anchorize .title }}">{{ .title }}</h2>
+            {{- with .intro }}<p class="measure">{{ . }}</p>{{ end }}
+        </div>
+        <ol class="steps">
+            {{- range .steps }}
+            <li>
+                <h3>{{ .title }}</h3>
+                <p>{{ .body }}</p>
+            </li>
+            {{- end }}
+        </ol>
+    </div>
+</section>
+{{- end }}
+
+{{- with .Params.cta }}
+<div class="cta-band band-brand">
+    <h2>{{ .heading }}</h2>
+    <a class="btn btn-white" href="{{ .url }}">{{ .label }}</a>
+</div>
+{{- end }}
+{{ end }}

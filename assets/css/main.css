@@ -39,8 +39,8 @@
   --amber-text: #8a5208; /* amber-family text/links on light backgrounds (6:1) */
 
   /* Neutrals */
-  --paper: #fbf8f6; /* page background */
-  --white: #ffffff; /* cards */
+  --paper: #fbf8f6; /* alternate bands */
+  --white: #ffffff; /* page background, cards */
   --ink: #24121b; /* body text */
   --ink-muted: #6b5561; /* secondary text */
   --line: #e4dad5; /* borders, dividers */
@@ -63,37 +63,44 @@
   --radius-lg: 24px;
   --radius-pill: 999px;
 
-  /* Semantic */
-  --bg: var(--paper);
+  /* Semantic. Laid out like the Odoo Apps description page: white base,
+     paper bands, maroon headings, one maroon band, amber as labels. */
+  --bg: var(--white);
+  --band: var(--paper);
+  --tint: var(--maroon-tint);
   --surface: var(--white);
   --text: var(--ink);
   --text-muted: var(--ink-muted);
+  --heading: var(--maroon);
+  --accent-text: var(--amber-text);
   --brand: var(--maroon);
   --on-brand: var(--white);
-  --accent: var(--amber);
   --link: var(--maroon);
   --link-hover: var(--maroon-deep);
 
   /* Layout */
-  --width-prose: 68ch;
   --width-grid: 1080px;
   --gutter: 16px;
   --motion: 150ms ease;
 }
 
+/* Dark: near-neutral surfaces so maroon stays an accent (buttons, bands)
+   instead of tinting every background. Amber is readable here (9:1), so
+   labels use it directly. */
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #1c0e15;
-    --surface: #2a1520;
-    --text: #f7eef2;
-    --text-muted: #bfa9b4;
-    --line: #3f2632;
+    --bg: #141113;
+    --band: #1b1719;
+    --tint: #261a20;
+    --surface: #211c1f;
+    --text: #f5eff2;
+    --text-muted: #b8acb2;
+    --line: #372f33;
+    --heading: #f5eff2;
+    --accent-text: var(--amber);
     --brand: #9b2a62;
-    --on-brand: #ffffff;
     --link: #e889b3;
-    /* brand.css's own dark hover (--maroon-deep, #4A0A2A) is 1.6:1 on this
-       background — unreadable. Use a lighter tint instead; kept only here,
-       not filed against the kit since v1 shouldn't touch shared assets. */
+    /* brand.css's own dark hover (--maroon-deep) is unreadable here. */
     --link-hover: #f2b3d2;
   }
 }
@@ -108,9 +115,6 @@
 * {
   box-sizing: border-box;
 }
-html {
-  width: 100%;
-}
 body {
   margin: 0;
   background: var(--bg);
@@ -119,8 +123,7 @@ body {
 }
 h1,
 h2,
-h3,
-.display {
+h3 {
   font-family: var(--font-display);
   font-weight: 700;
   line-height: 1.1;
@@ -131,10 +134,12 @@ h1 {
   font-size: clamp(40px, 6vw, 64px);
 }
 h2 {
-  font-size: clamp(28px, 4vw, 40px);
+  font-size: clamp(28px, 4vw, 36px);
+  color: var(--heading);
 }
 h3 {
   font-size: 22px;
+  color: var(--heading);
 }
 p {
   margin: 0 0 var(--space-3);
@@ -145,8 +150,14 @@ kbd {
   font-family: var(--font-display);
   font-size: 15px;
 }
+kbd {
+  background: var(--tint);
+  border-radius: var(--radius-sm);
+  padding: 1px 6px;
+}
 img,
-svg {
+svg,
+video {
   max-width: 100%;
   height: auto;
 }
@@ -172,7 +183,15 @@ a:hover {
   margin-left: 0.06em;
   border-radius: 50%;
   background: var(--amber);
-  vertical-align: baseline;
+}
+
+/* Small uppercase label above a heading, in the amber family. */
+.eyebrow {
+  font: 700 14px/1.4 var(--font-display);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent-text);
+  margin: 0 0 var(--space-2);
 }
 
 /* Buttons */
@@ -189,8 +208,7 @@ a:hover {
   border: 2px solid transparent;
   transition:
     background var(--motion),
-    color var(--motion),
-    border-color var(--motion);
+    color var(--motion);
 }
 .btn-primary {
   background: var(--brand);
@@ -201,13 +219,11 @@ a:hover {
   color: var(--on-brand);
 }
 .btn-secondary {
-  background: transparent;
-  color: var(--brand);
-  border-color: var(--brand);
+  color: var(--link);
+  border-color: currentColor;
 }
 .btn-secondary:hover {
-  background: var(--maroon-tint);
-  color: var(--brand);
+  background: var(--tint);
 }
 .btn-white {
   background: var(--white);
@@ -215,33 +231,121 @@ a:hover {
 }
 .btn-white:hover {
   background: var(--maroon-tint);
-  color: var(--maroon);
+  color: var(--maroon-deep);
 }
-@media (prefers-color-scheme: dark) {
-  .btn-secondary {
-    /* --brand is only 2.6:1 on --bg here (it's tuned for use as a fill, not
-       text on the page background) — use --link, which is readable. */
-    color: var(--link);
-    border-color: var(--link);
-  }
-  .btn-secondary:hover {
-    background: var(--surface);
-  }
-  .btn-white:hover {
-    background: var(--surface);
-  }
+.btn-ghost {
+  color: var(--white);
+  border-color: rgb(255 255 255 / 0.6);
+}
+.btn-ghost:hover {
+  color: var(--white);
+  background: var(--maroon-deep);
+}
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+  margin-top: var(--space-4);
 }
 
-/* Layout containers */
+/* Layout */
 .wrap {
   max-width: var(--width-grid);
   margin: 0 auto;
   padding: 0 var(--gutter);
 }
-.prose-wrap {
-  max-width: var(--width-prose);
+.section {
+  padding-block: var(--space-6);
+}
+.band {
+  background: var(--band);
+  border-block: 1px solid var(--line);
+}
+.band-tint {
+  background: var(--tint);
+}
+.band-brand {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: var(--maroon);
+  color: var(--on-brand);
+}
+/* Arches on the right edge only, fading out, so text sits on flat maroon. */
+@media (min-width: 900px) {
+  .band-brand::after {
+    content: "";
+    position: absolute;
+    inset: 0 0 0 auto;
+    width: 32%;
+    z-index: -1;
+    background: url("/brand/arches-tile-maroon.svg") repeat;
+    background-size: 60px 120px;
+    mask-image: linear-gradient(to left, black, transparent);
+  }
+}
+.band-brand :is(h1, h2) {
+  color: var(--on-brand);
+}
+.lead {
+  font-size: 20px;
+  line-height: 1.55;
+  color: var(--text-muted);
+  max-width: 60ch;
+}
+.band-brand .lead {
+  color: var(--white);
+}
+.measure {
+  max-width: 72ch;
+}
+
+/* Two columns: text and a picture. */
+.split {
+  display: grid;
+  gap: var(--space-4) var(--space-5);
+  align-items: center;
+}
+@media (min-width: 800px) {
+  .split {
+    grid-template-columns: 5fr 7fr;
+  }
+  .split-reverse {
+    grid-template-columns: 7fr 5fr;
+  }
+  .split-reverse > :first-child {
+    order: 2;
+  }
+  .split-lead {
+    grid-template-columns: 7fr 5fr;
+  }
+  .split-even {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.split-top {
+  align-items: start;
+}
+.split > * > :last-child {
+  margin-bottom: 0;
+}
+
+.shot {
+  display: block;
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--white);
+}
+.shot-bare {
+  border: 0;
+  background: none;
+}
+.shot-phone {
+  max-width: 300px;
   margin: 0 auto;
-  padding: 0 var(--gutter);
+  border-radius: var(--radius-lg);
 }
 
 /* Header */
@@ -249,7 +353,7 @@ a:hover {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: var(--space-3);
+  gap: var(--space-4);
   padding: var(--space-4) var(--gutter);
   max-width: var(--width-grid);
   margin: 0 auto;
@@ -263,12 +367,10 @@ a:hover {
   width: auto;
   display: block;
 }
-.site-header .wordmark picture source,
-.site-header .wordmark picture img {
-  height: 36px;
-  width: auto;
-}
 
+.site-nav {
+  margin-left: auto;
+}
 .site-nav ul {
   list-style: none;
   margin: 0;
@@ -277,90 +379,76 @@ a:hover {
   align-items: center;
   gap: var(--space-4);
 }
-.site-nav a:not(.btn) {
+.site-nav a {
+  position: relative;
   text-decoration: none;
   color: var(--text);
   font-family: var(--font-display);
   font-size: 15px;
 }
-.site-nav a:not(.btn):hover {
-  color: var(--brand);
+.site-nav a:hover {
+  color: var(--link);
+}
+/* Current section: the brand dot under the link. */
+.site-nav a[aria-current]::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -9px;
+  width: 6px;
+  height: 6px;
+  margin-left: -3px;
+  border-radius: 50%;
+  background: var(--amber);
 }
 
-.nav-toggle summary {
-  display: none;
-}
-.nav-toggle[open] summary {
-  margin-bottom: var(--space-3);
-}
-
+/* Phones: logo and Contact on the first row, the links in a row below. */
 @media (max-width: 700px) {
   .site-header {
     flex-wrap: wrap;
+    padding-block: var(--space-3) 0;
   }
-  .nav-toggle {
-    width: 100%;
+  .header-cta {
+    margin-left: auto;
   }
-  .nav-toggle summary {
-    display: flex;
-    align-items: center;
+  .site-nav {
+    order: 3;
+    flex: 1 0 100%;
+    margin: 0;
+    border-top: 1px solid var(--line);
+  }
+  .site-nav ul {
     justify-content: space-between;
-    cursor: pointer;
-    font-family: var(--font-display);
-    font-size: 15px;
-    list-style: none;
-    padding: var(--space-2) 0;
-  }
-  .nav-toggle summary::-webkit-details-marker {
-    display: none;
-  }
-  .nav-toggle summary::after {
-    content: "+";
-    font-size: 20px;
-  }
-  .nav-toggle[open] summary::after {
-    content: "\2212";
-  }
-  .nav-toggle ul {
-    flex-direction: column;
-    align-items: flex-start;
     gap: var(--space-3);
-    padding-bottom: var(--space-3);
+  }
+  .site-nav a {
+    display: block;
+    padding: var(--space-3) 0;
+  }
+  .site-nav a[aria-current]::after {
+    bottom: 6px;
   }
 }
 
 /* Hero */
 .hero {
   position: relative;
-  max-width: var(--width-grid);
-  margin: 0 auto;
-  padding: var(--space-6) var(--gutter);
   overflow: hidden;
 }
-.hero .hero-content {
-  max-width: 640px;
+.hero > .wrap {
+  padding-block: var(--space-6);
 }
-.hero p.subhead {
-  font-size: 20px;
-  color: var(--text-muted);
-  max-width: 56ch;
+.hero-content {
+  max-width: 680px;
 }
-.hero .actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-3);
-  margin-top: var(--space-4);
-}
-.hero .hero-pattern {
+.hero-pattern {
   display: none;
 }
 @media (min-width: 900px) {
-  .hero .hero-pattern {
+  .hero-pattern {
     display: block;
     position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
+    inset: 0 0 0 auto;
     width: 30%;
     background: url("/brand/arches-tile-light.svg") repeat;
     background-size: 30px 60px;
@@ -368,113 +456,231 @@ a:hover {
   }
 }
 @media (prefers-color-scheme: dark) {
-  .hero .hero-pattern {
-    /* arches-tile-light is tint-on-paper — built for a light surface, so it
-       reads as a stray bright panel on the dark background instead. */
+  .hero-pattern {
+    /* tint-on-paper tile reads as a stray bright panel on dark. */
     display: none;
   }
 }
 
-/* Grids */
+/* Grids and cards */
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: var(--space-4);
-  max-width: var(--width-grid);
-  margin: 0 auto;
-  padding: 0 var(--gutter);
 }
-
-/* Cards */
+.grid-3 {
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+}
 .card {
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--radius-md);
   padding: var(--space-4);
 }
-.card h3 {
+.card :is(h2, h3) {
+  font-size: 22px;
   margin-bottom: var(--space-2);
 }
 .card p {
   color: var(--text-muted);
+  font-size: 16px;
+}
+.card > :last-child {
   margin-bottom: 0;
 }
+.card-link {
+  text-decoration: none;
+}
+.card-link:hover {
+  text-decoration: underline;
+}
+.section-head {
+  margin-bottom: var(--space-4);
+}
 
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  list-style: none;
+  margin: 0 0 var(--space-3);
+  padding: 0;
+}
+.pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.pills li {
+  border: 1px solid rgb(255 255 255 / 0.4);
+  border-radius: var(--radius-pill);
+  padding: 4px 14px;
+  font-size: 15px;
+}
+
+/* Numbered rows: heading on the left, text on the right, divided by rules. */
+.rows {
+  list-style: none;
+  counter-reset: row;
+  margin: 0;
+  padding: 0;
+}
+.rows > li {
+  counter-increment: row;
+  display: grid;
+  gap: 0 var(--space-5);
+  padding: var(--space-5) 0;
+  border-top: 1px solid var(--line);
+}
+.rows > li::before {
+  content: counter(row, decimal-leading-zero);
+  font: 700 14px/1.6 var(--font-display);
+  color: var(--accent-text);
+}
+.rows h2 {
+  font-size: clamp(24px, 3vw, 30px);
+}
+.rows h3 {
+  font-size: 18px;
+  margin: var(--space-4) 0 var(--space-1);
+}
+.rows > li > :last-child > :last-child {
+  margin-bottom: 0;
+}
+@media (min-width: 800px) {
+  .rows > li {
+    grid-template-columns: 48px 4fr 7fr;
+  }
+}
+/* Homepage list: same rules, no numbers. */
+.list-lines {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.list-lines li {
+  padding: var(--space-4) 0;
+  border-top: 1px solid var(--line);
+}
+.list-lines li:last-child {
+  border-bottom: 1px solid var(--line);
+}
+.list-lines h3 {
+  margin-bottom: var(--space-1);
+}
+.list-lines p {
+  margin: 0;
+  color: var(--text-muted);
+}
+
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4) var(--space-6);
+  margin: var(--space-5) 0 0;
+}
+.stats dt {
+  font: 700 36px/1.1 var(--font-display);
+  color: var(--heading);
+}
+.stats dd {
+  margin: 0;
+  font-size: 15px;
+  color: var(--text-muted);
+  max-width: 22ch;
+}
+
+.cols {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--space-4) var(--space-5);
+}
+
+.steps {
+  list-style: none;
+  counter-reset: step;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--space-5) var(--space-4);
+  margin: 0;
+  padding: 0;
+}
+.steps li {
+  counter-increment: step;
+  padding-top: var(--space-3);
+  border-top: 2px solid var(--line);
+}
+.steps li::before {
+  content: counter(step, decimal-leading-zero);
+  font: 700 14px/1.6 var(--font-display);
+  color: var(--accent-text);
+}
+.steps h3 {
+  font-size: 20px;
+  margin: var(--space-1) 0 var(--space-2);
+}
+.steps p {
+  margin: 0;
+  color: var(--text-muted);
+}
+
+/* Apps */
 .app-card {
   display: flex;
   flex-direction: column;
   gap: var(--space-2);
+}
+.app-card .actions {
+  margin-top: auto;
 }
 .app-icon {
   width: 64px;
   height: 64px;
   border-radius: var(--radius-md);
 }
-.app-versions {
+.app-page h1 {
+  font-size: clamp(34px, 6vw, 52px);
+}
+.app-name {
   display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-1);
-  margin: var(--space-1) 0;
+  align-items: center;
+  gap: var(--space-3);
+  font: 700 22px/1 var(--font-display);
+  margin-bottom: var(--space-5);
+}
+.app-name .app-icon {
+  width: 56px;
+  height: 56px;
+  border: 1px solid rgb(255 255 255 / 0.25);
+  border-radius: 14px;
 }
 .version-tag {
-  font-family: var(--font-display);
-  font-size: 12px;
+  font: 400 12px/1.5 var(--font-display);
   padding: 2px 8px;
   border-radius: var(--radius-sm);
-  background: var(--maroon-tint);
-  color: var(--maroon);
-}
-@media (prefers-color-scheme: dark) {
-  .version-tag {
-    background: var(--surface);
-    border: 1px solid var(--line);
-    color: var(--link);
-  }
+  background: var(--tint);
+  color: var(--heading);
 }
 .app-price {
-  font-family: var(--font-display);
-  font-weight: 700;
-  margin: var(--space-1) 0;
+  font: 700 17px/1.4 var(--font-display);
+  margin: 0;
 }
-
-/* App detail page */
-.app-hero .app-icon {
-  width: 64px;
-  height: 64px;
-  margin-bottom: var(--space-3);
+.faq > * {
+  max-width: 820px;
 }
-.app-demo-wrap {
-  padding: 0 var(--gutter) var(--space-5);
+.faq h3 {
+  font-size: 20px;
+  margin: var(--space-4) 0 var(--space-1);
 }
-.app-demo {
-  display: block;
-  width: 100%;
-  max-width: var(--width-grid);
-  margin: 0 auto;
-  border-radius: var(--radius-md);
-  border: 1px solid var(--line);
-}
-.app-features {
-  padding-bottom: var(--space-5);
-}
-.app-screens {
-  padding-bottom: var(--space-6);
-}
-.app-screens img {
-  border-radius: var(--radius-md);
-  border: 1px solid var(--line);
-  width: 100%;
-  height: auto;
-}
-
-/* Section titles */
-.section {
-  padding: var(--space-6) 0;
-}
-.section-title {
-  max-width: var(--width-grid);
-  margin: 0 auto var(--space-4);
-  padding: 0 var(--gutter);
+.fineprint {
+  margin: var(--space-5) 0 0;
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--line);
+  font-size: 14px;
+  color: var(--text-muted);
 }
 
 /* Blog index */
@@ -491,26 +697,15 @@ a:hover {
 }
 .post-list-date {
   font-family: var(--font-display);
-  color: var(--text-muted);
+  color: var(--accent-text);
   font-size: 14px;
   flex: 0 0 64px;
 }
 
 /* CTA band — full-width maroon, once per page, above the footer */
 .cta-band {
-  background: var(--maroon) url("/brand/arches-tile-maroon.svg") repeat;
-  background-size: 30px 60px;
-  color: var(--on-brand);
   text-align: center;
   padding: var(--space-6) var(--gutter);
-}
-.cta-band h2 {
-  color: var(--on-brand);
-}
-@media (prefers-color-scheme: dark) {
-  .cta-band {
-    background-color: var(--maroon-deep);
-  }
 }
 
 /* Footer */
@@ -538,32 +733,37 @@ a:hover {
 }
 .site-footer a {
   color: var(--text-muted);
+  white-space: nowrap;
 }
-.site-footer .footer-mark {
-  width: 20px;
-  height: 20px;
+.site-footer .footer-meta {
+  margin-top: var(--space-2);
 }
 .site-footer p {
-  margin: var(--space-2) 0 0;
+  margin: 0;
 }
 
-/* Prose (posts, about, services body) */
+/* Prose (posts, about). Same width as the rest of the site. */
 article.prose {
-  max-width: var(--width-prose);
+  max-width: var(--width-grid);
   margin: 0 auto;
   padding: var(--space-5) var(--gutter);
 }
 .post-meta {
   font-family: var(--font-display);
-  color: var(--text-muted);
+  color: var(--accent-text);
   font-size: 14px;
   margin-bottom: var(--space-4);
 }
 article.prose h1 {
-  font-size: clamp(32px, 5vw, 40px);
+  font-size: clamp(32px, 5vw, 44px);
 }
-article.prose p,
-article.prose li {
+article.prose h2 {
+  margin-top: var(--space-5);
+}
+article.prose h3 {
+  margin-top: var(--space-4);
+}
+article.prose :is(p, li) {
   overflow-wrap: anywhere;
 }
 article.prose img {
@@ -572,29 +772,38 @@ article.prose img {
 article.prose blockquote {
   margin: var(--space-4) 0;
   padding: 0 var(--space-4);
-  border-left: 2px solid var(--line);
+  border-left: 3px solid var(--tint);
   color: var(--text-muted);
 }
 article.prose table {
   width: 100%;
   border-collapse: collapse;
 }
-article.prose th,
-article.prose td {
+article.prose :is(th, td) {
   border: 1px solid var(--line);
   padding: var(--space-2);
   text-align: left;
 }
+/* About: portrait beside the opening paragraphs on wide screens. */
+@media (min-width: 800px) {
+  .prose.about > p:first-of-type {
+    float: right;
+    width: 300px;
+    margin: 0 0 var(--space-4) var(--space-5);
+  }
+  .prose.about h2 {
+    clear: both;
+  }
+}
 
 #toc {
-  background: var(--surface);
+  background: var(--band);
   border: 1px solid var(--line);
   border-radius: var(--radius-md);
   padding: var(--space-3) var(--space-4);
   margin: 0 0 var(--space-4);
 }
 #toc h2 {
-  font-family: var(--font-display);
   font-size: 15px;
   margin: 0 0 var(--space-2);
 }
@@ -607,18 +816,13 @@ pre {
   margin: 0 0 var(--space-4);
 }
 :not(pre) > code {
-  background: var(--maroon-tint);
+  background: var(--tint);
   border-radius: var(--radius-sm);
   padding: 0.1em 0.4em;
 }
-@media (prefers-color-scheme: dark) {
-  :not(pre) > code {
-    background: var(--surface);
-  }
-}
 
 @media (max-width: 480px) {
-  .hero p.subhead {
+  .lead {
     font-size: 18px;
   }
 }

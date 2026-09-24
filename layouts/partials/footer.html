@@ -9,5 +9,11 @@
             {{- end }}
         </ul>
     </div>
-    <p>{{ replace .Site.Params.copyright "{year}" now.Year }}</p>
+    <div class="footer-row footer-meta">
+        <p>{{ replace .Site.Params.copyright "{year}" now.Year }}. Posts are <a href="{{ .Site.Params.license }}" rel="license">CC BY 4.0</a>.</p>
+        <ul class="footer-links">
+            <li><a href="{{ "/privacy/" | relLangURL }}">Privacy</a></li>
+            <li><a href="{{ .Site.Params.source }}">Website source code</a></li>
+        </ul>
+    </div>
 </footer>

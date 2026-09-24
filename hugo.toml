@@ -19,8 +19,10 @@ disableHugoGeneratorInject = true
   email = "miika@miikanissi.com"
   brand = "m.nissi"
   title = "Miika Nissi"
-  description = "Miika Nissi (m.nissi): Odoo development, customization and business process consulting."
+  description = "Software engineer and Odoo ERP specialist since 2019. Custom modules, large migrations and integrations, for businesses and for Odoo partners."
   copyright = "Copyright © 2020-{year} Miika Nissi"
+  source = "https://github.com/miikanissi/miikanissi.com"
+  license = "https://creativecommons.org/licenses/by/4.0/"
   dark = "auto"
   highlight = true
 
@@ -60,12 +62,6 @@ disableHugoGeneratorInject = true
     url = "https://github.com/miikanissi"
     weight = 10
 
-  [[menu.footer]]
-    identifier = "gitlab"
-    name = "GitLab"
-    title = "GitLab"
-    url = "https://gitlab.com/miikanissi"
-    weight = 20
 
   [[menu.footer]]
     identifier = "rss"

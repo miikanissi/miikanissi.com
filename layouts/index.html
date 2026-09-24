@@ -1,88 +1,98 @@
 {{ define "main" }}
 <section class="hero">
-    <div class="hero-content">
-        <h1 class="dot">Odoo development and consulting.</h1>
-        <p class="subhead">
-            I build, customize and support Odoo ERP systems for small and medium
-            businesses — implementation, migrations, integrations, and business
-            process consulting, from a single point of contact.
-        </p>
-        <div class="actions">
-            <a class="btn btn-primary" href="mailto:{{ .Site.Params.email }}">Email me</a>
-            <a class="btn btn-secondary" href="{{ "/services/" | relLangURL }}">See services</a>
+    <div class="wrap">
+        <div class="hero-content">
+            <h1 class="dot">Software engineer and Odoo ERP specialist</h1>
+            <p class="lead">
+                I'm Miika Nissi, based in Queens, New York. I've worked on Odoo
+                professionally since 2019, especially on the hard parts: migrations
+                carrying more than 100 custom modules, integrations with tax, billing and e-commerce
+                platforms, and business processes that standard Odoo doesn't cover.
+            </p>
+            <div class="actions">
+                <a class="btn btn-primary" href="mailto:{{ .Site.Params.email }}">Email me</a>
+                <a class="btn btn-secondary" href="{{ "/services/" | relLangURL }}">What I work on</a>
+            </div>
         </div>
     </div>
     <div class="hero-pattern" aria-hidden="true"></div>
 </section>
 
-<section class="section">
-    <div class="section-title">
-        <h2>Services</h2>
+{{- $services := "/services/" | relLangURL }}
+<section class="section band">
+    <div class="wrap split split-top">
+        <div>
+            <h2>What I work on</h2>
+            <p><a href="{{ $services }}">All services</a></p>
+        </div>
+        <ul class="list-lines">
+            <li>
+                <h3><a class="card-link" href="{{ $services }}#custom-odoo-modules">Custom Odoo development</a></h3>
+                <p>Modules and changes to standard Odoo, written to OCA guidelines so they
+                hold up through upgrades.</p>
+            </li>
+            <li>
+                <h3><a class="card-link" href="{{ $services }}#odoo-migrations-and-upgrades">Migrations &amp; upgrades</a></h3>
+                <p>From Odoo 8 to 20, including databases with more than 100 custom
+                modules.</p>
+            </li>
+            <li>
+                <h3><a class="card-link" href="{{ $services }}#integrations">Integrations</a></h3>
+                <p>Avalara, TaxCloud, Invoiced, Shopify, HubSpot, shipping platforms, and
+                AI tooling.</p>
+            </li>
+            <li>
+                <h3><a class="card-link" href="{{ $services }}#implementation-and-hosting">Implementation &amp; hosting</a></h3>
+                <p>Community or Enterprise, on Odoo.sh, CloudPepper, Docker or Kubernetes,
+                whichever fits the business.</p>
+            </li>
+        </ul>
     </div>
-    <div class="grid">
-        <div class="card service-card">
-            <h3><a href="{{ "/services/" | relLangURL }}">Customization &amp; development</a></h3>
-            <p>Reliable, high-quality modules and modifications, built to work
-            seamlessly with your existing systems.</p>
-        </div>
-        <div class="card service-card">
-            <h3><a href="{{ "/services/" | relLangURL }}">Business process consulting</a></h3>
-            <p>Mapping how your business actually runs, and where Odoo's standard
-            flows can do the work without custom code.</p>
-        </div>
-        <div class="card service-card">
-            <h3><a href="{{ "/services/" | relLangURL }}">Implementation</a></h3>
-            <p>Guidance through the entire Odoo implementation process, from initial
-            planning to deployment, self-hosted or cloud.</p>
-        </div>
-        <div class="card service-card">
-            <h3><a href="{{ "/services/" | relLangURL }}">Migrations &amp; upgrades</a></h3>
-            <p>Careful migrations and upgrades across Odoo versions 8 through 20, with
-            minimal downtime and preserved data integrity.</p>
-        </div>
-        <div class="card service-card">
-            <h3><a href="{{ "/services/" | relLangURL }}">Integrations &amp; APIs</a></h3>
-            <p>Connecting Odoo to the systems and third-party applications your
-            business already runs on.</p>
-        </div>
+</section>
+
+<section class="section">
+    <div class="wrap">
+        <h2>Industries I know</h2>
+        <p class="measure">Most of my work has been in manufacturing and beverage. That has meant
+        freight and TMS workflows, quality management, and private label projects
+        that run from the recipe to the artwork. I've also spent a good part of my
+        career in the managed print services industry.</p>
     </div>
 </section>
 
 {{ with site.GetPage "/apps/mn-bookmarks" }}
-<section class="section">
-    <div class="section-title">
-        <h2>Apps</h2>
+<section class="section band">
+    <div class="wrap">
+        <h2 class="section-head">Apps</h2>
+        <div class="grid">
+            {{ partial "app-card.html" . }}
+        </div>
     </div>
-    <div class="grid">
-        {{ partial "app-card.html" . }}
-    </div>
-    <p class="section-title"><a href="{{ "/apps/" | relLangURL }}">See all apps</a></p>
 </section>
 {{ end }}
 
-<section class="section about-strip wrap">
-    {{- with resources.Get "images/miika.jpg" }}
-    {{- $photo := .Resize "160x160 webp q82" }}
-    <img class="about-photo" src="{{ $photo.RelPermalink }}" width="{{ $photo.Width }}" height="{{ $photo.Height }}" alt="Portrait of Miika Nissi" loading="lazy">
-    {{- end }}
-    <div>
-        <h2>About Miika</h2>
-        <p>Software engineer, father, and Linux/Unix enthusiast located in Queens, New
-        York. Odoo has been my main focus for the past several years, across Python,
-        JavaScript, PostgreSQL and XML.</p>
-        <p><a href="{{ "/about/" | relLangURL }}">More about me</a></p>
+<section class="section">
+    <div class="wrap about-strip">
+        {{- with resources.Get "images/miika.jpg" }}
+        {{- $photo := .Resize "320x320 webp q82" }}
+        <img class="about-photo" src="{{ $photo.RelPermalink }}" width="160" height="160" alt="Portrait of Miika Nissi" loading="lazy">
+        {{- end }}
+        <div>
+            <h2>About Miika</h2>
+            <p>Software engineer and father in Queens, New York. Odoo since 2019, OCA
+            contributor, and a long-time Linux and Vim user.</p>
+            <p><a href="{{ "/about/" | relLangURL }}">More about me</a></p>
+        </div>
     </div>
 </section>
 
-<section class="section">
-    <div class="section-title">
-        <h2>Recent writing</h2>
-    </div>
+<section class="section band">
     <div class="wrap">
+        <h2 class="section-head">Recent writing</h2>
         <ul class="post-list">
             {{- range first 3 (where site.RegularPages "Section" "posts") }}
             <li>
-                <time class="post-list-date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2" }}</time>
+                <time class="post-list-date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2006" }}</time>
                 <a href="{{ .Permalink }}">{{ .Title }}</a>
             </li>
             {{- end }}
@@ -91,8 +101,8 @@
     </div>
 </section>
 
-<div class="cta-band">
-    <h2 class="dot">Ready to streamline your Odoo?</h2>
+<div class="cta-band band-brand">
+    <h2>Want to talk about an Odoo problem?</h2>
     <a class="btn btn-white" href="mailto:{{ .Site.Params.email }}">Email me</a>
 </div>
 {{ end }}
