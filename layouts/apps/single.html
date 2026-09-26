@@ -38,13 +38,15 @@
     {{- end }}
 
     {{- range $i, $s := .Params.sections }}
-    {{- $img := $.Resources.Get $s.image }}
+    {{- $img := "" }}
+    {{- with $s.image }}{{ $img = $.Resources.Get . }}{{ end }}
     {{- $shotClass := "shot" }}
     {{- if eq $s.style "even" }}{{ $shotClass = "shot shot-phone" }}{{ end }}
     {{- if eq $s.style "wide" }}{{ $shotClass = "shot shot-bare" }}{{ end }}
     <section class="section{{ if modBool $i 2 | not }} band{{ end }}">
         <div class="wrap">
             {{- $text := printf "<h2>%s</h2>%s" $s.heading ($.Page.RenderString (dict "display" "block") $s.body) }}
+            {{- with $s.eyebrow }}{{ $text = printf "<p class=\"eyebrow\">%s</p>%s" . $text }}{{ end }}
             {{- $picture := "" }}
             {{- with $img }}
             {{- $w := .Width }}
@@ -52,7 +54,9 @@
             {{- $webp := .Resize (printf "%dx webp q80" $w) }}
             {{- $picture = printf "<img class=%q src=%q width=\"%d\" height=\"%d\" alt=%q loading=\"lazy\">" $shotClass $webp.RelPermalink $webp.Width $webp.Height $s.alt }}
             {{- end }}
-            {{- if eq $s.style "wide" }}
+            {{- if not $img }}
+            <div class="measure">{{ $text | safeHTML }}</div>
+            {{- else if eq $s.style "wide" }}
             <div class="measure">{{ $text | safeHTML }}</div>
             {{ $picture | safeHTML }}
             {{- else }}

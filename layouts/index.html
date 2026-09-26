@@ -60,12 +60,14 @@
     </div>
 </section>
 
-{{ with site.GetPage "/apps/mn-bookmarks" }}
+{{ with site.GetPage "/apps" }}
 <section class="section band">
     <div class="wrap">
         <h2 class="section-head">Apps</h2>
         <div class="grid">
+            {{- range .Pages }}
             {{ partial "app-card.html" . }}
+            {{- end }}
         </div>
     </div>
 </section>

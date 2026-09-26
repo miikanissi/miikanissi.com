@@ -88,8 +88,8 @@ Not covered by either license:
 - The m.nissi logo, wordmark, icons and patterns (`assets/brand/`, `static/brand/`, and
   the favicons in `static/`).
 - Photos of Miika Nissi (`assets/images/miika.jpg`).
-- The MN Bookmarks app images (`content/apps/`). The app itself is sold separately on
-  the Odoo Apps store.
+- The MN Bookmarks and MN Global Search app images (`content/apps/`). The apps
+  themselves are sold separately on the Odoo Apps store.
 - Images made by other people, such as the GIFs in `assets/images/` and `static/media/`,
   which belong to their authors.
 
