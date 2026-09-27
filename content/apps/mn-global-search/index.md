@@ -3,17 +3,17 @@ title: "MN Global Search"
 seo_title: "MN Global Search: find any record from the command palette"
 summary: "Find any record from the command palette and reopen the ones you used last"
 description:
-  "Record search for the Odoo 20 command palette. Type a name or an order number and
-  open the record. Works on Community and Enterprise."
+  "Record search for the Odoo 19 and 20 command palette. Type a name or an order number
+  and open the record. Works on Community and Enterprise."
 icon: "icon.svg"
 price: 79.00
 currency: "USD"
-odoo_versions: [20]
+odoo_versions: [19, 20]
 store_url: "https://apps.odoo.com/apps/modules/mn_global_search"
 license: "OPL-1"
 fineprint:
-  "Odoo 20, Community and Enterprise. Licensed under the Odoo Proprietary License v1.0
-  (OPL-1)."
+  "Odoo 19 and 20, Community and Enterprise. Licensed under the Odoo Proprietary License
+  v1.0 (OPL-1)."
 
 headline: "Type a name, open the record"
 lead:
@@ -21,7 +21,7 @@ lead:
   and puts a search field in the top bar. Click it or press "/", type a customer''s name
   or an order number, and open it from there. It works as soon as it''s installed, with
   nothing to set up or index.'
-pills: ["Odoo 20", "Community and Enterprise", "Desktop and mobile"]
+pills: ["Odoo 19 and 20", "Community and Enterprise", "Desktop and mobile"]
 
 demo:
   eyebrow: "See it in 30 seconds"

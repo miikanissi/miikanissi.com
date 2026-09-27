@@ -3,24 +3,24 @@ title: "MN Bookmarks"
 seo_title: "MN Bookmarks: a bookmarks bar for Odoo"
 summary: "A personal bookmarks bar that reopens any backend screen as it was"
 description:
-  "A bookmarks bar for Odoo 20. Save any screen with its filters, grouping and view, and
-  open it again in one click. Works on Community and Enterprise."
+  "A bookmarks bar for Odoo 19 and 20. Save any screen with its filters, grouping and
+  view, and open it again in one click. Works on Community and Enterprise."
 icon: "icon.svg"
 price: 89.00
 currency: "USD"
-odoo_versions: [20]
+odoo_versions: [19, 20]
 store_url: "https://apps.odoo.com/apps/modules/mn_bookmarks"
 license: "OPL-1"
 fineprint:
-  "Odoo 20, Community and Enterprise. Licensed under the Odoo Proprietary License v1.0
-  (OPL-1)."
+  "Odoo 19 and 20, Community and Enterprise. Licensed under the Odoo Proprietary License
+  v1.0 (OPL-1)."
 
 headline: "Your favorite Odoo screens, one click away"
 lead:
   "MN Bookmarks puts a bookmarks bar next to everything you do in Odoo. Save the screen
   you're on, with its filters, grouping and view, and open it again whenever you need
   it."
-pills: ["Odoo 20", "Community and Enterprise", "Desktop and mobile"]
+pills: ["Odoo 19 and 20", "Community and Enterprise", "Desktop and mobile"]
 
 demo:
   eyebrow: "See it in 20 seconds"
