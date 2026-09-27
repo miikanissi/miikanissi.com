@@ -8,3 +8,5 @@ resources/
 # Local notes
 CLAUDE.local.md
 .claude/
+.agents/
+skills-lock.json
