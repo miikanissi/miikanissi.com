@@ -21,7 +21,8 @@ and other AI tools connect to the same server, and they're covered at the end.
 
 You need Odoo 20 Enterprise. That covers Odoo Online (the `yourcompany.odoo.com` kind),
 Odoo.sh and Enterprise on your own server. Odoo Community doesn't have the MCP server.
-If you're on Community and want Claude connected anyway, email me and we can look at the
+If you're on Community and want Claude connected anyway, email me. This is the kind of
+[AI integration](/services/#ai-integrations-for-odoo) work I do, and we can look at the
 options.
 
 Your Odoo database has to be reachable from the internet. Claude connects from

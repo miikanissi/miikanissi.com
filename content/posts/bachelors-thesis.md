@@ -1,5 +1,5 @@
 ---
-title: "Bachelors Thesis"
+title: "Bachelor's Thesis"
 date: 2021-11-21T14:40:12-04:00
 description:
   "Bachelor's thesis on Odoo (version 14) event management system. Integration with
@@ -57,3 +57,5 @@ used a pre-existing feature.
 I wrote my thesis based on the project after the development process. The thesis is now
 published and can be viewed from a permanent address at
 [https://urn.fi/URN:NBN:fi:amk-2021111220157](https://urn.fi/URN:NBN:fi:amk-2021111220157).
+
+I still do this kind of [custom Odoo module](/services/#custom-odoo-modules) work today.

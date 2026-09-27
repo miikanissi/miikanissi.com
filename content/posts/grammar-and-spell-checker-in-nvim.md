@@ -1,5 +1,6 @@
 ---
 title: "Grammar and Spell Checker in Neovim with LTeX Language Server"
+seo_title: "Grammar and Spell Checker in Neovim with LTeX"
 description:
   "Grammar and spell checker in Neovim with LTeX Language Server to check for grammar
   and spelling issues in LaTeX, Markdown, reStructuredText, and others."

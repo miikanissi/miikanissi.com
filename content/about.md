@@ -16,10 +16,10 @@ My name is Miika. I'm a software engineer and a father, living in Queens, New Yo
 originally from Finland, where I earned a Bachelor of Engineering with a major in
 computer science. I started working on Odoo in 2019, back on version 12.
 
-I work on Odoo projects for businesses and for Odoo partners, and I contribute to the
-[Odoo Community Association (OCA)](https://odoo-community.org/). I also sell a few
-[Odoo apps](/apps/) of my own. Outside Odoo I'm a long-time Linux user, which is what
-most of the older posts on this blog are about.
+I work on [Odoo projects](/services/) for businesses and for Odoo partners, and I
+contribute to the [Odoo Community Association (OCA)](https://odoo-community.org/). I
+also sell a few [Odoo apps](/apps/) of my own. Outside Odoo I'm a long-time Linux user,
+which is what most of the older posts on this blog are about.
 
 I like simple solutions, and building on what people already figured out instead of
 reinventing it.

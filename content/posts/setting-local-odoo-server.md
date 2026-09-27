@@ -111,8 +111,8 @@ nano /opt/odoo/16/conf/Dockerfile
 ```
 
 In this file, you can install any additional external dependencies required by your
-custom Odoo modules. The following is a great basic template to use for your first
-Dockerfile:
+[custom Odoo modules](/services/#custom-odoo-modules). The following is a great basic
+template to use for your first Dockerfile:
 
 ```dockerfile
 FROM odoo:16

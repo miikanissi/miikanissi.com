@@ -103,11 +103,11 @@ partners:
 industries:
   title: "Industries"
   items:
-    - title: "Manufacturing"
+    - title: "Odoo for manufacturing"
       body:
         "Freight and transport management (TMS) workflows, integrations with shipping
         platforms, and quality management."
-    - title: "Beverage"
+    - title: "Odoo for private label beverage"
       body:
         "The same logistics and quality work as manufacturing, plus private label
         projects: a customer wants its own drink, and Odoo tracks the recipe, the

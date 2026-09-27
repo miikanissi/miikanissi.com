@@ -31,7 +31,10 @@
         <div class="wrap">
             <p class="eyebrow">{{ $.Params.demo.eyebrow }}</p>
             <h2>{{ $.Params.demo.heading }}</h2>
-            <img class="shot" src="{{ .RelPermalink }}" width="{{ .Width }}" height="{{ .Height }}" alt="{{ $.Params.demo.alt }}">
+            <span class="sr-only">{{ $.Params.demo.alt }}</span>
+            <video class="shot" width="1200" height="720" autoplay loop muted playsinline>
+                <source src="{{ .RelPermalink }}" type="{{ .MediaType.Type }}">
+            </video>
         </div>
     </section>
     {{- end }}
