@@ -97,13 +97,14 @@
 {{- range .Resources.Match "shot-*" }}{{ $shots = $shots | append .Permalink }}{{ end }}
 {{- with $shots }}{{ $app = merge $app (dict "screenshot" .) }}{{ end }}
 {{- $graph = $graph | append $app }}
+{{- end }}
+
 {{- with .Params.faq }}
 {{- $qs := slice }}
 {{- range .items }}
-{{- $qs = $qs | append (dict "@type" "Question" "name" .q "acceptedAnswer" (dict "@type" "Answer" "text" .a)) }}
+{{- $qs = $qs | append (dict "@type" "Question" "name" .q "acceptedAnswer" (dict "@type" "Answer" "text" (.a | markdownify | plainify | htmlUnescape | strings.TrimSpace | replaceRE `\s+` " "))) }}
 {{- end }}
 {{- $graph = $graph | append (dict "@type" "FAQPage" "mainEntity" $qs) }}
-{{- end }}
 {{- end }}
 
 {{- if and (eq .Section "posts") .IsPage }}

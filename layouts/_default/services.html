@@ -76,6 +76,18 @@
 </section>
 {{- end }}
 
+{{- with .Params.faq }}
+<section class="section">
+    <div class="wrap faq">
+        <h2 id="{{ anchorize .heading }}">{{ .heading }}</h2>
+        {{- range .items }}
+        <h3 id="{{ anchorize .q }}">{{ .q }}</h3>
+        {{ $.RenderString (dict "display" "block") .a }}
+        {{- end }}
+    </div>
+</section>
+{{- end }}
+
 {{- with .Params.cta }}
 <div class="cta-band band-brand">
     <h2>{{ .heading }}</h2>

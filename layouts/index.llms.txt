@@ -18,6 +18,13 @@ Miika Nissi has worked on Odoo professionally since 2019, starting with Odoo 12.
 {{- range .Params.industries.items }}
 - [{{ .title }}]({{ $svc }}#{{ anchorize .title }}): {{ .body | plainify | htmlUnescape }}
 {{- end }}
+{{- with .Params.faq }}
+
+## {{ .heading }}
+{{ range .items }}
+- [{{ .q }}]({{ $svc }}#{{ anchorize .q }}): {{ .a | markdownify | plainify | htmlUnescape | strings.TrimSpace | replaceRE `\s+` " " }}
+{{- end }}
+{{- end }}
 {{- end }}
 {{- with site.GetPage "/apps" }}
 

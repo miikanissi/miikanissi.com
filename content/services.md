@@ -142,4 +142,72 @@ process:
       body:
         "Fixes and changes after launch, and custom modules kept ready for the next Odoo
         version."
+
+faq:
+  heading: "Questions people ask about Odoo projects"
+  items:
+    - q: "How long does an Odoo upgrade take?"
+      a: |
+        Around four weeks for a simple upgrade with few customizations, and three to six
+        months for a larger migration.
+
+        One side of the work is technical: porting the custom modules and moving the
+        data. The other side is the business. Odoo changes how things work in every
+        version, and an upgrade that jumps several versions brings all of those changes
+        at once, so some processes will have to change with it. I go through those
+        changes with the people who'll be affected, on a test copy of your database, so
+        they're ready to work the new way when you go live.
+    - q: "Can you upgrade a database with a lot of custom modules?"
+      a: |
+        Yes. The largest migrations I've done carried more than 100 custom modules. Each
+        module gets one of three outcomes: ported to the new version, replaced by
+        something standard Odoo now does on its own, or dropped because nobody uses it
+        anymore. Fewer modules after the upgrade means less to maintain and less to port
+        next time.
+    - q: "Our Odoo version is out of support. Which version should we upgrade to?"
+      a: |
+        Usually the latest one. Odoo gives each major version three years of standard
+        support, so the newest version gives you the most time before you have to
+        upgrade again, and you can upgrade straight to it from an older version. Odoo 17
+        left standard support in September 2026, and Odoo 16 a year before that.
+
+        One catch: right after a new version comes out, migrating to it usually isn't
+        possible for around three months. Odoo releases a new version every fall, so
+        that's worth knowing when you pick a date.
+    - q: "Do you work on Odoo Community or Enterprise?"
+      a: |
+        Both, and on every kind of hosting I've come across so far: Odoo.sh, CloudPepper,
+        plain servers running Docker, and Kubernetes. My own apps on the Odoo Apps store
+        run on Community and Enterprise too.
+    - q: "Can an Odoo partner bring you into a project?"
+      a: |
+        Yes, that's a big part of what I do. Partners usually bring me in for the
+        hardest part of a project: the migration with too many custom modules, the
+        integration nobody on the team has built before, or the requirement standard
+        Odoo doesn't cover.
+
+        More and more, partners bring me on as the
+        [technical lead and architect](#technical-lead-on-odoo-projects). I work out the
+        solution with their team, guide their developers while they build it, and say
+        early when standard Odoo would do the job better than custom code.
+    - q: "Can you take over custom modules another developer wrote?"
+      a: |
+        Yes. I fix modules other developers wrote, and I'm often brought in when the
+        original developer is gone. Part of the job is deciding what to keep: some
+        modules need fixing, and some can go because a newer Odoo version does the same
+        thing as standard.
+    - q: "Can you connect Odoo to Avalara, TaxCloud or Shopify?"
+      a: |
+        I've built Odoo integrations with Avalara and TaxCloud for US sales tax, and with
+        Invoiced for billing. I've also worked on integrations with Shopify, HubSpot, and
+        freight and shipping platforms. If the system you need has an API, Odoo can
+        usually be connected to it.
+    - q: "Can AI tools like Claude or ChatGPT work with our Odoo data?"
+      a: |
+        Yes. Odoo 20 Enterprise comes with an MCP server, and connecting Claude or
+        ChatGPT to it is covered in
+        [my guide to connecting Claude to Odoo 20](/blog/connect-claude-to-odoo-mcp/). On
+        Community or an older version there's no built-in server, so I build the
+        integration. That's how my own Odoo works: it runs Community 20, and Claude looks
+        up customers and invoices through Odoo's JSON-2 API.
 ---
