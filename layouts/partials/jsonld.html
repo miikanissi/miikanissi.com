@@ -10,7 +10,7 @@
     "url" $base
     "email" (printf "mailto:%s" .Site.Params.email)
     "jobTitle" "Software engineer and Odoo ERP specialist"
-    "address" (dict "@type" "PostalAddress" "addressLocality" "Queens" "addressRegion" "NY" "addressCountry" "US")
+    "address" (dict "@type" "PostalAddress" "addressLocality" "New York" "addressRegion" "NY" "addressCountry" "US")
     "knowsAbout" (slice "Odoo" "Odoo ERP" "Odoo migrations" "Odoo custom module development" "Odoo integrations" "Odoo Community Association (OCA)" "Avalara" "TaxCloud" "Python" "Linux")
     "sameAs" (slice "https://github.com/miikanissi")
 }}
@@ -37,7 +37,7 @@
     "description" .Site.Params.description
     "email" .Site.Params.email
     "image" (resources.Get "brand/og-image-1200x630.png").Permalink
-    "address" (dict "@type" "PostalAddress" "addressLocality" "Queens" "addressRegion" "NY" "addressCountry" "US")
+    "address" (dict "@type" "PostalAddress" "addressLocality" "New York" "addressRegion" "NY" "addressCountry" "US")
     "founder" (dict "@id" $personID)
 ) }}
 {{- else if ne .Kind "404" }}

@@ -1,8 +1,8 @@
 ---
-title: "Odoo Development and Consulting"
+title: "Odoo development and consulting"
 description:
   "Odoo migrations from 8 to 20, custom modules, and integrations with Avalara,
-  TaxCloud, Shopify and HubSpot. Based in Queens, New York."
+  TaxCloud, Shopify and HubSpot. Based in New York."
 layout: services
 aliases:
   - /odoo-development-services/

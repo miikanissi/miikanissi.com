@@ -1,0 +1,54 @@
+# {{ site.Title }}
+
+> {{ site.Params.description }}
+
+Miika Nissi has worked on Odoo professionally since 2019, starting with Odoo 12. He works directly with businesses running Odoo and inside Odoo partners' teams, usually on the hardest technical and business problems in a project. That includes migrations across Odoo 8 to 20 (some on databases with more than 100 custom modules), custom modules written to OCA guidelines, and integrations. He works on Community and Enterprise, hosted on Odoo.sh, CloudPepper, plain servers with Docker, and Kubernetes. Contact: {{ site.Params.email }}
+{{- with site.GetPage "/services" }}
+{{- $svc := .Permalink }}
+
+## Services
+
+- [{{ .Title }}]({{ .Permalink }}): {{ .Description }}
+{{- range .Params.services }}
+- [{{ .title }}]({{ $svc }}#{{ anchorize .title }}): {{ index (split (strings.TrimSpace .body) "\n\n") 0 | $.RenderString | plainify | htmlUnescape | replaceRE `\s+` " " }}
+{{- end }}
+{{- with .Params.partners }}
+- [{{ .title }}]({{ $svc }}#{{ anchorize .title }}): {{ .body | plainify | htmlUnescape }}
+{{- end }}
+{{- range .Params.industries.items }}
+- [{{ .title }}]({{ $svc }}#{{ anchorize .title }}): {{ .body | plainify | htmlUnescape }}
+{{- end }}
+{{- end }}
+{{- with site.GetPage "/apps" }}
+
+## Odoo apps
+{{ range .Pages }}
+- [{{ .Title }}]({{ .Permalink }}): {{ .Description | plainify | htmlUnescape }}{{ with .Params.store_url }} Odoo Apps store: {{ . }}{{ end }}
+{{- end }}
+{{- end }}
+{{- $posts := where site.RegularPages "Section" "posts" }}
+{{- $odoo := slice }}
+{{- $other := slice }}
+{{- range $posts }}
+{{- if or (findRE `(?i)odoo` .Title) (findRE `(?i)odoo` .Description) }}{{ $odoo = $odoo | append . }}{{ else }}{{ $other = $other | append . }}{{ end }}
+{{- end }}
+{{- with $odoo }}
+
+## Odoo writing
+{{ range . }}
+- [{{ .Title }}]({{ .Permalink }}): {{ .Description | plainify | htmlUnescape }}
+{{- end }}
+{{- end }}
+{{- with site.GetPage "/about" }}
+
+## About
+
+- [{{ .Title }}]({{ .Permalink }}): {{ .Description }}
+{{- end }}
+{{- with $other }}
+
+## Optional
+{{ range . }}
+- [{{ .Title }}]({{ .Permalink }}): {{ .Description | plainify | htmlUnescape }}
+{{- end }}
+{{- end }}

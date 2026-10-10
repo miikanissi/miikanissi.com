@@ -48,7 +48,7 @@
         <div class="cols">
             {{- range .items }}
             <div>
-                <h3>{{ .title }}</h3>
+                <h3 id="{{ anchorize .title }}">{{ .title }}</h3>
                 <p>{{ .body }}</p>
             </div>
             {{- end }}

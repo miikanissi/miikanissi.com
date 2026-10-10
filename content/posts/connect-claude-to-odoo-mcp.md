@@ -5,6 +5,8 @@ description:
   "Step-by-step guide to connecting Claude to your Odoo 20 database through Odoo's
   built-in MCP server. Also covers ChatGPT, Grok and API keys."
 date: 2026-09-26T05:00:00-04:00
+images: ["/images/og/connect-claude-to-odoo-mcp.png"]
+lastmod: 2026-09-27T00:18:57-04:00
 toc: True
 cta:
   heading: "Want to talk about an Odoo problem?"

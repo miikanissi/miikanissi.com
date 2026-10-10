@@ -67,7 +67,7 @@
     {{- else }}
     <meta property="og:image" content="{{ $ogImageURL }}">
     {{- end }}
-    <meta property="og:image:alt" content="{{ if eq .Section "apps" }}{{ .Title }}{{ else }}{{ .Site.Params.brand }} logo{{ end }}">
+    <meta property="og:image:alt" content="{{ if or (eq .Section "apps") (and (eq .Section "posts") .Params.images) }}{{ .Title }}{{ else }}{{ .Site.Params.brand }} logo{{ end }}">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{{ $title }}">
     <meta name="twitter:description" content="{{ $description }}">

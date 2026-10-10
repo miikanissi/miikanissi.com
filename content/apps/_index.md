@@ -1,5 +1,5 @@
 ---
-title: "Apps"
+title: "Odoo apps"
 seo_title: "Odoo Apps by Miika Nissi"
 description:
   "Odoo apps built and maintained by Miika Nissi, available on the Odoo Apps store."

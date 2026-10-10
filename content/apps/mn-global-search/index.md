@@ -1,6 +1,6 @@
 ---
 title: "MN Global Search"
-seo_title: "MN Global Search: find any record from the command palette"
+seo_title: "MN Global Search: record search for Odoo"
 summary: "Find any record from the command palette and reopen the ones you used last"
 description:
   "Record search for the Odoo 19 and 20 command palette. Type a name or an order number
